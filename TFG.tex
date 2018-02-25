@@ -7,6 +7,7 @@
 
 %paquetes usados
 \usepackage[utf8]{inputenc}
+\usepackage{multicol}
 \usepackage{graphicx}
 \graphicspath{{./FIguras/}}
 
@@ -16,20 +17,44 @@
 
 \renewcommand*\contentsname{\'Indice}
 \renewcommand*\bibname{Referencias}
+\renewcommand*\chaptername{Cap\'itulo}
 
 
 \begin{document}
 	\pagenumbering{gobble} %no numera
-	 \maketitle%portada
+	%portada
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{Encabezado.PNG}
+\end{figure}
+\begin{center}
+\LARGE
+UNIVERSIDAD POLIT\'ECNICA DE MADRID \par
+\vspace {10 mm}
+ESCUELA T\'ECNICA SUPERIOR DE INGENIER\'IA Y DISEÑO INDUSTRIAL\par
+\vspace {10 mm}
+\LARGE
+Grado en Ingenier\'ia electr\'onica industrial y autom\'atica \par
+\vspace {10 mm}
+\Huge
+TRABAJO FIN DE GRADO \par
+\vspace{20 mm}
+\LARGE
+\textbf{Control de conexi\'on a red de parques e\'olicos}\par
+\vspace {10 mm}
+Autor: Emilio Liaño de la Fuente \par
+\vspace {10 mm}
+\end{center}
 \newpage
- 
+   \par
 \newpage
+\normalsize
 \pagenumbering{arabic}
 \tableofcontents
 \chapter{Introducci\'on}
 	\section{Objetivos}
-\chapter{Plantas el\'ectricas y conexi\'on a red}
-Un parque e\'olico es una agrupaci\'on de aerogeneradores que transforman la energ\'ia e\'olica en energ\'ia el\'ectrica. 
+\chapter{Parques e\'olicos y conexi\'on a red}
+Un parque e\'olico es una agrupaci\'on de aerogeneradores que transforman la energ\'ia e\'olica en energ\'ia el\'ectrica. En este cap\'itulo se har\'a una introducci\'on a los elementos de un parque e\'olico prestando especial atenci\'on a los elementos el\'ectricos y de control. Primero se expondran los elementos en general de un p\'arque e\'olico y de la conexi\'on a la red, despues se hablara de los parametros el\'ectricos del circuito de conexi\'on y de su comportamiento, y por \'ultimo se hablara de los c\'odigos de red y de las limitaciones que estos inponen sobre el funcionamiento de los parques e\'olicos.  
 	\section{Elementos del parque}
 Los parques e\'olicos necesitan para su funcionamiento los aerogeneradores para transformar la energ\'ia e\'olica en energ\'ia el\'ectrica, un sistema de control central y una red interna para la conexi\'on el\'ectrica. A su vez estos est\'an compuestos por diferentes elementos.
 
@@ -52,17 +77,18 @@ Los parques e\'olicos necesitan para su funcionamiento los aerogeneradores para 
 	\section{Elementos de la conexi\'on a red}
 	
 	La red del parque est\'a formada por l\'inea de media tensi\'on que conecta con todos los aerogeneradores, la l\'inea de alta tensi\'on que ser\'ia la red el\'ectrica general a la que se le aporta la potencia y una subestaci\'on que contiene varios elementos. El PCC est\'a a un lado del transformador, dependiendo de si las medidas se toman del lado de baja o de alta tensi\'on es el criterio utilizado para dictaminar donde est\'a el PCC. \par
-
+		\paragraph {L\'ineas de transmisi\'on}
 Las l\'ineas de media tensi\'on generalmente en los parques conectan todos los aerogeneradores con el transformador con diferentes topolog\'ias. Las formas de conectar las l\'ineas de alimentaci\'on de los aerogeneradores son numerosas pero generalmente se utiliza la radial, la radial bifurcada, la de alimentaci\'on-subalimentaci\'on y en bucle. \par
 
 La conexi\'on radial consiste de un solo cable de alimentaci\'on que se conecta secuencialmente a todos los aerogeneradores del parque, es la m\'as simple y por tanto la m\'as barata, es la que mejor se adapta para parques con los aerogeneradores en l\'inea. La radial bifurcada es parecida a la radial pero la l\'inea se divide para poder alimentar a dos series de aerogeneradores en paralelo, es la m\'as barata pero un fallo en la l\'inea supone una p\'erdida de todos los aerogeneradores. La alimentaci\'on-subalimentaci\'on junta varios cables de alimentaci\'on en radial en uno principal manteniendo los elementos de seguridad de cada cable de alimentaci\'on secundario, generalmente se usan para parques de gran tamaño que est\'an distribuidos en una gran \'area. La topolog\'ia en bucle conecta todos los cables secundarios de alimentaci\'on secundarios para evitar que un fallo en una de las l\'ineas la deje inoperante, es la m\'as segura de todas las topolog\'ias \cite{ComunicationTopologies}.\par
-El cable de alimentaci\'on general llega a la subestaci\'on donde se transforma la media tensi\'on en alta con un transformador. Dentro de la subestaci\'on, adem\'as de los componentes de los lados de media y alta tensi\'on, podemos encontrar los sistemas de medida y control, sistemas de protección contra incendios u otras incidencias y un sistema para ajustar la potencia reactiva. Tradicionalmente este sistema consistia de un sistema mecanico de bajo coste que conectaba un banco de condensadores. A pesar de que estos dispositivos ayudan a mejorar el factor de potencia y la regulaci\'on de tensi\'on en estado estacionario, no se puede resolver satisfactoriamente problemas como las fluctuaciones de potencia o tensi\'on y la eliminación de harm\'onicos. \par
+		\paragraph {Subestaci\'on}
+El cable de alimentaci\'on general llega a la subestaci\'on donde se transforma la media tensi\'on en alta con un transformador. Dentro de la subestaci\'on, adem\'as de los componentes de los lados de media y alta tensi\'on, podemos encontrar los sistemas de medida y control, sistemas de protecci\'on contra incendios u otras incidencias y un sistema para ajustar la potencia reactiva. Tradicionalmente este sistema consistia de un sistema mecanico de bajo coste que conectaba un banco de condensadores. A pesar de que estos dispositivos ayudan a mejorar el factor de potencia y la regulaci\'on de tensi\'on en estado estacionario, no se puede resolver satisfactoriamente problemas como las fluctuaciones de potencia o tensi\'on y la eliminaci\'on de harm\'onicos. \par
 
-La integraci\'on de los aprque e\'olicos a la red requiere una compensación de la potencia reactiva din\'amica para apoyar a la estabilidad, sobre todo durante perturbaciones en la red. Para conseguir un alto rendimiento en el control de la tensi\'on tanto en transitorio como estacionario en el PCC se utilizan FACTS, \emph{flexible ac transmission system} en español sistema flexible de transmisi\'on en corriente continua. Los dos más comunes usados en parques e\'olicos son el SVC, \emph{static var compensator}, y el STATCOM, \emph{static synchronous compensator} \cite{FACTS}.  \par
+La integraci\'on de los aprque e\'olicos a la red requiere una compensaci\'on de la potencia reactiva din\'amica para apoyar a la estabilidad, sobre todo durante perturbaciones en la red. Para conseguir un alto rendimiento en el control de la tensi\'on tanto en transitorio como estacionario en el PCC se utilizan FACTS, \emph{flexible ac transmission system} en español sistema flexible de transmisi\'on en corriente continua. Los dos m\'as comunes usados en parques e\'olicos son el SVC, \emph{static var compensator}, y el STATCOM, \emph{static synchronous compensator} \cite{FACTS}.  \par
 
 El STATCOM suele ser la opci\'on considerada para esta soluci\'on por las ventajas que presenta frente al SVC. Entre estas ventajas se encuentra un tiempo de respuesta m\'as r\'apido y una capacidad de aporte de tensi\'on auxilair mayor por su naturaleza de fuente de tensi\'on \cite{STATCOM}. \par
 
-En el lado de media tensi\'on se suele encontrar el barraje que conecta la red al cuadro el\'electrico, el seccionador para abrir el circuito cuando no hay corriente y un interruptor autom\'atico para abrir el circuito ante corientes el\'ectricas elevadas. En el lado de alta tensi\'on suele haber reactancia a tierra en los transformadores, una toma a tierra general, descargadores de sobretensión, otro seccionador y otro disyuntor.  \par
+En el lado de media tensi\'on se suele encontrar el barraje que conecta la red al cuadro el\'electrico, el seccionador para abrir el circuito cuando no hay corriente y un interruptor autom\'atico para abrir el circuito ante corientes el\'ectricas elevadas. En el lado de alta tensi\'on suele haber reactancia a tierra en los transformadores, una toma a tierra general, descargadores de sobretensi\'on, otro seccionador y otro disyuntor.  \par
 
 
 	\section{Par\'ametros de la red trif\'asica} 
@@ -74,7 +100,7 @@ El circuito que se va a analizar se puede reducir a una fuente de intensidad que
 Para la medici\'on de estos valores se considera que los circuitos de la red de conexi\'on son equilibrados, por lo que las tensiones de cada fase y las intensidades tendr\'an el mismo valor eficaz y un desfase de 120º entre s\'i. Para expresar esta diferencia de fase se suele utilizar la notaci\'on fasorial,  pero por la simplicidad a la hora de hacer ciertos c\'alculos como la suma o la resta se usan n\'umeros complejos para definir los vectores tambi\'en. Para poner una referencia a la fase se le da a un valor de tensi\'on o corriente el valor 0 o 90 de fase. En este caso, para tomar el mismo crit\'erio que los resultados de Simulink, se dar\'a fase 0 a la intensidad de la primera fase, $I_a$. \par
 
 Las fuentes de intensidad generan tres ondas sinusoidales de igual amplitud y desfasadas entre ellas 120º. Conectada a una carga se pueden observar tambien tres ondas sinusoidales de voltage que tambi\'en son equilibradas. Entre las ondas de tensi\'on e intensidad existe una relaci\'on dada por la impedancia de la carga representada en la ley de Ohm. \par
-\begin{equation}
+\begin{equation}\label{eq:ohm}
 	\overline{I}=\overline{V}/\overline{Z}
 \end{equation} \par
 Si los par\'ametros de la ecuaci\'on son introducidos como fasores y teniendo en cuenta que la fase de la intensidad se considera 0, podemos concluir que el desfase entre la intensidad y la tensi\'on viene dado por la fase de la carga y la relaci\'on entre los m\'odulos es el m\'odulo de la impedancia. Si la impedancia es puramente resistiva el desfase es nulo entre ambas, si es de car\'acter capacitivo la intensidad va adelantada y si es de car\'acter inductivo la intensidad va retrasada respecto a la tensi\'on. \par
@@ -95,7 +121,7 @@ Para observar este efecto de la carga sobre la relaci\'on entre tensi\'on e inte
 \label{Va_IaALL}
 \end{figure}
 
-Cuando la carga es puramente capacitiva o inductiva se produce un desfase entre la intensidad y la tensión de 90º. Si la carga es capacitiva, al estar la intensidad adelantada respecto a la tensi\'on el angulo visto desde la tensi\'on sera positivo y si la carga es inductiva el angulo sera negativo visto desde la tensi\'on como se puede ver en la figura \ref {PhasComp}. Para todos los calculos de potencias el angulo se ve desde la tensi\'on a la intesidad, por eso se utiliza ese criterio de signos. \par
+Cuando la carga es puramente capacitiva o inductiva se produce un desfase entre la intensidad y la tensi\'on de 90º. Si la carga es capacitiva, al estar la intensidad adelantada respecto a la tensi\'on el angulo visto desde la tensi\'on sera positivo y si la carga es inductiva el angulo sera negativo visto desde la tensi\'on como se puede ver en la figura \ref {PhasComp}. Para todos los calculos de potencias el angulo se ve desde la tensi\'on a la intesidad, por eso se utiliza ese criterio de signos. \par
 
 \begin{figure}[h!]
 \centering
@@ -107,29 +133,79 @@ Cuando la carga es puramente capacitiva o inductiva se produce un desfase entre 
 En el an\'alisis de la conexi\'on a red es importante la potencia, esta debe cumplir con los requisitos que marcan el operario de red y el c\'odigo de red. Para el c\'alculo de la potencia de una red trif\'asica se utiliza la siguiente f\'ormula:   \par
 
 \begin{equation}
-	\overline{S}=3 \overline{V}_F  \overline{I}_F^*
+	\overline{S}=\sqrt{3} \overline{V}_L  \overline{I}_L^*
 \end{equation} \par
 
 Podemos observar que la potencia consumida o sumisnistrada por un elemento del circuito tiene una componenente real y una componenente imaginaria que se llaman potencia activa, $P$ y reactiva, $Q$ respectivamente. Desarrollando la formula anterior usando complejos llegamos a lo siguiente: \par
 
-\begin{equation}
-	\overline{S}= 3 V_F I_F \cos{\varphi}+j3 V_F I_F \sin{\varphi} = P+jQ 
+\begin{equation}\label{eq:potensia}
+	\overline{S}= \sqrt{3} V_L I_L \cos{\varphi}+j\sqrt{3} V_L I_L \sin{\varphi} = P+jQ 
 \end{equation} \par
 
-Donde $\varphi$ es el \'angulo de desfase entre la tensi\'on y la intensidad. Por lo tanto basandose en el criterio de signos anteriormente mencionado para los \'angulos trataremos la Q negativa como capacitiva y con signo positiva como inductiva. \par
+Donde $\varphi= \alpha_V-\alpha_I$. Por lo tanto basandose en el criterio de signos anteriormente mencionado para los \'angulos trataremos la $Q$ negativa como capacitiva y con signo positiva como inductiva. \par
+
+\'Analizando la diferencia de tensi\'on entre dos puntos de un circuito que esta descrita por la ecuaci\'on (\ref{eq:ohm}), donde la tensi\'on antes de la carga es $E$ y la tensi\'on despues de la carga es $V$ tenemos que:
+
+\begin{equation}\label{eq:difV}
+	\Delta V=E-V=ZI
+\end{equation} \par
+
+ Introduciendo la ecuaci\'on (\ref{eq:potensia}) en la ecuaci\'on (\ref{eq:difV}) obtenemos el siguiente desarrollo:
+\begin{equation}\label{eq:lol}
+	\Delta V=(R+jX)\frac{P-jQ}{E}= \frac{RP+XQ}{E}+j\frac{XP-RQ}{E}
+\end{equation} \par
+
+Cuando hablamos de una linea de transmisi\'on, como son las que conectan el parque con al subestaci\'on y esta con la red, consideramos que $X \gg R$ \cite{WFgridcode}. Considerando entonces despreciable el valor de $R$ en la formula (\ref{eq:lol}) queda lo siguiente: 
+\begin{equation}
+	\Delta V= Q\frac{X}{E}+jP\frac{X}{E}
+\end{equation} \par
+
+Esto significa que los cambios en la magnitud de de la tensi\'on son controlados por la potencia reactiva y la  diferencia de fase entre emisor y receptor viene dada por la potencia activa \cite{WFgridcode}. Por eso se utiliza el control de la potencia activa y reactiva para controlar frecuencia de la red y la tensi\'on respectivamente. \par
+
+Normalmente la fercuencia es m\'as estable que la tensi\'on en la red el\'ectrica por lo que los p\'arques e\'olicos tratan de producir la potencia el\'ectrica m\'axima que permita la instalaci\'on y la demanda de la red, y as\'i obtener los mayores beneficios posibles. Es por eso la reactiva la que suele variar m\'as para mejorar la claidad de la potencia entregada. 
 
 
 	\section{C\'odigos de red}
 
-Un c\'odigo de red es un conjunto de especificaciones t\'ecnicas que definen los par\'ametros que debe cumplir una instalci\'on para asegurar la seguridad y estabilidad de la red p\'ublica a la que est\'a conectada  \cite{UKgridCode}. Dichas instalaciones pueden ser plantas el\'ectricas generadoras, consumidores u otra red. En este apartado se prestara especial atención a los c\'odigos de red referidos a plantas el\'ectricas y al c\'odigo de red de España en concreto. \par
+Un c\'odigo de red es un conjunto de especificaciones t\'ecnicas que definen los par\'ametros que debe cumplir una instalci\'on para asegurar la seguridad y estabilidad de la red p\'ublica a la que est\'a conectada  \cite{UKgridCode}. Dichas instalaciones pueden ser plantas el\'ectricas generadoras, consumidores u otra red. En este apartado se prestara especial atenci\'on a los c\'odigos de red referidos a plantas el\'ectricas y al c\'odigo de red de España en concreto. \par
 
 Los c\'odigos de red var\'ian seg\'un la red para la que se han diseñado. Es por eso cada pa\'is tiene un c\'odigo de red propio, pero no solo var\'ia de un pa\'is a otro si no que incluso dentro de España las condiciones que se imponen en la red peninsular o no peninsulares son distintas por las diferencias en las redes y las condiciones en las que operan. A pesar de las diferentes restricciones, los casos que se abordan en los codigos de red suelen ser comunes para la mayor\'ia de ellos.  \par
 
-En el caso de la conexi\'on y operaci\'on de plantas generadoras los requerimientos m\'as importantes para el control son los rangos de frecuencia y tensi\'on, el control de la potencia activa y el control de la reactiva en operaci\'on normal, ante perturbaciones en la red como los huecos de tensi\'on o la inyecci\'on de corriente reactiva. Normalmente estos requerimientos pueden ser descritos comolas siguientes zonas de operaci\'on para frecuencia y voltaje. Operaci\'on continua en un rango limitado al rededor del punto nominal, operaci\'on por tiempo limitado con una posible reducci\'on de la salida en unos margenes extendidos y por \'ultimo la desconexi\'on inmediata \cite{GridCodeDeepAnalisys}.\par
+En el caso de la conexi\'on y operaci\'on de plantas generadoras los requerimientos m\'as importantes para el control son los rangos de frecuencia y tensi\'on, el control de la potencia activa y el control de la reactiva en operaci\'on normal. Tambien se cubren los casos de perturbaciones en la red como los huecos de tensi\'on o la inyecci\'on de corriente reactiva. Normalmente estos requerimientos pueden ser descritos como las siguientes zonas de operaci\'on para frecuencia y voltaje. Operaci\'on continua en un rango limitado alrededor del punto nominal, operaci\'on por tiempo limitado con una posible reducci\'on de la salida en unos margenes extendidos y por \'ultimo la desconexi\'on inmediata \cite{GridCodeDeepAnalisys}.\par
 
-Antes no se esperaba que los aerogeneradores contribuyeran al conttrol de voltage o frecuencia y se les obligaba a desconectarse de la red bajo condiciones anormales de operaci\'on. Sin embargo el crecimiento  de la potencia el\'ectrica instalada proviniente de los parques e\'olicos en ciertos paises como Dinamarca, Alemania o España ha cambiado la situaci\'on. \par
+		\paragraph{Tensi\'on}
+Respecto al control de tensi\'on, en la secci\'on anterior se ha visto que la magnitud de la tensi\'on esta controlada por la potencia reactiva. Por lo tanto el control de la tensi\'on se expone en los c\'odigos de red como un control de la potencia reactiva en funci\'on de la tensi\'on de red \cite{WFgridcode}. En los PO, procedimientos de operaci\'on que forman el c\'odigo de red de España, el control de la potencia reactiva esta definido por la potencia activa neta instalada del parque. En el PO 7.4 \cite{PO74}  se establece que todos los generadores deben funcionar dentro de el margen de generaci\'on/absorci\'on que aparecen en la figura \ref{VQgridcode}.   \par 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{VQgridcode.PNG}
+\caption{L\'imites de potencia reactiva en funci\'on de la tensi\'on de la linea}
+\label{VQgridcode}
+\end{figure}
+\newpage
+		\paragraph{Frecuencia}
+Como consecuencia de un desajuste entre la potencia activa aportada y la demanda se produce un cambio en la energía almacenada en la masa rotativa del generador que provoca un desvio de la frecuencia del sistema. Un aumento en la potencia entregada se convertir\'ia en un aumento de la velocidad angular del generador y por tanto un aumento de frecuencia, pasando lo contrario al entregar potencia por debajo de la demanda \cite{WFgridcode}, \cite{FrecuencyLvL}. \par
+
+Normalmente el control de la frecuencia esta compuesto por tres funciones distintas. El control primario de frecuencia, usado ante los desequilibrios repentinos en la red. Actua a nivel local en la turbina en un rango de 15 a 30 segundos. El control secundario o de carga permite reestablecer la frecuencia y la potencia a los valores programados. Se realiza en las unidades de control central del p\'arque y actua en un rango de 15 minutos. Este es el tipo de funci\'on que se implementara en este trabajo. Finalmente esta el control terciario que consiste en la gesti\'on de la potencia generada por cada aerogenerador para ayudar al control secundario \cite{WFgridcode}. \par
+
+
+
+
 
 \chapter{Control de plantas el\'ectricas}
+
+La teor\'ia de control es un campo de la ingenier\'ia y las matem\'aticas que trata el comportamiento de los sistemas din\'amicos. El problema de control consiste en, dada una entrada o referencia a un actuador en un sistema f\'isico o planta, obtener la respuesta deseada de dicha planta. \par
+
+Esto se puede conseguir en lazo abiertoo  en lazo cerrado. La solución en lazo abierto es, conociendo las condiciones de la planta y su funci\'on de transferencia, introducir una referencia con la que se obtenga la salida deseada. En lazo cerrado se realimenta comparandola con la entrada para medir el error del sistema, este error generalmente entra a un controlador que da finalmente la entrada a la planta con la que se obtiene la salida deseada. Este esquema de realimentaci\'on se muestra en la figura \ref{FeedBackLoop} y es en los que se basan normalmente los controladores usados en la industria. \par
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{Realimentacion.PNG}
+\caption{Esquema de control en lazo cerrado.}
+\label{FeedBackLoop}
+\end{figure}
+
+Por la complejidad del sistema de conexi\'on a red de una planta electrica y la posibilidad de variaciones en sus parametros a lo largo del tiempo en este cap\'itulo se hablara de la soluci\'on de lazo cerrado. Primero se hablara del control en general de plantas el\'ectricas y se definira el concepto de los niveles de control, en la siguietne secci\'on se establecer\'a el estado del arte en el control de parques e\'olicos y a contiunaci\'on se hablara de las t\'ecnicas de control cl\'asicas y modernas existentes. \par 
 
 	\section{Introducci\'on al control de plantas el\'ectricas}
 
@@ -144,25 +220,49 @@ Antes no se esperaba que los aerogeneradores contribuyeran al conttrol de voltag
 
 	\section{Desarrollo en Simulink de un modelo matem\'atico del parque}
 
-Para el desarrollo del modelo su simulaci\'on se utilizar\'a la herramienta de programación Simulink. Simulink es un entorno de programaci\'on de diagramas de bloques para el diseño basado en modelos. Es parte del entorno de programación de Matlab pero a un nivel de abstracci\'on m\'as alto que el lenguaje interpretado usado en los scripts. \par
+Para el desarrollo del modelo su simulaci\'on se utilizar\'a la herramienta de programaci\'on Simulink. Simulink es un entorno de programaci\'on de diagramas de bloques para el diseño basado en modelos. Es parte del entorno de programaci\'on de Matlab pero a un nivel de abstracci\'on m\'as alto que el lenguaje interpretado usado en los scripts. \par
 
-Simulink permite diseñar y simular modelos de sistemas f\'isicos y sistemas de control por medio de diagramas de bloques. El comportamiento de dichos sistemas se define mediante operaciones matem\'aticas, señales predefinidas y funciones de Matlab. Adem\'as de las multiples herramientas de desarrollo Simulink cuenta con una serie de utilidades para la visualizaci\'on, \'analisis y guardado de los resultados de cada simulaci\'on.  \par
+Simulink permite diseñar y simular modelos de sistemas f\'isicos y sistemas de control por medio de diagramas de bloques. El comportamiento de dichos sistemas se define mediante operaciones matem\'aticas, señales predefinidas y funciones de Matlab. Adem\'as de las multiples herramientas de desarrollo Simulink cuenta con una serie de utilidades para la visualizaci\'on, \'analisis y guardado de los resultados de cada simulaci\'on. Con estas caracter\'isticas Simulink es una herramienta ampliamente usada en modelado de sistemas el\'ectricos y electr\'onicos, tanto como para ingenier\'ia de control. \par
 
-Con estas caracter\'isticas Simulink es una herramienta ampliamente usada en modelado de sistemas el\'ectricos y electr\'onicos, tanto como para ingenier\'ia de control.  \par
+El modelo de Simulink se compondra de tres partes. El modelo electrico de la red, que se montara usado la liber\'ia Simscape Power Systems de Simulink como se explicara m\'as adelante. El lazo de ralimentaci\'on y control que se compondria de todas las herramientas matematicas para manejar los datos leidos de la red y controlarla. Por \'ultimo, esta la parte de visualizaci\'on y an\'alisis de los datos con la que se estudiara el modelo y el control que se diseñen.   \par
 
-		\subsection{Liberer\'ia Simscape Power Systems}
+		\paragraph{Control} 
+Con el control se trata de que el modelo alcance unos valores de potencia activa y reactiva establecidos como consignas, $P^*$ y $Q^*$. Con estas dos consignas se calcula la consigna de potencia aparente, $S^*$, como n\'umero complejo que servira de consigna \'unica. Para eso se realimentaran las medidas de tensi\'on e intensidad de las tres fases, $V_{abc}$ e $I_{abc}$. \par
 
-La liber\'ia Simscape Power Systems contiene elementos y herramientas de \'analisis para el modelado y simulaci\'on de sistemas el\'ectricos. Entre otros incluye elementos de redes trif\'asicas y sistemas de energ\'ias renovables. Todo el modelo del circuito el\'ectrico esta realizado con elementos de esta librer\'ia.  \par
+Con las medidas tomadas de $V_{abc}$ e $I_{abc}$ en el lado de alta tensi\'on se calcula la potencia activa y reactiva del circuito en ese punto. Las medidas de tensi\'on e intensidad se pueden tomar tanto en el lado de alta como de media tensi\'on del transformador, la situaci\'on del medidor depende del parque en concreto. En este caso eleg\'i medir en el lado de alta porque estas medidas son las que realmente estan afectando a la estabilidad de la red. \par
 
-Lo \par
+Las medidas de potencia activa y reactiva en el lado de alta tensi\'on se utilizan para calcular la potencia aparente en forma de complejo. Esta potencia aparente se resta a la consigna cerrando el lazo de realimentaci\'on. Esta diferencia es el error en potencia aparente del sistema que entra en el bloque de control, en el caso del control cl\'asico un PID. A la salida del control se opera la señal de potencia aparente para que vuelva a dar una intensidad que se introduce a las fuentes de intensidad del modelo el\'ectrico.  \par
 
+		\paragraph{Observaci\'on}
+Para poder analizar el comportamiento del modelo el\'ectrico Simulink tiene herramientas de observación y seguimiento de las variables. Dentro de la libreria b\'asica de Simulink podemos encontrar en el apartado de \emph{Sinks} algunas de estas herramientas. Existe tanto la opci\'on de guardar los valores de la simulaci\'on como la visualizaci\'on de las gr\'aficas. \par
+
+Usando el bloque \emph{To Workspace} podemos guardar la evoluci\'on de una variable a lo largo de una simulaci\'on como vector o como estructura con tiempo.  \par
+
+		\subsection{Librer\'ia Simscape Power Systems}
+
+La liber\'ia Simscape Power Systems contiene elementos y herramientas de \'analisis para el modelado y simulaci\'on de sistemas el\'ectricos. Entre otros incluye elementos de redes trif\'asicas y sistemas de energ\'ias renovables. Todo el modelo del circuito el\'ectrico esta realizado con elementos de esta librer\'ia. La propia librer\'ia tiene tambien las herramientas para simular y calcular el modelo ofreciendo diferentes opciones al usuario seg\'un que tipo de resultados necesite. \par
+
+		\paragraph {Simulaci\'on}
+El bl\'oque \emph{Powergui} permite elegir entre tres m\'etodos de resolver el modelo del circuito. Estos son continua, discreto y fasorial. Adem\'as este bloque te permite establecer ciertos par\'ametros globales para la simulaci\'on como el tiempo de muestreo o la frecuencia.  \par
+
+La simulaci\'on por el metodo de continua resuelve el modelo con el tiempo discreto m\'as pequeño que le permitan los recursos del ordenador. Al no tener un tiempo de muestreo fijo los resultados pueden cambiar de una simulaci\'on a otra. Con este m\'etodo de resoluci\'on se puede observar el valor instantaneo de las medidas. Adem\'as tambien calcula  los transitorios de elementos como bobinas o condensadores que tienen una inercia. \par
+
+El modo discreto fija un tiempo de muestre que el usuario elige. Las propiedades son las mismas que en el modo continuo pero los resultados son siempre los mismos independientemente de lo que se tarde en hacer los c\'alculos. Ambos m\'etodos se utilizan para simulaciones de periodos de tiempo cortos en las que es necesario analizar la forma de onda o en aquellos modelos que sea necesario estudiar sus etapas trasnitorias. \par
+
+El m\'etodo fasorial calcula todos los valores de tensi\'on e intensidad como vectores, ya sean fasores o complejos. 
+
+		\paragraph {Fuentes el\'ectricas}
+
+		\paragraph {Medidores}
+
+		\paragraph {L\'ineas de transmisi\'on}
 Las l\'ineas de transmisi\'on son elementos pasivos del circuito que presentan una impedancia. Para definir una l\'inea de media distancia, que son las que se utilizan en un parque e\'olico, hay dos t\'ipos de par\'ametros. Existen los par\'ametros transversales, la conductancia y la capacidad, y est\'an los  par\'ametros longitudinales, resistencia e inductancia. Existen dos formas de agrupar estos par\'ametros, el circuito equivalente en $T$ y el circuito equivalente en $\pi$ \cite{LibroRedesLineas}. En este trabajo voy a centrarme en el modelo $\pi$ que es el que usare en el modelo de Simulink.  \par
 
 El circuito equivalente en $\pi$ mantiene unidos los par\'ametros longitudinales y divide los par\'ametros transversales. En el tramo central se sit\'uan la resistencia y la reactancia mientras que la conductancia y capacitancia quedan divididas en los extremos con sus valores a la mitad, $G/2$ y $B/2$. El circuito est\'a representado en la figura \ref{CircuitoPi}. \par 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{CircuitoPi.PNG}
+\includegraphics[width=0.7\textwidth]{CircuitoPi.PNG}
 \caption{Circuito equivalente de circuito $\pi$ \cite{LibroRedesLineas}. }
 \label{CircuitoPi}
 \end{figure} \par
@@ -171,15 +271,18 @@ En el modelo de Simulink para definir la l\'inea con el circuito equivalente  $\
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{PiSectionSimulink.PNG}
+\includegraphics[width=0.6\textwidth]{PiSectionSimulink.PNG}
 \caption{Circuito equivalente de circuito $\pi$ utilizado por Simulink. }
 \label{PiSectionSimulink}
 \end{figure} \par
 
+		\paragraph{Transformador}
 
 		\subsection{Tratamiento de señal por buses}
 
-los buses molan
+Simulink trabaja usando señales para comunicar los bloques. El tratamiento de estas señales es importante por ser precisamente estas a las que se las hara el seguimiento en las simulaciones. Para el tratamiento de multiples señales existe la herramienta de los buses. Los buses son estructuras formadas por varias señales o incluso otros buses. \par
+
+Los buses se manejan dentro del modelo con 
 
 		\subsection{Diseño encapsulado mediante modelos referenciados}
 

@@ -4,8 +4,12 @@
 
 pi=3.1416;
 Rad2Deg=180/pi;
-Ts=0.2;
+Ts=0.02;
+StopT=40;
 Fnom=50;
+
+cd 'C:\Users\Emilio\Desktop\universidad\AA_TFG\Simulink'
+load('ControlConfig.mat');
 
 %llamada al init de los buses
 GridBus();
