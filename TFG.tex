@@ -51,10 +51,15 @@ Autor: Emilio Liaño de la Fuente \par
 \normalsize
 \pagenumbering{arabic}
 \tableofcontents
+
 \chapter{Introducci\'on}
+
 	\section{Objetivos}
+
 \chapter{Parques e\'olicos y conexi\'on a red}
+
 Un parque e\'olico es una agrupaci\'on de aerogeneradores que transforman la energ\'ia e\'olica en energ\'ia el\'ectrica. En este cap\'itulo se har\'a una introducci\'on a los elementos de un parque e\'olico prestando especial atenci\'on a los elementos el\'ectricos y de control. Primero se expondran los elementos en general de un p\'arque e\'olico y de la conexi\'on a la red, despues se hablara de los parametros el\'ectricos del circuito de conexi\'on y de su comportamiento, y por \'ultimo se hablara de los c\'odigos de red y de las limitaciones que estos inponen sobre el funcionamiento de los parques e\'olicos.  
+
 	\section{Elementos del parque}
 Los parques e\'olicos necesitan para su funcionamiento los aerogeneradores para transformar la energ\'ia e\'olica en energ\'ia el\'ectrica, un sistema de control central y una red interna para la conexi\'on el\'ectrica. A su vez estos est\'an compuestos por diferentes elementos.
 
@@ -162,7 +167,7 @@ Cuando hablamos de una linea de transmisi\'on, como son las que conectan el parq
 
 Esto significa que los cambios en la magnitud de de la tensi\'on son controlados por la potencia reactiva y la  diferencia de fase entre emisor y receptor viene dada por la potencia activa \cite{WFgridcode}. Por eso se utiliza el control de la potencia activa y reactiva para controlar frecuencia de la red y la tensi\'on respectivamente. \par
 
-Normalmente la fercuencia es m\'as estable que la tensi\'on en la red el\'ectrica por lo que los p\'arques e\'olicos tratan de producir la potencia el\'ectrica m\'axima que permita la instalaci\'on y la demanda de la red, y as\'i obtener los mayores beneficios posibles. Es por eso la reactiva la que suele variar m\'as para mejorar la claidad de la potencia entregada. 
+Normalmente la fercuencia es m\'as estable que la tensi\'on en la red el\'ectrica por lo que los p\'arques e\'olicos tratan de producir la potencia el\'ectrica m\'axima que permita la instalaci\'on y la demanda de la red, y as\'i obtener los mayores beneficios posibles. Es por eso la reactiva la que suele variar m\'as para mejorar la claidad de la potencia entregada. \par
 
 
 	\section{C\'odigos de red}
@@ -174,7 +179,9 @@ Los c\'odigos de red var\'ian seg\'un la red para la que se han diseñado. Es po
 En el caso de la conexi\'on y operaci\'on de plantas generadoras los requerimientos m\'as importantes para el control son los rangos de frecuencia y tensi\'on, el control de la potencia activa y el control de la reactiva en operaci\'on normal. Tambien se cubren los casos de perturbaciones en la red como los huecos de tensi\'on o la inyecci\'on de corriente reactiva. Normalmente estos requerimientos pueden ser descritos como las siguientes zonas de operaci\'on para frecuencia y voltaje. Operaci\'on continua en un rango limitado alrededor del punto nominal, operaci\'on por tiempo limitado con una posible reducci\'on de la salida en unos margenes extendidos y por \'ultimo la desconexi\'on inmediata \cite{GridCodeDeepAnalisys}.\par
 
 		\paragraph{Tensi\'on}
-Respecto al control de tensi\'on, en la secci\'on anterior se ha visto que la magnitud de la tensi\'on esta controlada por la potencia reactiva. Por lo tanto el control de la tensi\'on se expone en los c\'odigos de red como un control de la potencia reactiva en funci\'on de la tensi\'on de red \cite{WFgridcode}. En los PO, procedimientos de operaci\'on que forman el c\'odigo de red de España, el control de la potencia reactiva esta definido por la potencia activa neta instalada del parque. En el PO 7.4 \cite{PO74}  se establece que todos los generadores deben funcionar dentro de el margen de generaci\'on/absorci\'on que aparecen en la figura \ref{VQgridcode}.   \par 
+Respecto al control de tensi\'on, en la secci\'on anterior se ha visto que la magnitud de la tensi\'on esta controlada por la potencia reactiva. Por lo tanto el control de la tensi\'on se expone en los c\'odigos de red como un control de la potencia reactiva en funci\'on de la tensi\'on de red \cite{WFgridcode}. \par
+
+En los PO, procedimientos de operaci\'on que forman el c\'odigo de red de España, el control de la potencia reactiva esta definido por la potencia activa neta instalada del parque. En el PO 7.4 \cite{PO74}  se establece que todos los generadores deben funcionar dentro de el margen de generaci\'on/absorci\'on que aparecen en la figura \ref{VQgridcode}.   \par 
 
 \begin{figure}[h!]
 \centering
@@ -182,15 +189,17 @@ Respecto al control de tensi\'on, en la secci\'on anterior se ha visto que la ma
 \caption{L\'imites de potencia reactiva en funci\'on de la tensi\'on de la linea}
 \label{VQgridcode}
 \end{figure}
-\newpage
+
+Para comprobar que se cumplen los requisitos de tensi\'on y potencia reactiva se hacen controles de estos valores cada cinco minutos por parte del operador del sistema. Se establece una banda admisible de $\pm2.5 kV$ entorno al valor de consigna. Se considera un servicio adecuado cuando se cumple al menos un $75\%$ de los valores muestreados cada hora. Para cumplir con los valores la tensi\'on  se debe mantener dentro de los margenes admisibles de variaci\'on o la central debe haber alcanzado el limite de potencia reactiva obligatorio \cite{PO74}. \par
+
 		\paragraph{Frecuencia}
 Como consecuencia de un desajuste entre la potencia activa aportada y la demanda se produce un cambio en la energía almacenada en la masa rotativa del generador que provoca un desvio de la frecuencia del sistema. Un aumento en la potencia entregada se convertir\'ia en un aumento de la velocidad angular del generador y por tanto un aumento de frecuencia, pasando lo contrario al entregar potencia por debajo de la demanda \cite{WFgridcode}, \cite{FrecuencyLvL}. \par
 
 Normalmente el control de la frecuencia esta compuesto por tres funciones distintas. El control primario de frecuencia, usado ante los desequilibrios repentinos en la red. Actua a nivel local en la turbina en un rango de 15 a 30 segundos. El control secundario o de carga permite reestablecer la frecuencia y la potencia a los valores programados. Se realiza en las unidades de control central del p\'arque y actua en un rango de 15 minutos. Este es el tipo de funci\'on que se implementara en este trabajo. Finalmente esta el control terciario que consiste en la gesti\'on de la potencia generada por cada aerogenerador para ayudar al control secundario \cite{WFgridcode}. \par
 
+En el PO 1.5 se trata el establecimiento de la reserva para la regulacion de frecuencia y potencia. Respecto al control primario, se especifica que debe cumpletar un reestablecimiento total antes de 15 segundos desde el instante de desequilibrio si el valor de esre es menor o igual a 1500 MW. En caso de que el desequilibrio sea superior a 1500 MW el 50\% la reserva de regulaci\'on primaria debe actuar antes de 15 segundos y se be alzanzar el 100\% de actuaci\'on antes de 30 segundos. La regulaci\'on primaria debe actuar durante un tiempo de 15 minutos hasta que la regulaci\'on secundaria recupere las consignas iniciales y reestablezca la reserva primaria utilizada \cite{PO15}. \par
 
-
-
+La actuaci\'on de la reserva secundaria no debe retarserse m\'as de 30 segundos y debe mantenerse durante un tiempo de 15 minutos hasta que su uso neto sea sustituido por la regulaci\'on terciaria. Se deben garantizar unos valores minimos de reserva de 500 MW a subir y 400 MW a bajar. Sobre la reserva terciaria se dice que se ha de mantener unos margenes de subida y bajada de potencia para prevenir las diferencias de demanda real con respecto a la esperada y de la producci\'on de las centrales e\'olicas respecto a la esperada \cite{PO15}. \par
 
 \chapter{Control de plantas el\'ectricas}
 
@@ -218,7 +227,7 @@ Por la complejidad del sistema de conexi\'on a red de una planta electrica y la 
 \chapter{Herramientas de diseño}
 
 
-	\section{Desarrollo en Simulink de un modelo matem\'atico del parque}
+	\section{Desarrollo en Simulink de un modelo matem\'atico del p\'arque}
 
 Para el desarrollo del modelo su simulaci\'on se utilizar\'a la herramienta de programaci\'on Simulink. Simulink es un entorno de programaci\'on de diagramas de bloques para el diseño basado en modelos. Es parte del entorno de programaci\'on de Matlab pero a un nivel de abstracci\'on m\'as alto que el lenguaje interpretado usado en los scripts. \par
 
