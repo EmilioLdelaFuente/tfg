@@ -4,10 +4,14 @@
 \setlength{\textwidth}{155mm} %longitud horizontal del texto
 \setlength{\oddsidemargin}{5mm} %margen del borde frontal
 \setlength{\evensidemargin}{7mm}%margen del lomo
+\setlength{\topmargin}{-5mm}%margen superior
+\setlength{\textheight}{210mm}%altura de texto
+\setlength{\parindent}{14pt}
 
 %paquetes usados
 \usepackage[utf8]{inputenc}
 \usepackage{multicol}
+\usepackage{afterpage}
 \usepackage{graphicx}
 \graphicspath{{./FIguras/}}
 
@@ -28,29 +32,54 @@
 \includegraphics[width=\textwidth]{Encabezado.PNG}
 \end{figure}
 \begin{center}
-\LARGE
-UNIVERSIDAD POLIT\'ECNICA DE MADRID \par
-\vspace {10 mm}
-ESCUELA T\'ECNICA SUPERIOR DE INGENIER\'IA Y DISEÑO INDUSTRIAL\par
-\vspace {10 mm}
-\LARGE
-Grado en Ingenier\'ia electr\'onica industrial y autom\'atica \par
-\vspace {10 mm}
-\Huge
-TRABAJO FIN DE GRADO \par
-\vspace{20 mm}
-\LARGE
-\textbf{Control de conexi\'on a red de parques e\'olicos}\par
-\vspace {10 mm}
-Autor: Emilio Liaño de la Fuente \par
-\vspace {10 mm}
+	\LARGE
+	UNIVERSIDAD POLIT\'ECNICA DE MADRID \par
+	\vspace {10 mm}
+	ESCUELA T\'ECNICA SUPERIOR DE INGENIER\'IA Y DISEÑO INDUSTRIAL\par
+	\vspace {10 mm}
+	\LARGE
+	Grado en Ingenier\'ia electr\'onica industrial y autom\'atica \par
+	\vspace {10 mm}
+	\Huge
+	TRABAJO FIN DE GRADO \par
+	\vspace{20 mm}
+	\LARGE
+	\textbf{Control de conexi\'on a red de parques e\'olicos}\par
+	\vspace {10 mm}
+	Autor: Emilio Liaño de la Fuente \par
+	\vspace {10 mm}
 \end{center}
-\newpage
-   \par
+\begin{multicols}{2}
+	\LARGE
+	Cotutor:
+
+	Manuel Garc\'ia Plaza \par
+	Tutor:
+
+	Ricardo Granizo Arrabe
+\vfill
+		
+\end{multicols}
+
+\begin{flushright}
+\vfill
+	Madrid, Julio 2018
+\end{flushright}
+\afterpage{\null\newpage}
 \newpage
 \normalsize
 \pagenumbering{arabic}
-\tableofcontents
+
+\chapter*{Resumen}
+
+Debido a la importancia de la energ\'ia e\'olica en la producci\'on el\'ectrica actual, los c\'odigos de red han adaptado su noramtiva para permitir la introdcci\'on de la potencia instalada a la red de forma estable y segura. Esto significa para los parques e\'olicos la necesidad de implementar un control que cumpla con dicha noramtiva. \par
+En este trabajo se presentan controles de diferentes plantas centrandose en garantizar el cumplimiento del procedimiento de operaci\'on 7.4 sobre el control de tensi\'on y reactiva de la red \cite{PO74}. Para ello, se crearan modelos de la conexi\'on a red de parques e\'olicos en el entorno de Simulink. \par
+Se implementaran y analizaran casos de estudios para diferentes plantas, diferentes t\'ipos de red y desv\'ios de tensi\'on en el punto de conexi\'on. En el segundo cap\'itulo se describira el funcionamiento de los parques e\'olicos y suconexi\'on a red como introducci\'on a los posibles escenarios que se pueden plantear para su estudio. \par
+Se diseñaran y aplicaran diferentes tipos de algor\'itmos de control de la potencia activa y reactiva de los generadores modelados. Se compararan las respuestas obtenidas por diferentes tipos de control para el cumplimiento del c\'odigo de red de España. Las diferentes t\'ecnicas utilizadas actualmente y las posibilidades de teor\'ia de control son descritas en el tercer cap\'itulo. \par
+Para el modelado del sistema el\'ectrico se utilizaran las herramientas de la librer\'ia SimPowerSystem de Simulink. El modelo consta de los elementos t\'ipicos de una conexi\'on a red como las l\'ineas de trasnmisi\'on, transformadores, generadores y la propia red. En el cuarto cap\'itulo se describen las herramientas usadas de esta librer\'ia y otras de Matlab/Simulink que fueron usadas en este trabajo. \par
+Los objetivos por tanto de este trabajo de fin de grado son la simualci\'on de un parque e\'olico y presentar diferentes escenarios posibles de conexi\'on a red y la comparaci\'on de diferentes estrategias de control para cumplir los requisitos impuestos por el c\'odigo de red en los diferentes casos anteriormente propuestos. \par
+
+\tableofcontents %indice
 
 \chapter{Introducci\'on}
 
@@ -58,7 +87,7 @@ Autor: Emilio Liaño de la Fuente \par
 
 \chapter{Parques e\'olicos y conexi\'on a red}
 
-Un parque e\'olico es una agrupaci\'on de aerogeneradores que transforman la energ\'ia e\'olica en energ\'ia el\'ectrica. En este cap\'itulo se har\'a una introducci\'on a los elementos de un parque e\'olico prestando especial atenci\'on a los elementos el\'ectricos y de control. Primero se expondran los elementos en general de un p\'arque e\'olico y de la conexi\'on a la red, despues se hablara de los parametros el\'ectricos del circuito de conexi\'on y de su comportamiento, y por \'ultimo se hablara de los c\'odigos de red y de las limitaciones que estos inponen sobre el funcionamiento de los parques e\'olicos.  
+Un parque e\'olico es una agrupaci\'on de aerogeneradores que transforman la energ\'ia e\'olica en energ\'ia el\'ectrica. En este cap\'itulo se har\'a una introducci\'on a los elementos de un parque e\'olico prestando especial atenci\'on a los elementos el\'ectricos y de control. Primero se expondran los elementos en general de un parque e\'olico y de la conexi\'on a la red, despues se hablara de los parametros el\'ectricos del circuito de conexi\'on y de su comportamiento, y por \'ultimo se hablara de los c\'odigos de red y de las limitaciones que estos inponen sobre el funcionamiento de los parques e\'olicos.  
 
 	\section{Elementos del parque}
 Los parques e\'olicos necesitan para su funcionamiento los aerogeneradores para transformar la energ\'ia e\'olica en energ\'ia el\'ectrica, un sistema de control central y una red interna para la conexi\'on el\'ectrica. A su vez estos est\'an compuestos por diferentes elementos.
@@ -167,7 +196,7 @@ Cuando hablamos de una linea de transmisi\'on, como son las que conectan el parq
 
 Esto significa que los cambios en la magnitud de de la tensi\'on son controlados por la potencia reactiva y la  diferencia de fase entre emisor y receptor viene dada por la potencia activa \cite{WFgridcode}. Por eso se utiliza el control de la potencia activa y reactiva para controlar frecuencia de la red y la tensi\'on respectivamente. \par
 
-Normalmente la fercuencia es m\'as estable que la tensi\'on en la red el\'ectrica por lo que los p\'arques e\'olicos tratan de producir la potencia el\'ectrica m\'axima que permita la instalaci\'on y la demanda de la red, y as\'i obtener los mayores beneficios posibles. Es por eso la reactiva la que suele variar m\'as para mejorar la claidad de la potencia entregada. \par
+Normalmente la fercuencia es m\'as estable que la tensi\'on en la red el\'ectrica por lo que los parques e\'olicos tratan de producir la potencia el\'ectrica m\'axima que permita la instalaci\'on y la demanda de la red, y as\'i obtener los mayores beneficios posibles. Es por eso la reactiva la que suele variar m\'as para mejorar la claidad de la potencia entregada. \par
 
 
 	\section{C\'odigos de red}
@@ -195,7 +224,7 @@ Para comprobar que se cumplen los requisitos de tensi\'on y potencia reactiva se
 		\paragraph{Frecuencia}
 Como consecuencia de un desajuste entre la potencia activa aportada y la demanda se produce un cambio en la energía almacenada en la masa rotativa del generador que provoca un desvio de la frecuencia del sistema. Un aumento en la potencia entregada se convertir\'ia en un aumento de la velocidad angular del generador y por tanto un aumento de frecuencia, pasando lo contrario al entregar potencia por debajo de la demanda \cite{WFgridcode}, \cite{FrecuencyLvL}. \par
 
-Normalmente el control de la frecuencia esta compuesto por tres funciones distintas. El control primario de frecuencia, usado ante los desequilibrios repentinos en la red. Actua a nivel local en la turbina en un rango de 15 a 30 segundos. El control secundario o de carga permite reestablecer la frecuencia y la potencia a los valores programados. Se realiza en las unidades de control central del p\'arque y actua en un rango de 15 minutos. Este es el tipo de funci\'on que se implementara en este trabajo. Finalmente esta el control terciario que consiste en la gesti\'on de la potencia generada por cada aerogenerador para ayudar al control secundario \cite{WFgridcode}. \par
+Normalmente el control de la frecuencia esta compuesto por tres funciones distintas. El control primario de frecuencia, usado ante los desequilibrios repentinos en la red. Actua a nivel local en la turbina en un rango de 15 a 30 segundos. El control secundario o de carga permite reestablecer la frecuencia y la potencia a los valores programados. Se realiza en las unidades de control central del parque y actua en un rango de 15 minutos. Este es el tipo de funci\'on que se implementara en este trabajo. Finalmente esta el control terciario que consiste en la gesti\'on de la potencia generada por cada aerogenerador para ayudar al control secundario \cite{WFgridcode}. \par
 
 En el PO 1.5 se trata el establecimiento de la reserva para la regulacion de frecuencia y potencia. Respecto al control primario, se especifica que debe cumpletar un reestablecimiento total antes de 15 segundos desde el instante de desequilibrio si el valor de esre es menor o igual a 1500 MW. En caso de que el desequilibrio sea superior a 1500 MW el 50\% la reserva de regulaci\'on primaria debe actuar antes de 15 segundos y se be alzanzar el 100\% de actuaci\'on antes de 30 segundos. La regulaci\'on primaria debe actuar durante un tiempo de 15 minutos hasta que la regulaci\'on secundaria recupere las consignas iniciales y reestablezca la reserva primaria utilizada \cite{PO15}. \par
 
@@ -218,6 +247,10 @@ Por la complejidad del sistema de conexi\'on a red de una planta electrica y la 
 
 	\section{Introducci\'on al control de plantas el\'ectricas}
 
+Para poder cumplir los requisitos del codigo de red y alcanzar el m\'aximo de potencia entregable de forma \'optima las centrales el\'ectricas disponen de un sistema de control. En el caso de los parques e\'olicos se tiene la problematica añadida de tener que controlar varios generadores diferentes con una potencia m\'axima disponible variable en el tiempo. \par
+
+ Para solucionar estos problemas en la industria se utiliza un control jer\'arquico como viene especificado en la normativa ISA-95 que se puede separar en dos niveles de control \cite{PowerLoadControl} o tres. 
+
 	\section{Estrategias de control utilizadas}
 
 	\section{Control cl\'asico}
@@ -227,7 +260,7 @@ Por la complejidad del sistema de conexi\'on a red de una planta electrica y la 
 \chapter{Herramientas de diseño}
 
 
-	\section{Desarrollo en Simulink de un modelo matem\'atico del p\'arque}
+	\section{Desarrollo en Simulink de un modelo matem\'atico del parque}
 
 Para el desarrollo del modelo su simulaci\'on se utilizar\'a la herramienta de programaci\'on Simulink. Simulink es un entorno de programaci\'on de diagramas de bloques para el diseño basado en modelos. Es parte del entorno de programaci\'on de Matlab pero a un nivel de abstracci\'on m\'as alto que el lenguaje interpretado usado en los scripts. \par
 
