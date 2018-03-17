@@ -19,10 +19,10 @@
 \date{}
 \author{Emilio Lia\~no}
 
+
 \renewcommand*\contentsname{\'Indice}
 \renewcommand*\bibname{Referencias}
 \renewcommand*\chaptername{Cap\'itulo}
-
 
 \begin{document}
 	\pagenumbering{gobble} %no numera
@@ -271,12 +271,16 @@ El modelo de Simulink se compondra de tres partes. El modelo electrico de la red
 		\paragraph{Control} 
 Con el control se trata de que el modelo alcance unos valores de potencia activa y reactiva establecidos como consignas, $P^*$ y $Q^*$. Con estas dos consignas se calcula la consigna de potencia aparente, $S^*$, como n\'umero complejo que servira de consigna \'unica. Para eso se realimentaran las medidas de tensi\'on e intensidad de las tres fases, $V_{abc}$ e $I_{abc}$. \par
 
-Con las medidas tomadas de $V_{abc}$ e $I_{abc}$ en el lado de alta tensi\'on se calcula la potencia activa y reactiva del circuito en ese punto. Las medidas de tensi\'on e intensidad se pueden tomar tanto en el lado de alta como de media tensi\'on del transformador, la situaci\'on del medidor depende del parque en concreto. En este caso eleg\'i medir en el lado de alta porque estas medidas son las que realmente estan afectando a la estabilidad de la red. \par
+Con las medidas tomadas de $V_{abc}$ e $I_{abc}$ en el lado de alta tensi\'on se calcula la potencia activa y reactiva del circuito en ese punto. Las medidas de tensi\'on e intensidad se pueden tomar tanto en el lado de alta como de media tensi\'on del transformador, la situaci\'on del medidor depende del parque en concreto. \par
 
 Las medidas de potencia activa y reactiva en el lado de alta tensi\'on se utilizan para calcular la potencia aparente en forma de complejo. Esta potencia aparente se resta a la consigna cerrando el lazo de realimentaci\'on. Esta diferencia es el error en potencia aparente del sistema que entra en el bloque de control, en el caso del control cl\'asico un PID. A la salida del control se opera la señal de potencia aparente para que vuelva a dar una intensidad que se introduce a las fuentes de intensidad del modelo el\'ectrico.  \par
 
 		\paragraph{Observaci\'on}
 Para poder analizar el comportamiento del modelo el\'ectrico Simulink tiene herramientas de observación y seguimiento de las variables. Dentro de la libreria b\'asica de Simulink podemos encontrar en el apartado de \emph{Sinks} algunas de estas herramientas. Existe tanto la opci\'on de guardar los valores de la simulaci\'on como la visualizaci\'on de las gr\'aficas. \par
+
+El bloque \emph{Scope} nos permite visualizar en una gr\'afica la evoluci\'on de una variable en el tiempo. Este bloque permite la entrada de variables reales o complejas y vectores de diferentes dimensiones. Si la variable entrante de un puerto es compleja o de varias dimensiones se dibujaran todos los valores en la misma gr\'afica, en cambio se si utilizan diferentes puertos, las señales de cada puerto se podran dibujar en diferentes gr\'aficas.  \par
+
+Con el bloque \emph{XY Graph} se dibujara una gr\'afica de una señal contra otra. El bloque tiene dos entradas, La primera se representara en el eje \emph{X} y la segunda en el eje \emph{Y}.  \par
 
 Usando el bloque \emph{To Workspace} podemos guardar la evoluci\'on de una variable a lo largo de una simulaci\'on como vector o como estructura con tiempo.  \par
 
@@ -291,12 +295,31 @@ La simulaci\'on por el metodo de continua resuelve el modelo con el tiempo discr
 
 El modo discreto fija un tiempo de muestre que el usuario elige. Las propiedades son las mismas que en el modo continuo pero los resultados son siempre los mismos independientemente de lo que se tarde en hacer los c\'alculos. Ambos m\'etodos se utilizan para simulaciones de periodos de tiempo cortos en las que es necesario analizar la forma de onda o en aquellos modelos que sea necesario estudiar sus etapas trasnitorias. \par
 
-El m\'etodo fasorial calcula todos los valores de tensi\'on e intensidad como vectores, ya sean fasores o complejos. 
+El m\'etodo fasorial calcula todos los valores de tensi\'on e intensidad como vectores, ya sean fasores o complejos. Este modo se usa para simulaciones de larga duraci\'on, por eso ignora los estados transitorios y solo se miden los valores del estacionario. En este modo de simulaci\'on es necesario especificar la frecuencia a la que trabaja el circuito. Es el que se utiliza principalmente en este trabajo por tratarse de un control terciario. \par
 
 		\paragraph {Fuentes el\'ectricas}
+En los modelos el\'ectricos hay dos formas de diferenciar las fuentes electricas, por la magnitud que establecen en fuentes de tensi\'on e intensidad, o por la variabilidad de su valor en fijas o variables. La libreria de Simscape cuenta con fuentes de tensi\'on de alterna fijas y variables, además de fuentes de tensi\'on diseñadas especificamente para circuitos trif\'asicos, por otro lado tambien hay fuentes de intensidad de alterna variables y fijas. \par
+
+En este trabajo las fuentes de tensi\'on se utilizan para representar a la red. Al tratarse de un circuito trif\'asico me centrare en el an\'alisis de los bloques diseñados para este tipo de circuitos. Ambas fuentes de tensi\'on estan configuradas en estrella como se puede ver en la figura \ref{VoltageSources}. La fuente de tensi\'on fija se puede configurar para que tenga conexi\'on a neutro, para que este conectada a tierra o para que no haya conexi\'on a este punto mientras que la variable siempre incluye una conexi\'on a neutro. \par
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{VoltageSources.PNG}
+\caption{Fuentes de tensi\'on de trif\'asica en Simulink. }
+\label{VoltageSources}
+\end{figure} \par
+
+Adem\'as la fuente de tensi\'on fija incluye una impedancia de caracter inductivo con la que se puede emular la red, en la variable hay que añadir esta impedancia a continuaci\'on para obtener el mismo circuito equivalente. La fuente fija se puede usar para simular una red estavle mientras que la variable modela las inestabilidades posibles en la red. Las variaciones en la tensi\'on de salida pueden ser de amplitud, fase o frecuencia. La variaci\'on se puede modelar adem\'as como un escal\'on, una rampa, una senoide o una tabla de amplitudes en funci\'on del tiempo. \par
+
+Las fuentes de intensidad variables imponenen una intensidad en una rama en funci\'on de una entrada. Como solo hay fuentes de intensidad monof\'asicas se deben utilizar tres para modelar una fuente de intensidad trif\'asica equilibrada. Si la simulaci\'on es continua o discreta se debe introducir un n\'umero real que da el valor instantaneo, normalemnte la señal de entrada tiene forma sinusoidal para las corrientes alternas, si se hacen una simulaci\'on fasorial se debe introducir un n\'umero complejo que establece el fasor de intensidad de la rama. \par
 
 		\paragraph {Medidores}
+Los medidores transforman los valores f\'sicos de los circuitos modelados en señales de Simulink compatibles con los bloques de fuera del modelo. Dependiendo del tipo de simulaci\'on los medidores devolveran diferentes señales, en modo continuo o discreto el valor de los medidores es siempre el instantaneo de la magnitud, mientras que en la simulaci\'on fasorial los medidores pueden devolver el valor del complejo o del argumento y el angulo. \par
 
+Conectados al circuito se pueden utilizar voltimetros, amperimetros y medidores de impedancia. Para circuitos trif\'asicos existe un medidor de las tres fases para intensidad y tensi\'on. Este bloque devuelve la tensi\'on y la intensidad de las tres fases en forma de complejo, real-imaginario, modulo o modulo y argumento. Adem\'as permite leer la tensi\'on como tensi\'on de fase o de linea, la intensidad siempre es de linea. \par
+
+Sin conectar al circuito hay bloques para obtener la potencia activa, en vatios, y reactiva, en voltiampreios reactivos, con la entrada de la tensi\'on e intensidad de un punto del circuito. En el bloque de trif\'asica deben entrar los valores de pico de cada magnitud en forma de complejos de las tres fases. \par
+ 
 		\paragraph {L\'ineas de transmisi\'on}
 Las l\'ineas de transmisi\'on son elementos pasivos del circuito que presentan una impedancia. Para definir una l\'inea de media distancia, que son las que se utilizan en un parque e\'olico, hay dos t\'ipos de par\'ametros. Existen los par\'ametros transversales, la conductancia y la capacidad, y est\'an los  par\'ametros longitudinales, resistencia e inductancia. Existen dos formas de agrupar estos par\'ametros, el circuito equivalente en $T$ y el circuito equivalente en $\pi$ \cite{LibroRedesLineas}. En este trabajo voy a centrarme en el modelo $\pi$ que es el que usare en el modelo de Simulink.  \par
 
@@ -318,21 +341,31 @@ En el modelo de Simulink para definir la l\'inea con el circuito equivalente  $\
 \label{PiSectionSimulink}
 \end{figure} \par
 
+En una representaci\'on simplificada de una linea se puede utilizar simplemente una impedancia de caracter inductivo en la linea. Esto elimina los efectos capacitivos que existen en una linea y por tanto las derivacones de corriente a tierra. \par 
+
 		\paragraph{Transformador}
+
+En la libreria de \emph{Simscape} exsten varios bloques de transformadores trif\'asicos, en esta secci\'on se describira el bloque del transformador de dos devanados. Este bloque implementa un transformador trif\'asico usando tres transformadores monof\'asicos. \par
+
+La conexi\'on de los devanados se puede establecer como estrella, estrella con el neutro accesible, estrella con conexi\'on a tierra, trienagulo con 30º de retraso frente a la estrella y triangulo con 30º de adelanto,  tanto en el priamrio como en el secundario. En este trabajo los transformadores usados tienen ambos lados conectados con la topolog\'ia de estrrella sin conexi\'on a neutro para evitar el desfase y para eliminar las corrientes que fuguen al neutro. \par
+
+Entre los par\'ametros configurables de los transformadores estan la potencia y frecuencia nominales, estos valores no tienen impacto en la simulaci\'on cuando se establece que las unidades son del sistema internacional, pero se utilizan apra calcular el resto de parametros cuando se usa \emph{pu}, \emph{por unidad}. Tambien se puede configurar la tensi\'on de linea, la resistencia interna, y la inductancia del primario y el secundario. \par
 
 		\subsection{Tratamiento de señal por buses}
 
 Simulink trabaja usando señales para comunicar los bloques. El tratamiento de estas señales es importante por ser precisamente estas a las que se las hara el seguimiento en las simulaciones. Para el tratamiento de multiples señales existe la herramienta de los buses. Los buses son estructuras formadas por varias señales o incluso otros buses. \par
 
-Los buses se manejan dentro del modelo con 
+Para gestionar los buses simulink tiene la herramienta de \emph{Bus Editor}. Aqui se pueden visualizar y editar los buses que hay declarados en el workspace adem\'as de crear nuevos buses.
 
 		\subsection{Diseño encapsulado mediante modelos referenciados}
 
 \chapter{Modelado y simulaci\'on del control}
 
-	\section{Desarrollo de un modelo de parque y red de conexi\'on}
+Para analizar el comportamiento del parque e\'olico y el controlador se modelara y analizara en Simulink los casos de estudio propuestos. En este cap\'itulo se presentara el m\'etodo usado para desarrollar el modelo del circuito el\'ectrico, el diseño del algoritmo de control y los diferentes casos que se han estudiado. \par
 
 	\section{Modelado del parque y la conexi\'on a red en Simulink}
+
+
 
 	\section{Diseño del control de la conexi\'on a red}
 
