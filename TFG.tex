@@ -357,17 +357,73 @@ Simulink trabaja usando señales para comunicar los bloques. El tratamiento de e
 
 Para gestionar los buses simulink tiene la herramienta de \emph{Bus Editor}. Aqui se pueden visualizar y editar los buses que hay declarados en el workspace adem\'as de crear nuevos buses.
 
-		\subsection{Diseño encapsulado mediante modelos referenciados}
+		%\subsection{Diseño encapsulado mediante modelos referenciados}
 
 \chapter{Modelado y simulaci\'on del control}
 
-Para analizar el comportamiento del parque e\'olico y el controlador se modelara y analizara en Simulink los casos de estudio propuestos. En este cap\'itulo se presentara el m\'etodo usado para desarrollar el modelo del circuito el\'ectrico, el diseño del algoritmo de control y los diferentes casos que se han estudiado. \par
+Para analizar el comportamiento del parque e\'olico y el controlador se modelara y analizara en Simulink los casos de estudio propuestos. En los casos de estudio propuestos se analizar\'a el comportamiento de la planta para diferentes referencias de potencia activa y variaci\'ones en el car\'acter reactivo de la red de conexi\'on. En este cap\'itulo se presentara el m\'etodo usado para desarrollar el modelo del circuito el\'ectrico, el diseño del algoritmo de control y los diferentes casos que se han estudiado. \par
 
 	\section{Modelado del parque y la conexi\'on a red en Simulink}
 
+Para realizar un modelo el\'ectrico del sistema de conexi\'on se debe definir cuales son las diferentes partes del circuito. En el caso del circuito de conexi\'on a red de un parque e\'olico podemos diferencias tres partes. El conjunto de generadores, las lineas de transmisi\'on y la red. \par 
+
+		\paragraph{Generadores}
+
+Los aerogeneradores son representados como una fuente de intensidad trif\'asica. Para que sea simulable se debe añadir una resistencia en paralelo a las fuentes de intensidad poruqe no se pueden colocar fuentes de intensidad en serie. Esta resistencia es de un valor muy alto para que no fluya intenisdad por esa rama en la pr\'actica. El modelo más simple seria el de la figura \ref{SimpleGenerator}. \par
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.4\textwidth]{SimpleGenerator.PNG}
+\caption{Modelo simplificado de generador. }
+\label{SimpleGenerator}
+\end{figure} \par
+
+Este modelo se puede usar para representar la totalidad del parque. En el primer modelo estudiado todo el parque es representado como un solo generador para simplificar el algoritmo de control utilizado. En este caso se esta tratando la potencia generada por los aerogeneradores como una sola como se ver\'ia en el bus principal de alimentaci\'on una vez que se han unido todas las ramas de cada generador. \par
+
+Además se eliminan detalles como el car\'acter inductivo del motor trif\'asico de cada aerogenerador o el transformador que conecta el bus de alimentaci\'on del parque con cada unidad. Cuando se hace una representaci\'on individual de cada aerogeneradoe se pueden ir incluyendo estos elementos seg\'un hasta donde se modele el circuito. Como se puede ver en la figura \ref{FullConverter} se pueden diferenciar tres aprtes en el circuito de conexi\'on de un aerogenerador. 
+
+%figuraFullConverter
+
+Como este trabajo esta centrado en el control a nivel alto de la planta el convertidor y la m\'aquina el\'ectrica no van a ser representados en los modelos. \par
+		
+		\paragraph{Lineas de transmisi\'on}
+
+Seg\'un se vio en las topolog\'ias de conexi\'on de un parque e\'olico la disposici\'on de las lineas de conexi\'on dentro del parque puede variar en funci\'on de la topolog\'ia escogida. Pero en general se puede dividir en tres grupos las lineas que hay en el modelo del circuito. La linea que conecta con la red, la linea del bus principal del parque y las ramas que unen laalimentaci\'on principal con los aerogeneradores. \par
+
+En el modelo en el que se trata el parque como una sola unidad este ultimo tipo no aparece en la simulaci\'on. \par
+
+En los parametros de las lineas es donde se establece si la planta tiene más o menos elemento inductivo, o incluso si llega a ser de car\'acter capacitivo. \par
+
+
+		\paragraph{Red} 
+
+La red esta representada como una fuente de tensi\'on y una impedancia de caracter indiuctivo. Se ha utilizado el bloque de fuente de tensi\'on variable para representar las inestabilidades en la red. Es la parte más simple del modelo el\'ectrico en cuanto a n\'umero de elementos, solo se necesitan dos bloques para representarla como se ve en la figura \ref{GridSimulink}. \par
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{GridSimulink.PNG}
+\caption{Modelo de la Red. }
+\label{GridSimulink}
+\end{figure} \par
+
+Es la red la que determina la consigna del control de reactiva, porque esta depende de la tensi\'on de red como se vio en la secci\'on de los c\'odigos de red. 
 
 
 	\section{Diseño del control de la conexi\'on a red}
+
+En el diseño de un controlador hay tres elementos importantes. La consigna, la realimentaci\'on y el propio controlador. Estos elementos se deben diseñar para las dos señales que se estan controlando, potencia activa y reactiva. \par
+
+		\paragraph{Consigna}
+
+La consigna de potencia, $P_{SP}$, fija es una constante que no varia durante la prueba pero que se variara para los difrentes casos de estudio. Por otro lado la consigna de reactiva, $Q_{SP}$, viene dada por el codigo de red. \par
+
+El codigo de red establece unos margenes dentro de los cuales debe trabajar la planta, pero para obtener una consigna en concreto se establece la consigna de la planta como el punto medio entre el limite superior y el inferior. Siendo los limites superior e inferior dos rectas de igual pendiente, el punto medio entre los dos pertenecera a otra recta de la misma pendiente y un origen de coordenadas media de ambas rectas. \par
+
+La recta que establece $Q_{SP}$ descrita en (\ref{eq:QV}) devuelve el porcentaje de reactiva necesaria respecto a la potencia activa. Para este calculo la tensi\'on introducida, que sera la tensi\'on medida en el PCC, debe estar en valor eficaz y medida en $kV$.  
+
+\begin{equation}\label{eq:QV}
+	Q_{SP}(\%P)= -0.75V +300 
+\end{equation} \par
 
 	\section{Casos de estudio}
 

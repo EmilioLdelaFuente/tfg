@@ -10,6 +10,7 @@ Fnom=50;
 
 cd 'C:\Users\Emilio\Desktop\universidad\AA_TFG\Simulink'
 load('ControlConfig.mat');
+cd 'C:\Users\Emilio\Documents\MATLAB'
 
 %llamada al init de los buses
 GridBus();
@@ -25,5 +26,18 @@ WtF_Q=0;
 Grid_V=400e3;
 Grid_Vnom=Grid_V;
 Grid_F=Fnom;
-Grid_P=0;
+P_SP=750e7;
 Grid_Q=0;
+%calculo de la impedancia de red
+XRCalculator;
+
+%% variables de las lineas
+
+r1=0.0731;
+r0=r1;
+l1=0.0013;
+l0=l1;
+c1=0.922e-9;
+c0=c1/1000;
+Grid_Linekm=0.1219;
+WtF_Linekm=0.603;
