@@ -1,7 +1,7 @@
 %% Declarations
 S=100e6;
 Vl=25e3;
-XRrate=7;
+XRrate=10;
 fnom=50;
 
 %% Operations

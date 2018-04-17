@@ -5,7 +5,7 @@
 pi=3.1416;
 Rad2Deg=180/pi;
 Ts=0.02;
-StopT=40;
+StopT=150;
 Fnom=50;
 
 cd 'C:\Users\Emilio\Desktop\universidad\AA_TFG\Simulink'
@@ -41,3 +41,8 @@ c1=0.922e-9;
 c0=c1/1000;
 Grid_Linekm=0.1219;
 WtF_Linekm=0.603;
+
+WtF_l1=0.0013e7;
+WtF_l0=WtF_l1;
+WtF_c1=0.922e-5;
+WtF_c0=WtF_c1/1000;

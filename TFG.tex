@@ -70,6 +70,8 @@
 \normalsize
 \pagenumbering{arabic}
 
+\chapter*{Agradecimientos}
+
 \chapter*{Resumen}
 
 Debido a la importancia de la energ\'ia e\'olica en la producci\'on el\'ectrica actual, los c\'odigos de red han adaptado su noramtiva para permitir la introdcci\'on de la potencia instalada a la red de forma estable y segura. Esto significa para los parques e\'olicos la necesidad de implementar un control que cumpla con dicha noramtiva. \par
@@ -104,8 +106,8 @@ Los parques e\'olicos necesitan para su funcionamiento los aerogeneradores para 
 		El sistema de control de la planta incluye el propio controlador, la comunicaci\'on interna del parque y el SCADA, \emph{Supervisory Control And Data Acquisition} en español Supervisi\'on, Control y Adquisici\'on de Datos, para operar el sistema. Debido al aumento de los parques e\'olicos con una gran potencia y su penetraci\'on en la red, es necesario que estos se comporten como componentes activos controlables de la red apoyando su estabilidad. Para eso es necesario instalar un sistema de control central del parque. Este control es responsable de que el parque funcione de forma segura, \'optima y cumpliendo los reglamentos impuestos por la red el\'ectrica a la que este alimentando. \par
 		Uno de los principales requerimientos que se especifican en la normativa del parque est\'a referido a los huecos de tensi\'on en la red. El objetivo es evitar la p\'erdida significativa de producci\'on de los aerogeneradores a lo largo de la duraci\'on de la falta. Los requerimientos de control se refieren a diferentes aspectos de la potencia del sistema y la estabilidad. \par 
 		Dependiendo del estado de la red, el operador del sistema realiza demandas espec\'ificas al control central del parque, el cual prepara las señales de consigna a cada aerogenerador en concreto. El controlador central se encarga de cumplir los requerimientos del operador de red mandando las referencias de potencia activa y reactiva que se necesita de cada aerogenerador. Estas consignas se calculan con las medidas obtenidas en el PCC, \emph{Point of common coupling} en español punto de acoplamiento com\'un, y con la potencia disponible que ofrece cada rotor \cite{WindFarmController}.  \par
-		La red de comunicaci\'on del parque est\'a formada por los controladores de los aerogeneradores, que est\'an instalados en la torre de cada turbina, que se comunican con el controlador central.  A su vez los controladores de cada torre recogen toda la informaci\'on necesaria de los modulos, que est\'an conectados con los instrumentos de medida a trav\'es de  un sistema de sensores. As\'i la red est\'a estructurada de forma jer\'arquica an\'aloga a los diferntes niveles de control como se ve en la figura \ref {ComLvls}. Los controladores de los aerogeneradores mandan toda la informaci\'on al controlador central y asignan las consignas que manda este dentro del aerogenerador \cite{ComunicationControl}.  \par
-		Adem\'as de los modulos instalados en cada turbina, la red de control cuenta con diferentes modulos de control conectados a al controlador central. Entre otros el modulo de la l\'inea, el del trasformador, los de los buses de comunicaci\'on y los conectados a las redes de alimentaci\'on de los aerogeneradores. Estos modulos monitorizan las condiciones de operaci\'on como los desequilibrios de tensi\'on, el sobrecalentamiento, fases inversas, sincronizaci\'on pobre y los l\'imites de tensi\'on y frecuencia\cite{ComunicationControl}.   \par
+		La red de comunicaci\'on del parque est\'a formada por los controladores de los aerogeneradores, que est\'an instalados en la torre de cada turbina, que se comunican con el controlador central.  A su vez los controladores de cada torre recogen toda la informaci\'on necesaria de los modulos, que est\'an conectados con los instrumentos de medida a trav\'es de  un sistema de sensores. Los controladores de los aerogeneradores mandan toda la informaci\'on al controlador central y asignan las consignas que manda este a los modulos dentro del aerogenerador \cite{ComunicationControl}.  \par
+		Adem\'as de los modulos instalados en cada turbina, la red de control cuenta con diferentes modulos conectados al controlador central. Entre otros el modulo de la l\'inea, el del trasformador, los de los buses de comunicaci\'on y los conectados a las redes de alimentaci\'on de los aerogeneradores. Estos modulos monitorizan las condiciones de operaci\'on como los desequilibrios de tensi\'on, el sobrecalentamiento, fases inversas, sincronizaci\'on pobre y los l\'imites de tensi\'on y frecuencia\cite{ComunicationControl}.   \par
 		La red t\'ipica de un sistema de comunicaciones consiste de una conexi\'on principal de amplio ancho de banda y redes de bajo ancho de banda conectadas individualmente a la principal. La fibra \'optica y las microondas de radio suelen ser las tecnolog\'ias usadas para la comunicaci\'on principal. En las redes secundarias se suele utilizar cable de par trenzado de cobre, aunque se pueden usar tambi\'en sistemas inal\'ambricos. Generalmente en el caso de los parques e\'olicos se suelen utilizar PLCs, \emph{Power Line Communications} en español comunicaci\'on por l\'inea de potencia. Las tecnolog\'ias de PLCs disponibles permiten una gran velocidad transmisi\'on llegando a los 200 Mb/s. La principal ventaja de este tipo de comunicaci\'on es que las señales viajan a trav\'es de los mismos cables de la l\'inea el\'ectrica. Por otro lado estos cables suelen estar desprotegidos contra interferencias electromagn\'eticas y los m\'odulos que utilizan son m\'as caros que los de la comunicaci\'on inal\'ambrica \cite{ComunicationWF}. \par
 	
 	\section{Elementos de la conexi\'on a red}
@@ -230,11 +232,30 @@ En el PO 1.5 se trata el establecimiento de la reserva para la regulacion de fre
 
 La actuaci\'on de la reserva secundaria no debe retarserse m\'as de 30 segundos y debe mantenerse durante un tiempo de 15 minutos hasta que su uso neto sea sustituido por la regulaci\'on terciaria. Se deben garantizar unos valores minimos de reserva de 500 MW a subir y 400 MW a bajar. Sobre la reserva terciaria se dice que se ha de mantener unos margenes de subida y bajada de potencia para prevenir las diferencias de demanda real con respecto a la esperada y de la producci\'on de las centrales e\'olicas respecto a la esperada \cite{PO15}. \par
 
+Por otra parte, en el PO 1.2 se especifican los limites de frecuencia admisibles del sistemas y las correciones que se deben aplicar de potencia activa. Estando los limites de subfrecuencia entre $49,8Hz$ y $49,5Hz$, y de sobrefrecuencia en $50,2Hz$ y $50,5Hz$. Para estos limites la correcci\'on de potencia activa se rige por la ecuaci\'on (\ref{eq:PF}) que devuelve difrenecia de potencia, $\Delta P$, a imponer respecto a la referencia, $P_{ref}$ \cite{PO12}. \par
+
+\begin{equation}\label{eq:PF}
+	\frac{\Delta P}{P_{ref}}=100 \frac{\frac{|\Delta f|-|\Delta f_1|}{f_n}}{s_2}
+\end{equation} \par
+
+Donde $\Delta f_1$ es la difrencia de frecuencia entre la tensión nominal, $f_n$, de $50Hz$ y los limites fijados por el c\'odigo de red m\'as cercanos a $f_n$ segun el caso sea de sobrefrecuencia o subfrecuencia. Adem\'as $s_2$ es el estatismo en porcentaje que debera ajustar a un rango entre 2\% y 12\% \cite{PO12}. \par
+
+En la figura \ref{FPgridcode} se muestran los limites de $\Delta P$ que se pueden imponer en funci\'on de los valores limites para $s_2$. Los valores validos son aquellos que se encuentran en el area comprendida entre las dos rectas. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.65\textwidth]{FPgridcode.PNG}
+\caption{L\'imites de variaci\'on de potencia activa en funci\'on de la desviaci\'on de frecuencia}
+\label{FPgridcode}
+\end{figure}
+
+En este mismo documento se especifica que las tecnolog\'ias cuya energ\'ia primaria sea renovable y se conecten a la red mediante convertidores electr\'onicos, como es el caso de los aerogeneradores modernos y por extensi\'on de la mayor\'ia de parques e\'olicos, se contribuira a la maximizaci\'on de producci\'on y se minimizara la necesidad de aplicar limitaciones a su producci\'on. Esto significa que este control estara podr\'a desactivarse siempre que el operador del sistema considere que existen otros medios para evitar poner en riesgo la calidad del suministro, pero es necesario que se pueda activar en tiempo real si as\'i se solicitase \cite{PO12}. \par
+
 \chapter{Control de plantas el\'ectricas}
 
 La teor\'ia de control es un campo de la ingenier\'ia y las matem\'aticas que trata el comportamiento de los sistemas din\'amicos. El problema de control consiste en, dada una entrada o referencia a un actuador en un sistema f\'isico o planta, obtener la respuesta deseada de dicha planta. \par
 
-Esto se puede conseguir en lazo abiertoo  en lazo cerrado. La solución en lazo abierto es, conociendo las condiciones de la planta y su funci\'on de transferencia, introducir una referencia con la que se obtenga la salida deseada. En lazo cerrado se realimenta comparandola con la entrada para medir el error del sistema, este error generalmente entra a un controlador que da finalmente la entrada a la planta con la que se obtiene la salida deseada. Este esquema de realimentaci\'on se muestra en la figura \ref{FeedBackLoop} y es en los que se basan normalmente los controladores usados en la industria. \par
+Esto se puede conseguir en lazo abierto en lazo cerrado. La solución en lazo abierto es, conociendo las condiciones de la planta y su funci\'on de transferencia, introducir una referencia con la que se obtenga la salida deseada. En lazo cerrado se realimenta comparandola con la entrada para medir el error del sistema, este error generalmente entra a un controlador que da finalmente la entrada a la planta con la que se obtiene la salida deseada. Este esquema de realimentaci\'on se muestra en la figura \ref{FeedBackLoop} y es en los que se basan normalmente los controladores usados en la industria. \par
 
 \begin{figure}[h!]
 \centering
@@ -243,19 +264,219 @@ Esto se puede conseguir en lazo abiertoo  en lazo cerrado. La solución en lazo 
 \label{FeedBackLoop}
 \end{figure}
 
-Por la complejidad del sistema de conexi\'on a red de una planta electrica y la posibilidad de variaciones en sus parametros a lo largo del tiempo en este cap\'itulo se hablara de la soluci\'on de lazo cerrado. Primero se hablara del control en general de plantas el\'ectricas y se definira el concepto de los niveles de control, en la siguietne secci\'on se establecer\'a el estado del arte en el control de parques e\'olicos y a contiunaci\'on se hablara de las t\'ecnicas de control cl\'asicas y modernas existentes. \par 
+Por la complejidad del sistema de conexi\'on a red de una planta el\'ectrica y la posibilidad de variaciones en sus parametros a lo largo del tiempo en este cap\'itulo se hablara de la soluci\'on de lazo cerrado. \par
+
+ Primero se hablara del control en general de plantas el\'ectricas y se definira el concepto de los niveles de control, en la siguietne secci\'on se establecer\'a el estado del arte en el control de parques e\'olicos pasando tanto por el uso de las t\'ecnicas de control cl\'asicas como las modernas. \par 
 
 	\section{Introducci\'on al control de plantas el\'ectricas}
 
 Para poder cumplir los requisitos del codigo de red y alcanzar el m\'aximo de potencia entregable de forma \'optima las centrales el\'ectricas disponen de un sistema de control. En el caso de los parques e\'olicos se tiene la problematica añadida de tener que controlar varios generadores diferentes con una potencia m\'axima disponible variable en el tiempo. \par
 
- Para solucionar estos problemas en la industria se utiliza un control jer\'arquico como viene especificado en la normativa ISA-95 que se puede separar en dos niveles de control \cite{PowerLoadControl} o tres. 
+En un principio, los aerogeneradores de un parque se controlaban solamente de forma local. Aplicando un control individual a cada m\'aquina se consigue una regulaci\'on de reactiva en torno al cero \cite{PI_QV}. Desde que se impone una noramtiva m\'as estricta sobre los parques e\'olicos el control ha evolucionado en complejidad. \par
+
+Para poder cumplir los requisitos del c\'odigo de red acerca de los distintos niveles se establecen tres niveles de control diferentes. El control primario a nivel local de cada generador y con los tiempos de reacci\'on especificados en el cap\'itulo anterior. El control secundario actua en un area atendiendo a la frecuencia y el intercambio de potencia con areas vecinas y el control terciario que actua en el sistema el\'ectrico en su totalidad \cite{NivelesDeControl}. En el caso de un parque e\'olico este ultimo nivel de control ser\'ia el parque como conjunto. \par
+
+Respecto al control de tensi\'on, el control primario se encargaria de mantener la tensi\'on de salida de cada generdor igual al valor de referencia, $V_{ref}$. El control secundario se encarga de imponer el valor de referencia a todos los aerogeneradores de un area manteniendo la tensi\'on en los nudos pilotos. El control terciario determina el valor de consigna para los nudos y la tensi\'on en la subestaci\'on, el PCC \cite{ControlCentrales}. \par
+
+Al nivel del control terciario, el controlador del parque, este se comporta como una sola unidad. Tiene como entradas las demandas del operador del sistema, las medidas en el PCC y la potencia disponible en los aerogeneradores. La potencia disponible de cada aerogenerador es establecido en el nivel primario de cada cada unidad. El sistema de control tiene normalmente un bloque de establecimiento de las referencias de potencia, el propio controlador y un bloque de reparto de consignas\cite{DankControl}. \par
+
 
 	\section{Estrategias de control utilizadas}
 
-	\section{Control cl\'asico}
 
-	\section{Control mod\'erno}
+En el control de tensi\'on y reactiva en concreto existen diferentes estrategias. En la actualidad se puede diferentes formas de establecer la consigna para el PCC. Las magnitudes usadas como consigna para el control son el factor de potencia o \emph{fdp}, la tensi\'on y la potencia reactiva. \par
+
+El fdp se utiliza como consigna en muchos casos por proporcionar un incremento en la contribuci\'on de reactiva a la par con el incremento de aporte de potencia activa a la red. Una desventaje en parques e\'olicos es que los cambios potencia activa en los aerogeneradores resultaran en un cambio del fdp en el PCC por la inductancia de las lineas. Esto resultara en una serie de cambios bruscos en al referenecia de reactiva que llegara a las turbinas que necesitara un control m\'as r\'apido y un hardware que elimine los retardos lo m\'as posible para asegurara que el sistema no oscila \cite{SPControl}.
+
+El control de tensi\'on ofrece la posibilidad de reducir los efectos que provocan los cambios en la potencia activa sin la necesidad de r\'apidos cambios en la consigna por parte del operador del sistema. Pero debido a los retardos de comunicaci\'on dentro del parque es inevitable cierta variaci\'on en la tensi\'on del PCC \cite{SPControl}. \par
+
+Utilizar la potencia reactiva como consigna es la estrategia m\'as utilizada  con grandes generadores s\'incronos. La desventaja es la misma que cuando se usa el fdp ante los cambios de potencia activa. Requiere tambien un control r\'apido para eliminar un impacto indeseado en la tensi\'on \cite{SPControl}. \par
+
+En el control de potencia activa tambien existen diferentes estrategias de control para las posibls situaciones de funcionamiento. Durante los periodos en los que la capicadad de transimis\'on de la red es reducida se establece un limite m\'aximo de potencia activa generada, esto se llama en ingles \emph{Absolute Production Limiter}. La capacidad de participar en el control secundario o de areas es llamado \emph{Balance Control}. Ante cambios bruscos en la potencia m\'axima disponible provocados por el tiempo, tormentas u otros eventos con r\'apidas variaciones de la velocidad del viento, se puede imponer una limitaci\'on en la velocidad de cambio de la potencia producida, esto se llama \emph{Power Rate Limitation}. En momentos en los que necesite mantener una reserva de potencia activa en el parque se puede establecer la potencia entregada a un limite por debajo de la disponible, esto se llama \emph{Delta Control}  \cite{ActiveStrategies}. \par
+
+En la figura \ref{PowerLimits} se pueden observar los efectos de estas diferentes funciones que se pueden aplicar en un parque e\'olico. Donde la curva en rojo es la potencia suministrada y la verde es la potencia disponible. \par 
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{PowerLimits.PNG}
+\caption{Estrategias de control de potencia activa en funci\'on del tiempo}
+\label{PowerLimits}
+\end{figure}
+
+Referente a los algoritmos de los controladores de parques e\'olicos existen dos areas diferentes, la implementaci\'on industrial y las lineas de investigaci\'on. En la industria es com\'un encontrar t\'ecnicas de control cl\'asico mientras que la investigaci\'on actual esta m\'as orientada al control moderno. \par 
+
+	\subsection{Control cl\'asico}
+
+El algoritmo predominante en la teor\'ia de control cl\'asica es el PID, \emph{Proporcional Integrativo Derivativo}, y sus variantes. El controlador PID es el caso extremo de un compensador de atraso-adelanto de fase, con un polo en el origen y el otro en el infinito. Es similar a las versiones reducidas, el PD y el PI, que son el caso extremo de compensadores de adelanto de fase y retraso de fase respectivamente \cite{PIDanalysis}. \par
+
+El PID consta de tres acciones como se ha mencionado antes. La acci\'on proporcional que devuelve una salida proporcional a la entrada con una gancia variable, la accion integral que representa la acumulaci\'on del error y la acci\'on derivativa, que representa la pendiente del error. Estas tres acciones se suman como se muestra en la figura \ref{EsquemaPID}. \par
+
+%Figura PID
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{EsquemaPID.PNG}
+\caption{Esquema de controlador PID m\'as sencillo}
+\label{EsquemaPID}
+\end{figure}\par
+
+Dentro de la familia de los controladores PID los m\'as usados en la industria, adem\'as del mismo, ser\'ian el PD y el PI. En este trabajo se prestara m\'as atenci\'on al control PI, por ser el que se usa mayoritariamente en los parques e\'olicos como se puede ver en diferentes publicaciones \cite{WindFarmController, PI_QV, SPControl, ExamplePI, ExamplePI1}. \par
+
+El controlador PD elimina la rama integradora del PID. Este tipo de controlador se suele usar para controles de posici\'on en sistemas de torsi\'on o movimientos acelerados. Sin embargo en sistemas m\'as rigidos a menudo este control hace al sistema inestable. La ganancia del lazo cerrado es demasiado grande y no existe suficiente amortiguamiento por lo que las oscilaciones se vuelven demasiado grandes.\cite{PDanalysis}. Por esta raz\'on este tipo de control no suele ser usado en centrales el\'ectricas. \par
+
+El controlador PI es lento pero preciso. La acci\'on integradora elimina el error en el r\'egimen permamnete y garantiza la estabilidad al cumplir el criterio de Liapunov (\ref{eq:Liapunov}). Esto significa que cuando el error sea positivo forzara una pendiente negativa y cuando el error sea negativo el integrador forzara una pendiente positiva. \par
+
+\begin{equation}\label{eq:Liapunov}
+	S\dot S < 0 \ \ \ Donde \ S\equiv error
+\end{equation} \par
+
+Para que el PID, o cualquiera de sus variaciones, devuelva la respuesta que se desea tanto en el r\'egimen transitorio como el permanete, hay que ajustar los par\'ametros utilizados en lo que se conoce como sintonizaci\'on o \emph{tuning}. Por tanto, esta parte del diseño del controlador tiene mucha importancia y existen variadas t\'ecnicas tanto apra el c\'alculo te\'orico como la obtenci\'on emp\'irica. \par
+
+Cuando se conoce la planta o se ha calculado un modelo aproximado de ella es posible calcular el PID de forma te\'orica. Se establece un polo dominante que se correpsonde a la respuesta deseada, y luego se aplica la asignaci\'on directa de polos. Esta consiste en multiplicar a la planta por la funci\'on de transferencia gen\'erica del controlador y calcular los coeficientes apra los cuales la funcion de transferencia final equivale al polo dominante elegido con anterioridad. \par
+
+Como Ziegler y Nichols describen en \cite{ZNoriginal}: "Un acercamiento puramente matem\'atico al estudio del control autom\'atico es, ciertamente, la forma más deseable desde un punto de vista de precisi\'on y brevedad. Sin embargo, desafortunadamente, las matem\'aticas de control implican una desconcertante variedad de funciones exponenciales y trigonometricas que el ingeniero medio no puede permitirse el tiempo en abrirse paso a traves de ellas para llegar a la soluci\'on del problema actual." \par
+
+Es por eso que en la industria para ahorrar costes y tiempo se utilizan los m\'etodos de ajuste y sintonizaci\'on emp\'iricos. Estos m\'etodos se conocen as\'i por utilizar la respuesta real de la planta sin control para poder aplicarse. Dentro de estos m\'etodos encontramos entre los m\'as usados el Ziegler-Nichols, Chien-Hrones-Reswick y el Cohen-Coon.\par
+
+		\paragraph{Ziegler-Nichols}
+
+Dos m\'etodos fueron presentados por Ziegler y Nichols en 1942. Estos m\'etodos todavia son ampliamente en su forma original o alguna de las variaciones. El primer m\'etodo es el de la respuesta al escal\'on y el segundo es el de la respuesta en frecuencia. \par 
+
+En la respuesta al escal\'on en lazo abierto se deben medir los par\'ametros $a$ y $L$. Para ello hay que dibujar una tangente en el punto de m\'axima pendiente y coger las coordenadas de los puntos de corte con los ejes. Como se ve en la figura \ref{ZNstep}, $L$ se corresponde a la coordenada del punto de corte con el eje $x$ y $a$ se corresponde con el punto de corte con el eje $y$. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.3\textwidth]{ZNstep.PNG}
+\caption{Par\'ametros del m\'etodo de Ziegler-Nichols para el escal\'on \cite{PIDbook}}
+\label{ZNstep}
+\end{figure}\par
+
+Con los valores de $a$ y $L$ se pueden calcular los parametros del controlador PID o cualquiera de sus variantes como se especifica en la tabla \ref{ta:ZNstep}. Adem\'as se puede calcular tambien una estimaci\'on del tiempo de pico que tendr\'ia el sistema con cada controlador. \par 
+
+\begin{table}[h!]
+\centering
+\caption{Par\'ametros del PID obtenidos a traves de Ziegler-Nichols \cite{PIDbook}}
+\label{ta:ZNstep}
+\begin{tabular}{c|cccc}
+Controller & K     & $T_{i}$ & $T_{d}$ & $T_{p}$ \\ \hline
+P          & $1/a$   & -        & -        & $4L$       \\
+PI         & $0.9/a$ & $3L$       & -        & $5.7L$     \\
+PID        & $1.2/a$ & $2L$       & $L/2$      & $3.4L$    
+\end{tabular}
+\end{table}
+
+Este m\'etodo solo se puede aplicar a plantas en las que la respuesta al escal\'on en lazo abierto no es inestable o si la respuesta es muy oscilatoria. Por eso Ziegler y Nichols propusieron un segundo m\'etodo que se puede aplicar a cualquier tipo de planta, usando la respuesta en frecuencia. \par
+
+Para el m\'etodo de la respuesta en frecuencia se utiliza la curva de Nyquistdel proceso en cadena abierta. Se calcula el punto de intersecci\'on con el eje real negativo que esta definido por $K_{u}$ y $T_{u}$. Estos dos valores se introducen en la tabla \ref{ta:ZNfreq} y se hallan los valores del controlador como en el m\'etodo anterior. \par
+
+\begin{table}[h!]
+\centering
+\caption{Par\'ametros obtenidos en el m\'etodo de la frecuencia \cite{PIDbook}}
+\label{ta:ZNfreq}
+\begin{tabular}{c|cccc}
+Controller & K        & $T_{i}$  & $T_{d}$    & $T_{p}$   \\ \hline
+P          & $0.5K_u$ & -        & -          & $T_u$     \\
+PI         & $0.4K_u$ & $0.8T_u$ & -          & $1.4T_u$  \\
+PID        & $0.6K_u$ & $0.5T_u$ & $0.125T_u$ & $0.85T_u$
+\end{tabular}
+\end{table}
+
+Como se necesita conocer la planta para poder dibujar la curva de Nyquist los parametros $K_u$ y $T_u$ se suelen medir de otra manera. Se aplica un controlador P a la planta con un $K$ nulo. Luego se va aumentando su valor lentamente hasta que el sistema oscile. La ganacia cuando el sistema empieza a oscilar es $K_u$ y el persiodo de las oscilaciones es $T_u$. \par
+
+El m\'etodo de Ziegler-Nichols es ampliamente utilizado por su simpleza y el poco esfuerzo que requiere. Sin embargo, el criterio de diseño que utiliza de obtener un sistema con un factor de reducci\'on de la oscilaci\'on entre el primer pico y el segundo a un cuarto tiene beneficios e inconvenientes. Aporta un buen rechazo a als perturbaciones de carga, pero tambien crea un sistema con una amortiguaci\'on muy pobre y poco margen de estabilidad \cite{PIDbook}. \par
+
+		\paragraph{Chien-Hrones-Reswick}
+
+Existen multiples sugerencias para modificar el m\'etodo de Ziegler-Nichols. Chien, Hrones y Reswick, \emph{CHR}, propusier\'on un cambio para el m\'etodo del escal\'on para conseguir un mejor amortiguamiento en lazo cerrado. \par
+
+El cambio propuesto es utilizar "la respuesta m\'as r\'apida sin sobreoscilaci\'on" o "la respuesta m\'as r\'apida con un 20\% de sobreoscilaci\'on" como nuevo criterio de diseño. Adem\'as observaron que el ajuste del PID para cambios en la consigna o para la respuesta ante perturbaciones de carga eran difrentes. \par
+
+Para el m\'etodo CHR se utilizan los par\'ametros anteriormente mencionados $a$ y $L$. Con estos valores se pueden calcular los par\'ametros del controlador utilizando la tabla \ref{ta:CHRload}. El PID con 20\% de sobreoscilaci\'on es muy parecido a los valores dados por Ziegler-Nichols, sin embargo se puede observar que para el 0\% se reduce el efecto del proporcional y el integrativo para hacer m\'as lento el sistema. \par
+
+\begin{table}[h!]
+\centering
+\caption{Valores de CHR para perturbaciones de carga \cite{PIDbook}}
+\label{ta:CHRload}
+\begin{tabular}{@{}c|cccccc@{}}
+Overshoot  & \multicolumn{3}{c}{0\%}      & \multicolumn{3}{c}{20\%}    \\
+Controller & K        & $T_{i}$ & $T_{d}$ & K       & $T_{i}$ & $T_{d}$ \\ \hline
+P          & $0.3/a$  & -       & -       & $0.7/a$ & -       & -       \\
+PI         & $0.6/a$  & $4L$    & -       & $0.7/a$ & $2.3L$  & -       \\
+PID        & $0.95/a$ & $2.4L$  & $0.42L$ & $1.2/a$ & $2L$    & $0.42L$ \\ 
+\end{tabular}
+\end{table} 
+
+Para obtener un controlador que responda ante cambios en la consigna de forma deseada se debe aplicar la tabla \ref{ta:CHRsp}. Para estos calculos ya no solo se necesita $a$ y $L$ si no que hay que usar el tiempo de establecimiento, $T$, del sistema \cite{PIDbook}. \par
+
+\begin{table}[]
+\centering
+
+\caption{Valores de CHR para seguimiento de consigna \cite{PIDbook}}
+\label{ta:CHRsp}
+\begin{tabular}{@{}c|cccccc@{}}
+Overshoot  & \multicolumn{3}{c}{0\%}      & \multicolumn{3}{c}{20\%}     \\
+Controller & K        & $T_{i}$ & $T_{d}$ & K        & $T_{i}$ & $T_{d}$ \\ \hline
+P          & $0.3/a$  & -       & -       & $0.7/a$  & -       & -       \\
+PI         & $0.35/a$ & $1.2T$  & -       & $0.7/a$  & $T$     & -       \\
+PID        & $0.6/a$  & $T$     & $0.5L$  & $0.95/a$ & $1.4T$  & $0.47L$ \\ 
+\end{tabular}
+\end{table}
+
+
+\iffalse
+	\paragraph{Cohen-Coon}
+
+Como en los m\'etodos anteriores en el m\'etodo de Cohen-Coon se debe observar la respuesta ante el escal\'on del sistema en cadena abierta. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{CoenCoonStep.PNG}
+\caption{Par\'ametros del m\'etodo de Cohen-Coon \cite{CohenCoon}}
+\label{CCstep}
+\end{figure}\par
+\fi
+		\paragraph{Ajuste del PID}
+
+Una vez que se ha obtenido unos valores del controlador usando los m\'etodos anteriores es posible que la planta no responda exactamente como se quer\'ia en un principio. Para lograr la respuesta deseada es neceserio ajustar los par\'ametros del controlador. Este proceso no se hace de forma arbitraria si no que existen ciertas pautas de actuaci\'on para llevarlo a cabo. \par
+
+La acci\'on proporcional multiplica el error por una constante, $K_p$. Lo cual hace llegar al sistema f\'isico un valor mayor o menor que el error real dependiendo de si $K_p$ es mayor o menor que 1 respectivamente. Esto afecta directamente a la velocidad de la respuesta de la planta de forma proporcional, a medida que se aumenta $K_p$ la planta es m\'as r\'apida. \par
+
+En un controlador, si solo variamos el valor de $K_p$, se obtendra un tiempo de subida, $T_r$, m\'as corto, una sobreoscilaci\'on, $M_p$ m\'as amplia y un ligero aumento en el tiempo de establecimiento, $T_s$ aumentando la acci\'on proporcional. No tiene efecto directo sobre el error del sistema pero si no hay acci\'on integradora lo aumentara o lo disminuira por afectar a la ganancia del sistema. \par
+
+La acci\'on integradora tambien aumenta la velocidad del sistema en forma de inercia. Al principio la integral no tendra mucho efecto por lo que el tiempo de subida disminuira pero ligeramente. La inercia tambien tendra el efecto de aumentar la sobreoscilaci\'on y la oscilaci\'on, incrementando el tiempo de establecimiento. \par
+
+Analizando el efecto sobre la respuesta en frecuencia, el aumento de $K_i$ disminuye el margen de ganancia y el margen de fase. Lo que hace el lazo cerrado m\'as oscilatorio y potencialmente inestable. Por eso, aunque la parte integral elimina el error en el regimen permanente, elevar demasiado $K_i$ perjudica a la estabilidad del sistema \cite{PIDtunning}.  \par
+
+La acci\'on derivativa trata de igualar la pendiente de la respuesta y la pendiente de la consigna. En cierto modo esto incumple la ley de estabilidad de Liapunov (\ref{eq:Liapunov}). Si hay un error negativo la pendiente de la respuesta tiene que ser mayor a la pendiente de la consigna, lo cual da un error en las pendientes positivo que la acci\'on derivativa corregira de forma negativa. \par 
+
+Esto puede verse como que la acci\'on derivativa hace inestable los sistemas, sin embargo en los sistemas oscilatorios sirve para contrarestar el efecto de $K_p$ y $K_i$. Aumentar el $K_d$ ofrece por tanto amortiguamiento al sistema que resulta en una reduci\'on en la sobreoscilaci\'on y el tiempo de establecimiento.\par
+
+En lo relativo a la frecuencia, proporciona adelanto de fase lo cual contrarresta el retardo provocado por la acci\'on integral. En principio aumentar el termino $K_d$ estar\'ia aumentando la estabilidad al aumentar el margen de fase. Sin embargo, tambien se aumenta la ganancia del sistema pudiendo llegar a incumplir el criterio de estabilidad de Nyquist \cite{PIDtunning}.\par
+
+En la tabla \ref{ta:tuning} se encuentra un resumen de lo que varia la respuesta si se incrementa una de las tres ganancias de un PID sin variar las otras dos. \par
+
+\begin{table}[h!]
+\centering
+\caption{Efectos independientes de P, I y D \cite{PIDtunning}}
+\label{ta:tuning}
+\begin{tabular}{c|ccc}
+	 & $T_r$    & $M_p$ & $T_s$ \\ \hline
+$K_p$         & Reducci\'on   & Incremento     & Pequeño incremento          \\
+$K_i$        & Pequeña reducci\'on & Incremento       & Incremento          \\
+$K_d$        & Pequeña reducci\'on & Reducci\'on     & Reducci\'on      
+\end{tabular}
+\end{table}
+
+
+	\subsection{Control mod\'erno}
+
+Los controladores cl\'asicos funcionan bajo la premisa de que el sistema f\'isico en el que se han implementado es lineal. Aunque la mayor\'ia de sistemas no son lineales se pueden linealizar en torno a un punto de trabajo para procedimientos industriales controlados. Sin embargo para los casos en los que el sistema es altamente no lineal o las condiciones varian en un rango demasiado amplio para linializarlo, se han diseñado una serie de t\'ecnicas de control que intentan evitar este problema.  \par
+
+		\paragraph{L\'ogica difusa}
+
+
+
 
 \chapter{Herramientas de diseño}
 

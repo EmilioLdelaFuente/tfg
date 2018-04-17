@@ -1,10 +1,5 @@
 % a=1.11;
 % 
-% quiver(0, 0, 0.0814*a,3.0219*a)
-% hold
-% quiver(0, 0, 0.0814*a,0)
-% quiver(0, 0, 0,3.0219*a)
-% figure;
 %% 
 % ax1=subplot(2,1,1);
 % quiver(0, 0, Vp(1), 0)
@@ -25,3 +20,4 @@
 % quiver(0, 0, WtF_Vp(1)*a, WtF_Vq(1)*a)
 % hold
 % quiver(0, 0, Line_Vp(1)*a, Line_Vq(1)*a)
+
