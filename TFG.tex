@@ -473,9 +473,13 @@ $K_d$        & Pequeña reducci\'on & Reducci\'on     & Reducci\'on
 
 Los controladores cl\'asicos funcionan bajo la premisa de que el sistema f\'isico en el que se han implementado es lineal. Aunque la mayor\'ia de sistemas no son lineales se pueden linealizar en torno a un punto de trabajo para procedimientos industriales controlados. Sin embargo para los casos en los que el sistema es altamente no lineal o las condiciones varian en un rango demasiado amplio para linializarlo, se han diseñado una serie de t\'ecnicas de control que intentan evitar este problema.  \par
 
+Entre estas t\'ecnicas encontramos el control progresivo, el control robusto, la l\'ogica difusa, el control de estructura variable y todas las t\'ecnologias basadas en IA. En este trabajo se hablara m\'as de las que se han estudiado su uso en la energ\'ia e\'olica. \par
+
 		\paragraph{L\'ogica difusa}
 
+Los controladores de l\'ogica difusa no trabajan con los modelos matem\'aticos obtenidos de las ecuaciones diferenciales como los controladores cl\'asicos, en su lugar resuelve el problema a traves de heur\'istica y los modelos m\'atematicos de la l\'ogica difusa. Esto es \'util para los sistemas f\'isicos con modelos no lineales o aquellos para los que no se pueden expresar por modelos m\'atematicos convencionales. \par
 
+El control difuso se rige por leyes de control parecidas a las que impondria un ser humano. Se asigna una calificaci\'on verbal a los diferentes valores que puede tomar una medida y esta calificaci\'on verbal va asociada a un subconjunto difuso. La elecci\'on de las funciones de pertenencia asociadas a estos subconjuntos es en principio arbitraria. Ajustar estas funciones es parte del proceso de diseño del controlador. \par
 
 
 \chapter{Herramientas de diseño}
@@ -647,6 +651,12 @@ La recta que establece $Q_{SP}$ descrita en (\ref{eq:QV}) devuelve el porcentaje
 \end{equation} \par
 
 	\section{Casos de estudio}
+
+En los casos de estudio propuestos se analizar\'an tres consignas diferentes de potencia reactiva y sus efectos en la tensi\'on en el PCC. Cuando la consigna del parque se mantiene a cero en el PCC para entregar tan solo potencia activa. Utilizando la consigna obtenida a traves del c\'odigo de red para tratar de compensar los posibles desajustes en la red. Por ultimo, cuando se establece por consigna de reactiva cero en la saldia de los generadores dejando que el propio caracter inductivo o reactivo de las lineas del parque aporten reactiva a la red. \par
+
+Para poder ver el diferente efecto que tienen estas estrategias en la red se plantean seis casos de estudio en los que tres se dan una planta de caracter inductivo y los otros tres en una de caracter capacitivo. Los casos se diferencian entre si por la potencia activa que se aporta a la red. Los casos son de $7.5 GW$, $6MW$ y $0W$ de potencia activa.  \par
+
+
 
 \chapter{An\'alisis de resultados}
 
