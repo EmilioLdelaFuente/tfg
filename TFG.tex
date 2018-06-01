@@ -13,6 +13,7 @@
 \usepackage{multicol}
 \usepackage{afterpage}
 \usepackage{graphicx}
+\usepackage{amsmath}
 \graphicspath{{./FIguras/}}
 
 \title{Control de conexi\'on a red de parques e\'olicos}
@@ -44,7 +45,7 @@
 	TRABAJO FIN DE GRADO \par
 	\vspace{20 mm}
 	\LARGE
-	\textbf{Control de conexi\'on a red de parques e\'olicos}\par
+	\textbf{Control de potencia en el punto conexi\'on a red de parques e\'olicos}\par
 	\vspace {10 mm}
 	Autor: Emilio Liaño de la Fuente \par
 	\vspace {10 mm}
@@ -85,7 +86,42 @@ Los objetivos por tanto de este trabajo de fin de grado son la simualci\'on de u
 
 \chapter{Introducci\'on}
 
+La importancia de aportar la potencia demandada por la red garantizando una calidad que apoye a la estabilidad de esta es reflejado en los c\'odigos de red que los paises han elaborado para garantizarlo. Las centrales electricas deben cumplir los requisitos impuestos en los c\'odigos de red para poder conectarse a la red. \par
+
+Esta necesidad de cumplir con los criterios impuestos por lso c\'odigos de red convierte a los controladores en un elemento imprescindible para el funcionamiento de cualquier planta. En general las condiciones impuestas por los c\'odigos de red son relativas a la potencia activa y reactiva que genera la instalaci\'on por eso los controladores se centran en estas dos factores. \par
+
+La compensaci\'on de reactiva esta asociada a los desfases de tensi\'on que se produce en la red. Los elementos de la red, tanto en el transporte como en el consumo, son principalmente de caracter inductivo. Esto genera un aumento en la tensi\'on de la red y de la ocupaci\'on el\'ectrica de las lineas y trasnforamdores. \par
+
+Las plantas genradores son las responsables de evitar esta situaci\'on corrigiendo este desfase desde sus instalaciones. Para ello deben consumir o generar la energ\'ia reactiva como se indica en los c\'odigos de red. Los parques e\'olicos como cualquier otra planta generadora deben colaborar en la compensaci\'on de reactiva. \par
+
+Normalmente este control se apliccaba a nivel individual en cada aerogenerador. En España, este planteamiento era v\'alido para cumplir el RD 2818, que solo tomaba en cuenta el alejamiento del factor de potencia unitario con los datos mensuales. Sin embargo la noramtiva actual requiere un ajuste fino que solo se puede conseguir añadiendo una capa de control global regulando el parque al completo. \par
+
+Estos controladores de planta, conocidos como \emph{Power Plant Controller} o PPC, cumple otras funciones a parte de cumplir con las restricciones de las normativas. Son los encargados de maximizar la producci\'on, seguir las instrucciones del operador de red o cumplir ciertas pautas que indique el gestor del parque. \par
+
+En el caso de los parques e\'olicos esto suele ser un problema complejo de abordar. El reparto de consignas para un n\'umero variable de generadores, las restricciones de potencia disponible por el viento o las condiciones mediambientales como la parada de m\'aquinas durante las horas de actividad de ciertas especies, son problemas que las plantas el\'ectricas cl\'asicas no tenian que tener en cuenta. Por eso en los parques e\'olicos o fotovoltaicos el PPC es una herramienta importante a desarrollar y es la que se ha diseñado en este trabajo. \par 
+
+Como se ha mencionado antes los elementos de la red son de caracter inductivo normalmente, esta generalizaci\'on se puede aplicar tambien a los elementos de una planta generadora y en concreto a los de un parque e\'olico. Tanto las m\'aquinas el\'ectricas usadas para la generaci\'on, normalmente m\'aquinas as\'incronas o s\'incronas, como los elementos de transporte, las lineas y los transformadores, son de caracter inductivo cuando la planta se encuentra en funcionamiento.\par
+
+Los c\'odigos de red estan escritos teniendo en cuenta esta presunci\'on del caracter inductivo en las plantas. Por eso, en ciertos casos, una planta de caracter capacitivo podr\'ia compensar m\'as las subidas de tensi\'on dejando a la capacitancia de la planta compensar que siguiendo el c\'odigo de red. \par
+
+
+
 	\section{Objetivos}
+
+El objetivo global del trabajo es el de diseñar y desarrollar un PCC en el entorno de Matlab/Simulink para controlar la potencia activa y reactiva sumnistrada a a la red. Para la consecuci\'on de este objetivo general se han establecido unos objetivos especificos que dicho PCC debe cumplir para poder realizar el estudio de los casos de platnas capacitivas anteriormente mencionados. \par
+
+Como primer objetivo en este trabajo se simular\'a el circuito de conexi\'on a red de un parque e\'olico. En esta fase se debe diseñar un modelo f\'isico de la conexi\'on a red utilizando las herramientas de la librer\'ia \emph{Simscape Power Systems}. Debe incluir como elementos imprescindibles la red, el parque y las lineas de transmisi\'on. \par
+
+De este sistema se deben poder extraer medidas de tensi\'on, intensidad y potencia. Con ellas se verificar\'a el comportamiento de la red y el criterio de signos utilizado en el c\'alculo de la reactiva. Esto es base fundamental para implementar el PPC al ser la realimentaci\'on del control. \par
+
+El segundo objetivo es el diseño de un controlador que sea capaz de cumplir el c\'odigo de red de España. En concreto cumplir con lo establecido en el procedimiento de operaci\'on 7.4 referente a compensaci\'on de reactiva ante variaciones de tensi\'on. \par
+
+Para considerar cumplido este objetivo la planta tendra que seguir la consigna de reactiva sin salirse de los margenes establecidos por la normativa española ante diferentes tipos de variaciones de tensi\'on en la red como el escal\'on, la rampa o la sinusoidal. Adem\'as el control debe actuar siguiendo estas entradas en todos los casos de estudio propuestos, tanto para las difernetes potencias nominales como para las plantas inductivas y capacitivas. \par
+
+Por \'ultimo los efectos de aplicar o no la compensaci\'on de reactiva que se establece en el c\'odigo de red para los diferentes casos de estudio del caracter de la planta. Teniendo en cuenta que el c\'odigo de red esta escrito suponiendo que las plantas generadoras son de caracter inductivo, las plantas que son de caracter capacitivo podr\'ian compensar mejor las subidas de tensi\'on con las propias caracteristicas de la planta que siguiendo la normativa. \par
+
+se comparar\'a como actuan diferentes plantas propuestas en los casos de estudio ante la subida de tensi\'on provocada la inyecci\'on de potencia activa en la red. Dependiendo de la cantidad de potencia activa que se genere tambien habra diferentes casos de estudio puesto que la tensi\'on variara en funci\'on de la intensidad que entregue la planta a la red. \par
+
 
 \chapter{Parques e\'olicos y conexi\'on a red}
 
@@ -631,18 +667,19 @@ La red esta representada como una fuente de tensi\'on y una impedancia de caract
 \label{GridSimulink}
 \end{figure} \par
 
-Es la red la que determina la consigna del control de reactiva, porque esta depende de la tensi\'on de red como se vio en la secci\'on de los c\'odigos de red. 
+Es la red la que determina la consigna del control de reactiva, porque esta depende de la tensi\'on de red como se vio en la secci\'on de los c\'odigos de red.  \par
+
 
 
 	\section{Diseño del control de la conexi\'on a red}
 
 En el diseño de un controlador hay tres elementos importantes. La consigna, la realimentaci\'on y el propio controlador. Estos elementos se deben diseñar para las dos señales que se estan controlando, potencia activa y reactiva. \par
 
-		\paragraph{Consigna}
+		\paragraph{consigna}
 
 La consigna de potencia, $P_{SP}$, fija es una constante que no varia durante la prueba pero que se variara para los difrentes casos de estudio. Por otro lado la consigna de reactiva, $Q_{SP}$, viene dada por el codigo de red. \par
 
-El codigo de red establece unos margenes dentro de los cuales debe trabajar la planta, pero para obtener una consigna en concreto se establece la consigna de la planta como el punto medio entre el limite superior y el inferior. Siendo los limites superior e inferior dos rectas de igual pendiente, el punto medio entre los dos pertenecera a otra recta de la misma pendiente y un origen de coordenadas media de ambas rectas. \par
+El c\'odigo de red establece unos margenes dentro de los cuales debe trabajar la planta, pero para obtener una consigna en concreto se establece la consigna de la planta como el punto medio entre el limite superior y el inferior. Siendo los limites superior e inferior dos rectas de igual pendiente, el punto medio entre los dos pertenecera a otra recta de la misma pendiente y un origen de coordenadas media de ambas rectas. \par
 
 La recta que establece $Q_{SP}$ descrita en (\ref{eq:QV}) devuelve el porcentaje de reactiva necesaria respecto a la potencia activa. Para este calculo la tensi\'on introducida, que sera la tensi\'on medida en el PCC, debe estar en valor eficaz y medida en $kV$.  
 
@@ -650,11 +687,110 @@ La recta que establece $Q_{SP}$ descrita en (\ref{eq:QV}) devuelve el porcentaje
 	Q_{SP}(\%P)= -0.75V +300 
 \end{equation} \par
 
+Para el c\'alculo de esta operaci\'on en el modelo de Simulink se usan la media de las tensiones de las tres fases medidas en el medidor de red y la potencia calculada con ello. Como se puede ver en la figura \ref{SP_Sim} la potencia medida en la red es cambaida de signo por que el medidor devuelve la potencia consumida por la red, por lo que hay que cambiarle el signo para obtener la potencia generada por la planta. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{SP_Sim.PNG}
+\caption{Generaci\'on de la consigna. }
+\label{SP_Sim}
+\end{figure} \par
+
+En el caso de que la planta no esta aplicando la compensaci\'on de reactiva la consigna de esta misma sera 0. La consigna tambien se establece como cero cuando se quiere que la planta aporte la reactiva natural provocada por su propio caracter. \par
+
+\paragraph{realimentaci\'on}
+
+Para la realimetnaci\'on del controlador se mide en dos puntos del circuito diferentes, el PCC y la salida de intensidad del parque. La salida de estos medidores son la tensi\'on de las tres fases y la intensidad de las tres lineas en valor de pico y expresado en complejo. \par
+
+Se necesita convertir ambos valores de pico a valores eficaces, a parte se convierte el valor de tensi\'on de fase a linea para tener ambos valores como linea. Para esto se utiliza un bloque como el que se ve en la figura \ref{peak2rms}, en el que se divide ambas señales entre ra\'iz de dos y se multiplica la tensi\'on por raiz de tres. \par
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{peak2rms.PNG}
+\caption{Conversi\'on de valores obtenidos por los medidores. }
+\label{peak2rms}
+\end{figure} \par
+
+Aunque la tensi\'on e intensidad obtenidos en los medidores se convierten a valor eficaz para la realimentaci\'on y su an\'alisis, se necesita utilizar el valor de pico para calcular la potencia activa y reactiva. Estos son los otros dos elementos que se realimentan en el controlador.  \par
+
+En la realimentaci\'on de las potencias y las cosnignas asociadas tiene que pasar por un bloque de control de signo antes de entrar al controlador. Este bloque cambia el signo de tanto las cosnignas como los realimentaciones en funci\'on del signo de la reactiva de la planta. Esta reactiva se mide en el instante inicial y se guarda su valor durante toda la simulaci\'on. \par
+
+Esta estructura se puede ver en la figura \ref{ControlSign}. Gracias a este bloque se evitan las realimentaciones postivas cuando la reactiva producida naturalmente por la planta tuviese el mismo signo que la consigna, lo cual har\'ia al sistema inestable.  \par
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{ControlSign.PNG}
+\caption{Bloque de control del signo. }
+\label{ControlSign}
+\end{figure} \par
+
+En el caso de que se este aplicando la compensaci\'on indicada en el c\'odigo de red la realimentaci\'on se hace desde el PCC porque la norma especifica que se debe asegurar los valores de reactiva indicados en el punto de conexi\'on. Sin embargo, cuando se evita compensar el caracter reactivo de la planta la realimetnaci\'on se hace desde la salida del parque. \par
+
+\paragraph{Controlador}
+
+El controlador esta integrado en un bloque que se encarga de generar las consignas de intensidad para los generadores de alterna del sistema trif\'asico. Recibe como entradas las consignas y medidas de potencia activa y reactiva, con las que calcula la potencia aparente de referencia, y la tensi\'on de las fases con la que finalmente se calculara la intensidad. \par
+
+Con las potencia medidas y las consignas correspondientes se calcula el error del sistema en activa y reactiva por separado. Estos dos errores entran a unos bloques de PID de los cuales solo se utiliza la parte de PI. Como se muestra en la figura \ref{PID_PQ}, el PID tiene un sistema de bloque del integrador para valores bajos de la consigna de reactiva, con la que el sistema se vuelve inestable, y un reinicio del valor del integrador a los tres segundos, puesto que durante este tiempo el sistema el\'ectrico todav\'ia no a atravesado los transitorios y se espera a que se establezca. \par
+
+Durante estos tres segundos de establecimiento del circuito el controlador mandara por tanto una referencia nula de intensidad a las fuentes. \par  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{PID_PQ.PNG}
+\caption{Implementaci\'on del PID en Simulink. }
+\label{PID_PQ}
+\end{figure} \par
+
+Utilizando $P_{ref}$  como la parte real y $Q_{ref}$ como parte imagianria se forma el complejo $S_{ref}$. Como se vio en el primer capitulo la intensidad se obtiene dividiendo entre la tensi\'on por raiz de tres. 
+
+\begin{equation}
+	I_L^*= \frac{S}{\sqrt{3}V_L}
+\end{equation}
+
+Una vez obtenida esta intensidad se calcula el conjugado y esa es $I_{ref}$. Como $S_{ref}$ se divide entre los complejos de la tensi\'on de cada linea el resultado son las tres intenisdades que pertenecen a cada linea en el mismo orden de fase. \par
+
+El esquema global del controlador se muestra en la figura \ref{PPC}. La salida de las intensidades que es un vector que contiene los tres complejos se divide despues para llevar cada intensidad a la liena correspondiente. \par
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{PPC.PNG}
+\caption{Bloque completo del controlador. }
+\label{PPC}
+\end{figure} \par
+
 	\section{Casos de estudio}
 
 En los casos de estudio propuestos se analizar\'an tres consignas diferentes de potencia reactiva y sus efectos en la tensi\'on en el PCC. Cuando la consigna del parque se mantiene a cero en el PCC para entregar tan solo potencia activa. Utilizando la consigna obtenida a traves del c\'odigo de red para tratar de compensar los posibles desajustes en la red. Por ultimo, cuando se establece por consigna de reactiva cero en la saldia de los generadores dejando que el propio caracter inductivo o reactivo de las lineas del parque aporten reactiva a la red. \par
 
 Para poder ver el diferente efecto que tienen estas estrategias en la red se plantean seis casos de estudio en los que tres se dan una planta de caracter inductivo y los otros tres en una de caracter capacitivo. Los casos se diferencian entre si por la potencia activa que se aporta a la red. Los casos son de $7.5 GW$, $6MW$ y $0W$ de potencia activa.  \par
+
+\paragraph{Reactancia de la planta}
+
+El caracter inductivo o capacitivo de la planta lo determinan en gran manera las lineas de esta. Los cambios de los par\'ametros de las inductacias y capacitancias de las lineas es lo que se variara para hacer la planta variar su caracter. \par
+
+Definiendo los valores de las inductancias y capacitancias de secuencai positiva y secuencia cero de la linea de la planta se puede definir el caracter reactivo de la planta. En el caso de la planta inductiva se dan estos valores:
+
+\begin{equation}
+\begin{split}
+l1 & =0.0013 \\
+l0 & =l1\\
+c1 & =0.922* 10^{-9} \\
+c0 & =c1/1000 \\
+\end{split}
+\end{equation}
+
+Los valores en el caso capacitivo son: 
+
+\begin{equation}
+\begin{split}
+l1 & =0.0013*10^{7} \\
+l0 & =l1\\
+c1 & =0.922*10^{-5} \\
+c0 & =c1/1000 \\
+\end{split}
+\end{equation}
+
+Cuando la planta esta conectada a la red pero no genera intensidad consume cierta reactiva. En el caso inductivo son $48.4kVAR$ y en el caso capacitivo son $-3.06MVAR$. Por lo que la planta capacitiva tiene una componente reactiva m\'as importante que la planta inductiva. \par
 
 
 
