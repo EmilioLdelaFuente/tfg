@@ -88,17 +88,17 @@ Los objetivos por tanto de este trabajo de fin de grado son la simualci\'on de u
 
 La importancia de aportar la potencia demandada por la red garantizando una calidad que apoye a la estabilidad de esta es reflejado en los c\'odigos de red que los paises han elaborado para garantizarlo. Las centrales electricas deben cumplir los requisitos impuestos en los c\'odigos de red para poder conectarse a la red. \par
 
-Esta necesidad de cumplir con los criterios impuestos por lso c\'odigos de red convierte a los controladores en un elemento imprescindible para el funcionamiento de cualquier planta. En general las condiciones impuestas por los c\'odigos de red son relativas a la potencia activa y reactiva que genera la instalaci\'on por eso los controladores se centran en estas dos factores. \par
+Esta necesidad de cumplir con los criterios impuestos por los c\'odigos de red convierte a los controladores en un elemento imprescindible para el funcionamiento de cualquier planta. En general las condiciones impuestas por los c\'odigos de red son relativas a la potencia activa y reactiva que genera la instalaci\'on por eso los controladores se centran en estas dos factores. \par
 
-La compensaci\'on de reactiva esta asociada a los desfases de tensi\'on que se produce en la red. Los elementos de la red, tanto en el transporte como en el consumo, son principalmente de car\'acter inductivo. Esto genera un aumento en la tensi\'on de la red y de la ocupaci\'on el\'ectrica de las lineas y trasnforamdores. \par
+La compensaci\'on de reactiva esta asociada a los desfases de tensi\'on que se produce en la red. Los elementos de la red, tanto en el transporte como en el consumo, son principalmente de car\'acter inductivo. Esto genera, normalmente, un aumento en la tensi\'on de la red y de la ocupaci\'on el\'ectrica de las lineas y trasnforamdores. \par
 
 Las plantas genradores son las responsables de evitar esta situaci\'on corrigiendo este desfase desde sus instalaciones. Para ello deben consumir o generar la energ\'ia reactiva como se indica en los c\'odigos de red. Los parques e\'olicos como cualquier otra planta generadora deben colaborar en la compensaci\'on de reactiva. \par
 
-Normalmente este control se apliccaba a nivel individual en cada aerogenerador. En España, este planteamiento era v\'alido para cumplir el RD 2818, que solo tomaba en cuenta el alejamiento del factor de potencia unitario con los datos mensuales. Sin embargo la noramtiva actual requiere un ajuste fino que solo se puede conseguir añadiendo una capa de control global regulando el parque al completo. \par
+Normalmente este control se apliccaba a nivel individual en cada aerogenerador. En España, este planteamiento era v\'alido para cumplir el RD 2818, que solo tomaba en cuenta el alejamiento del factor de potencia unitario con los datos mensuales. Sin embargo la noramtiva actual requiere un ajuste de precisi\'on que solo se puede conseguir añadiendo una capa de control global regulando el parque al completo. \par
 
-Estos controladores de planta, conocidos como \emph{Power Plant Controller} o PPC, cumple otras funciones a parte de cumplir con las restricciones de las normativas. Son los encargados de maximizar la producci\'on, seguir las instrucciones del operador de red o cumplir ciertas pautas que indique el gestor del parque. \par
+Estos controladores de planta, conocidos como \emph{Power Plant Controller} o PPC, sirven otras funciones a parte de cumplir con las restricciones de las normativas. Son los encargados de maximizar la producci\'on, seguir las instrucciones del operador de red o seguir ciertas pautas que indique el gestor del parque. \par
 
-En el caso de los parques e\'olicos esto suele ser un problema complejo de abordar. El reparto de consignas para un n\'umero variable de generadores, las restricciones de potencia disponible por el viento o las condiciones mediambientales como la parada de m\'aquinas durante las horas de actividad de ciertas especies, son problemas que las plantas el\'ectricas cl\'asicas no tenian que tener en cuenta. Por eso en los parques e\'olicos o fotovoltaicos el PPC es una herramienta importante a desarrollar y es la que se ha diseñado en este trabajo. \par 
+En el caso de los parques e\'olicos esto suele ser un problema complejo de abordar. El reparto de consignas para un n\'umero variable de generadores, las restricciones de potencia disponible por el viento o las condiciones mediambientales como la parada de m\'aquinas durante las horas de actividad de ciertas especies animales, son problemas que las plantas el\'ectricas cl\'asicas no tenian que tener en cuenta. Por eso en los parques e\'olicos o fotovoltaicos el PPC es una herramienta importante a desarrollar y es la que se ha diseñado en este trabajo. \par 
 
 Como se ha mencionado antes los elementos de la red son de car\'acter inductivo normalmente, esta generalizaci\'on se puede aplicar tambien a los elementos de una planta generadora y en concreto a los de un parque e\'olico. Tanto las m\'aquinas el\'ectricas usadas para la generaci\'on, normalmente m\'aquinas as\'incronas o s\'incronas, como los elementos de transporte, las lineas y los transformadores, son de car\'acter inductivo cuando la planta se encuentra en funcionamiento.\par
 
@@ -108,7 +108,7 @@ Los c\'odigos de red estan escritos teniendo en cuenta esta presunci\'on del car
 
 	\section{Objetivos}
 
-El objetivo global del trabajo es el de diseñar y desarrollar un PCC en el entorno de Matlab/Simulink para controlar la potencia activa y reactiva sumnistrada a a la red. Para la consecuci\'on de este objetivo general se han establecido unos objetivos especificos que dicho PCC debe cumplir para poder realizar el estudio de los casos de platnas capacitivas anteriormente mencionados. \par
+El objetivo global del trabajo es el diseño y desarrollo de un PCC en el entorno de Matlab/Simulink para controlar la potencia activa y reactiva sumnistrada a la red. Para la consecuci\'on de este objetivo general se han establecido unos objetivos especificos que dicho PCC debe cumplir para poder realizar el estudio de los casos de platnas capacitivas anteriormente mencionados. \par
 
 Como primer objetivo en este trabajo se simular\'a el circuito de conexi\'on a red de un parque e\'olico. En esta fase se debe diseñar un modelo f\'isico de la conexi\'on a red utilizando las herramientas de la librer\'ia \emph{Simscape Power Systems}. Debe incluir como elementos imprescindibles la red, el parque y las lineas de transmisi\'on. \par
 
@@ -120,12 +120,12 @@ Para considerar cumplido este objetivo la planta tendra que seguir la consigna d
 
 Por \'ultimo los efectos de aplicar o no la compensaci\'on de reactiva que se establece en el c\'odigo de red para los diferentes casos de estudio del car\'acter de la planta. Teniendo en cuenta que el c\'odigo de red esta escrito suponiendo que las plantas generadoras son de car\'acter inductivo, las plantas que son de car\'acter capacitivo podr\'ian compensar mejor las subidas de tensi\'on con las propias caracteristicas de la planta que siguiendo la normativa. \par
 
-se comparar\'a como actuan diferentes plantas propuestas en los casos de estudio ante la subida de tensi\'on provocada la inyecci\'on de potencia activa en la red. Dependiendo de la cantidad de potencia activa que se genere tambien habra diferentes casos de estudio puesto que la tensi\'on variara en funci\'on de la intensidad que entregue la planta a la red. \par
+Se comparar\'a como actuan diferentes plantas propuestas en los casos de estudio ante la subida de tensi\'on provocada la inyecci\'on de potencia activa en la red. Dependiendo de la cantidad de potencia activa que se genere tambien habra diferentes casos de estudio puesto que la tensi\'on variara en funci\'on de la intensidad que entregue la planta a la red. \par
 
 
 \chapter{Parques e\'olicos y conexi\'on a red}
 
-Un parque e\'olico es una agrupaci\'on de aerogeneradores que transforman la energ\'ia e\'olica en energ\'ia el\'ectrica. En este cap\'itulo se har\'a una introducci\'on a los elementos de un parque e\'olico prestando especial atenci\'on a los elementos el\'ectricos y de control. Primero se expondran los elementos en general de un parque e\'olico y de la conexi\'on a la red, despues se hablara de los parametros el\'ectricos del circuito de conexi\'on y de su comportamiento, y por \'ultimo se hablara de los c\'odigos de red y de las limitaciones que estos inponen sobre el funcionamiento de los parques e\'olicos.  
+Un parque e\'olico es una agrupaci\'on de aerogeneradores que transforman la energ\'ia e\'olica en energ\'ia el\'ectrica. En este cap\'itulo se har\'a una introducci\'on a los elementos de un parque e\'olico prestando especial atenci\'on a los elementos el\'ectricos y de control. Primero se expondran los elementos en general de un parque e\'olico y de la conexi\'on a la red, despu\'es se hablar\'a de los parametros el\'ectricos del circuito de conexi\'on y de su comportamiento, y por \'ultimo se hablar\'a de los c\'odigos de red y de las limitaciones que estos inponen sobre el funcionamiento de los parques e\'olicos.  
 
 	\section{Elementos del parque}
 Los parques e\'olicos necesitan para su funcionamiento los aerogeneradores para transformar la energ\'ia e\'olica en energ\'ia el\'ectrica, un sistema de control central y una red interna para la conexi\'on el\'ectrica. A su vez estos est\'an compuestos por diferentes elementos.
@@ -133,7 +133,7 @@ Los parques e\'olicos necesitan para su funcionamiento los aerogeneradores para 
 		\paragraph{Aerogenerador}
 		Los aerogeneradores funcionan convirtiendo la energ\'ia cin\'etica del viento en energ\'ia mec\'anica rotatoria y esta, en energ\'ia el\'ectrica en una m\'aquina trif\'asica. Hay dos tipos seg\'un la disposici\'on de sus aspas, los de eje horizontal y los de eje vertical. A nivel industrial la impuesta es el eje horizontal por su rendimiento, fiabilidad y la capacidad de adaptarse a diferentes potencias. Este tipo de aerogenerador consta de un rotor, una multiplicadora, un generador trif\'asico, la conexi\'on a la red y un sistema de control. \par
 		El rotor tiene las aspas que normalmente son tres, se puede variar la orientaci\'on de las palas en funci\'on de la velocidad del viento o de la potencia deseada. La multiplicadora transforma la baja velocidad y alto par del eje del rotor en alta velocidad y un par bajo en el eje del generador el\'ectrico, no todos los modelos lo incluyen necesariamente pero su uso est\'a muy extendido. El generador trif\'asico puede ser s\'incrono  o as\'incrono, esto depende de la topolog\'ia de conexi\'on que se utilice.  \par
-		La conexi\'on a red se puede hacer de forma directa, para lo que se utiliza un generador as\'incrono de jaula de ardilla. Este tipo de conexi\'on se conoce tambi\'en como conexi\'on de velocidad fija porque la velocidad del rotor depende directamente de la frecuencia de la red, que normalmente es fija. En este sistema, a pesar de robusto por su sencillez se necesitan resistencias rot\'oricas para aumentar el rango de velocidades del viento con las que se puede trabajar, adicionalmente hay que incluir un banco de condensadores para compensar la potencia reactiva, ocasionando posibles resonancias en la red \cite{TopologiasWT}. \par 
+		La conexi\'on a red se puede hacer de forma directa, para lo que se utiliza un generador as\'incrono de jaula de ardilla. Este tipo de conexi\'on se conoce tambi\'en como conexi\'on de velocidad fija porque la velocidad del rotor depende directamente de la frecuencia de la red, que normalmente es fija. En este sistema, a pesar de lo robusto que es por su sencillez se necesitan resistencias rot\'oricas para aumentar el rango de velocidades del viento con las que se puede trabajar, adicionalmente hay que incluir un banco de condensadores para compensar la potencia reactiva, ocasionando posibles resonancias en la red \cite{TopologiasWT}. \par 
 		Otro tipo de conexi\'on es la doblemente alimentada, para esta configuraci\'on tambi\'en se usan m\'aquinas as\'incronas. En esta topolog\'ia el estator se encuentra conectado de forma directa a  la red como encontr\'abamos antes, pero el rotor est\'a conectado tambi\'en a la red por medio de un circuito de electr\'onica de potencia, consistente de un convertidor AC-DC-AC ‘back to back’ \cite{AerogeneradorDIFG}. Este tipo de topolog\'ia aumenta el rango de velocidades para generar potencia activa, la velocidad m\'axima estar\'a limitada a la potencia del convertidor, adem\'as permite tener un control sobre el factor de potencia de la m\'aquina, requisito necesario para poder conectarse a la red el\'ectrica. \par
 		Por \'ultimo, la tercera topolog\'ia de conexi\'on normalmente utilizada es la \emph{‘Full Converter’}. Con este tipo de conexi\'on a la red se suelen utilizar m\'aquinas s\'incronas. En esta conexi\'on el estator est\'a conectado a la red a trav\'es de un convertidor ‘back to back’, sin ninguna conexi\'on adicional. En cuanto al rango de velocidades y el control de reactiva ofrece car\'acter\'isticas parecidas al doblemente alimentado, pero existen diferencias en coste. El doblemente alimentado es m\'as barato que el \emph{‘Full Converter’} inicialmente pero necesita un mantenimiento m\'as caro y ofrece menos potencia de salida anual \cite{PMGvsDFIG}. Ambos dos requieren un controlador de los transistores IGBT para su funcionamiento que los hace m\'as sofisticados.  \par
 		Adem\'as del control de la salida el\'ectrica hay un controlador en cada torre para asegurar la seguridad y eficiencia del aerogenerador a nivel mec\'anico y aerodin\'amico. Por medio de m\'odulos para el control de equipos de potencia, el controlador de la turbina recibe la informaci\'on de los par\'ametros monitorizados y manipula los interruptores, bombas hidr\'aulicas, v\'alvulas y motores para controlar dichos par\'ametros. Estos controladores a su vez se comunican con un controlador central de todo el parque \cite{ComunicationControl}.  \par
@@ -148,7 +148,7 @@ Los parques e\'olicos necesitan para su funcionamiento los aerogeneradores para 
 	
 	\section{Elementos de la conexi\'on a red}
 	
-	La red del parque est\'a formada por l\'inea de media tensi\'on que conecta con todos los aerogeneradores, la l\'inea de alta tensi\'on que ser\'ia la red el\'ectrica general a la que se le aporta la potencia y una subestaci\'on que contiene varios elementos. El PCC est\'a a un lado del transformador, dependiendo de si las medidas se toman del lado de baja o de alta tensi\'on es el criterio utilizado para dictaminar donde est\'a el PCC. \par
+	La red del parque est\'a formada por l\'inea de media tensi\'on que conecta con todos los aerogeneradores, la l\'inea de alta tensi\'on que conecta con la red el\'ectrica general a la que se le aporta la potencia y una subestaci\'on que contiene varios elementos. El PCC est\'a a un lado del transformador, dependiendo de si las medidas se toman del lado de baja o de alta tensi\'on es el criterio utilizado para dictaminar donde est\'a el PCC. \par
 		\paragraph {L\'ineas de transmisi\'on}
 Las l\'ineas de media tensi\'on generalmente en los parques conectan todos los aerogeneradores con el transformador con diferentes topolog\'ias. Las formas de conectar las l\'ineas de alimentaci\'on de los aerogeneradores son numerosas pero generalmente se utiliza la radial, la radial bifurcada, la de alimentaci\'on-subalimentaci\'on y en bucle. \par
 
@@ -156,25 +156,29 @@ La conexi\'on radial consiste de un solo cable de alimentaci\'on que se conecta 
 		\paragraph {Subestaci\'on}
 El cable de alimentaci\'on general llega a la subestaci\'on donde se transforma la media tensi\'on en alta con un transformador. Dentro de la subestaci\'on, adem\'as de los componentes de los lados de media y alta tensi\'on, podemos encontrar los sistemas de medida y control, sistemas de protecci\'on contra incendios u otras incidencias y un sistema para ajustar la potencia reactiva. Tradicionalmente este sistema consistia de un sistema mecanico de bajo coste que conectaba un banco de condensadores. A pesar de que estos dispositivos ayudan a mejorar el factor de potencia y la regulaci\'on de tensi\'on en estado estacionario, no se puede resolver satisfactoriamente problemas como las fluctuaciones de potencia o tensi\'on y la eliminaci\'on de harm\'onicos. \par
 
-La integraci\'on de los aprque e\'olicos a la red requiere una compensaci\'on de la potencia reactiva din\'amica para apoyar a la estabilidad, sobre todo durante perturbaciones en la red. Para conseguir un alto rendimiento en el control de la tensi\'on tanto en transitorio como estacionario en el PCC se utilizan FACTS, \emph{flexible ac transmission system} en español sistema flexible de transmisi\'on en corriente continua. Los dos m\'as comunes usados en parques e\'olicos son el SVC, \emph{static var compensator}, y el STATCOM, \emph{static synchronous compensator} \cite{FACTS}.  \par
+La integraci\'on de los aprque e\'olicos a la red requiere una compensaci\'on de la potencia reactiva din\'amica para apoyar a la estabilidad, sobre todo durante perturbaciones en la red. Para conseguir un alto rendimiento en el control de la tensi\'on tanto en transitorio como estacionario en el PCC se utilizan FACTS, \emph{flexible ac transmission system} en español sistema flexible de transmisi\'on en corriente alterna. Los dos m\'as comunes usados en parques e\'olicos son el SVC, \emph{static var compensator}, y el STATCOM, \emph{static synchronous compensator} \cite{FACTS}.  \par
 
 El STATCOM suele ser la opci\'on considerada para esta soluci\'on por las ventajas que presenta frente al SVC. Entre estas ventajas se encuentra un tiempo de respuesta m\'as r\'apido y una capacidad de aporte de tensi\'on auxilair mayor por su naturaleza de fuente de tensi\'on \cite{STATCOM}. \par
 
-En el lado de media tensi\'on se suele encontrar el barraje que conecta la red al cuadro el\'electrico, el seccionador para abrir el circuito cuando no hay corriente y un interruptor autom\'atico para abrir el circuito ante corientes el\'ectricas elevadas. En el lado de alta tensi\'on suele haber reactancia a tierra en los transformadores, una toma a tierra general, descargadores de sobretensi\'on, otro seccionador y otro disyuntor.  \par
+En el lado de media tensi\'on se suele encontrar el barraje que conecta la red al cuadro el\'electrico, el seccionador para abrir el circuito cuando no hay corriente y un interruptor autom\'atico para abrir el circuito ante corrientes el\'ectricas elevadas. En el lado de alta tensi\'on suele haber reactancia a tierra en los transformadores, una toma a tierra general, descargadores de sobretensi\'on, otro seccionador y otro disyuntor.  \par
 
 
 	\section{Par\'ametros de la red trif\'asica} 
 	
-	Todas las l\'ineas el\'ectricas descritas en la secci\'on anterior son trif\'asicas por las ventajas que este tipo de redes presentan frente a las monof\'asicas. En esta secci\'on se cubrir\'an todos los par\'ametros que hay que controlar de una red trif\'asica, su sentido f\'isico y las operaciones que los relacionan. \par
+	Todas las l\'ineas el\'ectricas descritas en la secci\'on anterior son trif\'asicas por las ventajas que este tipo de redes presentan frente a las monof\'asicas. En esta secci\'on se cubrir\'an todos los par\'ametros que hay que controlar de una red trif\'asica, su sentido f\'isico y las ecuaciones que los relacionan. \par
 
-El circuito que se va a analizar se puede reducir a una fuente de intensidad que ser\'ia al conjunto de aerogeneradores, una l\'inea que une esta fuente con el primario del transformador y otra l\'inea que une el secundario con la red, que estar\'ia representada por una fuente de tensi\'on. En los parques e\'olicos reales las medidas de los par\'ametros de la red solo se realizan a un lado del transformador, pero para analizar el circuito en esta secci\'on colocare medidores a ambos lados. Los par\'ametros de la red que se observan y controlan en un parque e\'olico son la tensi\'on, la intensidad, la potencia, tanto activa, reactiva y aparente y la frecuencia. \par
+El circuito que se va a analizar se puede reducir a una fuente de intensidad, que ser\'ia el conjunto de aerogeneradores. Una l\'inea que une esta fuente con el primario del transformador y otra l\'inea que une el secundario con la red. Finalmente, la red estar\'ia representada por una fuente de tensi\'on. En los parques e\'olicos reales las medidas de los par\'ametros de la red solo se realizan a un lado del transformador, pero para analizar el circuito en esta secci\'on se colocaran medidores a ambos lados. Los par\'ametros de la red que se observan y controlan en un parque e\'olico son la tensi\'on, la intensidad, la potencia, tanto activa, reactiva y aparente y la frecuencia. \par
 
 Para la medici\'on de estos valores se considera que los circuitos de la red de conexi\'on son equilibrados, por lo que las tensiones de cada fase y las intensidades tendr\'an el mismo valor eficaz y un desfase de 120º entre s\'i. Para expresar esta diferencia de fase se suele utilizar la notaci\'on fasorial,  pero por la simplicidad a la hora de hacer ciertos c\'alculos como la suma o la resta se usan n\'umeros complejos para definir los vectores tambi\'en. Para poner una referencia a la fase se le da a un valor de tensi\'on o corriente el valor 0 o 90 de fase. En este caso, para tomar el mismo crit\'erio que los resultados de Simulink, se dar\'a fase 0 a la intensidad de la primera fase, $I_a$. \par
 
 Las fuentes de intensidad generan tres ondas sinusoidales de igual amplitud y desfasadas entre ellas 120º. Conectada a una carga se pueden observar tambien tres ondas sinusoidales de voltage que tambi\'en son equilibradas. Entre las ondas de tensi\'on e intensidad existe una relaci\'on dada por la impedancia de la carga representada en la ley de Ohm. \par
+
 \begin{equation}\label{eq:ohm}
 	\overline{I}=\overline{V}/\overline{Z}
 \end{equation} \par
+
+Donde $\overline{I}$ es la intensidad que circula por la impedancia, $\overline{V}$ es la caida de tensi\'on en se produce en la impedancia y el valor de la impedancia esta representado por $\overline{Z}$. \par
+
 Si los par\'ametros de la ecuaci\'on son introducidos como fasores y teniendo en cuenta que la fase de la intensidad se considera 0, podemos concluir que el desfase entre la intensidad y la tensi\'on viene dado por la fase de la carga y la relaci\'on entre los m\'odulos es el m\'odulo de la impedancia. Si la impedancia es puramente resistiva el desfase es nulo entre ambas, si es de car\'acter capacitivo la intensidad va adelantada y si es de car\'acter inductivo la intensidad va retrasada respecto a la tensi\'on. \par
 
 Para observar este efecto de la carga sobre la relaci\'on entre tensi\'on e intensidad se simula el circuito de la figura \ref{LoadAnalyserModel} y cambiando los valores de la impedancia se obtienen las gr\'aficas de la figura \ref {Va_IaALL}, en las que se puede ver en el transitorio como la intensidad de la primera fase, $I_a$,  se adelanta o se retrasa respecto a la tensi\'on, $V_a$, dependiendo del tipo de carga.  \par
@@ -208,13 +212,13 @@ En el an\'alisis de la conexi\'on a red es importante la potencia, esta debe cum
 	\overline{S}=\sqrt{3} \overline{V}_L  \overline{I}_L^*
 \end{equation} \par
 
-Podemos observar que la potencia consumida o sumisnistrada por un elemento del circuito tiene una componenente real y una componenente imaginaria que se llaman potencia activa, $P$ y reactiva, $Q$ respectivamente. Desarrollando la formula anterior usando complejos llegamos a lo siguiente: \par
+Podemos observar que la potencia consumida o sumisnistrada por un elemento del circuito tiene una componenente real y una componenente imaginaria que se llaman potencia activa, $P$ y reactiva, $Q$ respectivamente. Desarrollando la formula anterior usando su representaci\'on en n\'umeros complejos llegamos a lo siguiente: \par
 
 \begin{equation}\label{eq:potensia}
 	\overline{S}= \sqrt{3} V_L I_L \cos{\varphi}+j\sqrt{3} V_L I_L \sin{\varphi} = P+jQ 
 \end{equation} \par
 
-Donde $\varphi= \alpha_V-\alpha_I$. Por lo tanto basandose en el criterio de signos anteriormente mencionado para los \'angulos trataremos la $Q$ negativa como capacitiva y con signo positiva como inductiva. \par
+Donde $\varphi= \alpha_V-\alpha_I$, la diferencia entre el angulo de la tensi\'on y el angulo de la intensidad. Por lo tanto basandose en el criterio de signos anteriormente mencionado para los \'angulos trataremos la $Q$ negativa como capacitiva y con signo positiva como inductiva. \par
 
 \'Analizando la diferencia de tensi\'on entre dos puntos de un circuito que esta descrita por la ecuaci\'on (\ref{eq:ohm}), donde la tensi\'on antes de la carga es $E$ y la tensi\'on despues de la carga es $V$ tenemos que:
 
@@ -222,28 +226,39 @@ Donde $\varphi= \alpha_V-\alpha_I$. Por lo tanto basandose en el criterio de sig
 	\Delta V=E-V=ZI
 \end{equation} \par
 
- Introduciendo la ecuaci\'on (\ref{eq:potensia}) en la ecuaci\'on (\ref{eq:difV}) obtenemos el siguiente desarrollo:
+ Despejando la ecuaci\'on (\ref{eq:potensia}) en la ecuaci\'on (\ref{eq:difV}) obtenemos el siguiente desarrollo:
+
 \begin{equation}\label{eq:lol}
 	\Delta V=(R+jX)\frac{P-jQ}{E}= \frac{RP+XQ}{E}+j\frac{XP-RQ}{E}
 \end{equation} \par
 
 Cuando hablamos de una linea de transmisi\'on, como son las que conectan el parque con al subestaci\'on y esta con la red, consideramos que $X \gg R$ \cite{WFgridcode}. Considerando entonces despreciable el valor de $R$ en la formula (\ref{eq:lol}) queda lo siguiente: 
+
 \begin{equation}
 	\Delta V= Q\frac{X}{E}+jP\frac{X}{E}
 \end{equation} \par
 
 Esto significa que los cambios en la magnitud de de la tensi\'on son controlados por la potencia reactiva y la  diferencia de fase entre emisor y receptor viene dada por la potencia activa \cite{WFgridcode}. Por eso se utiliza el control de la potencia activa y reactiva para controlar frecuencia de la red y la tensi\'on respectivamente. \par
 
-Normalmente la fercuencia es m\'as estable que la tensi\'on en la red el\'ectrica por lo que los parques e\'olicos tratan de producir la potencia el\'ectrica m\'axima que permita la instalaci\'on y la demanda de la red, y as\'i obtener los mayores beneficios posibles. Es por eso la reactiva la que suele variar m\'as para mejorar la claidad de la potencia entregada. \par
+Normalmente la fercuencia es m\'as estable que la tensi\'on en la red el\'ectrica por lo que los parques e\'olicos tratan de producir la potencia el\'ectrica m\'axima que permita la instalaci\'on y la demanda de la red, y as\'i obtener los mayores beneficios posibles. Es por eso que ante las variaciones de tensi\'on en la red se var\'ia la potencia reactiva entregada o consumida manteniendo la potencia activa. \par
 
 
 	\section{C\'odigos de red}
 
 Un c\'odigo de red es un conjunto de especificaciones t\'ecnicas que definen los par\'ametros que debe cumplir una instalci\'on para asegurar la seguridad y estabilidad de la red p\'ublica a la que est\'a conectada  \cite{UKgridCode}. Dichas instalaciones pueden ser plantas el\'ectricas generadoras, consumidores u otra red. En este apartado se prestara especial atenci\'on a los c\'odigos de red referidos a plantas el\'ectricas y al c\'odigo de red de España en concreto. \par
 
-Los c\'odigos de red var\'ian seg\'un la red para la que se han diseñado. Es por eso cada pa\'is tiene un c\'odigo de red propio, pero no solo var\'ia de un pa\'is a otro si no que incluso dentro de España las condiciones que se imponen en la red peninsular o no peninsulares son distintas por las diferencias en las redes y las condiciones en las que operan. A pesar de las diferentes restricciones, los casos que se abordan en los codigos de red suelen ser comunes para la mayor\'ia de ellos.  \par
+Los c\'odigos de red var\'ian seg\'un la red para la que se han diseñado. Es por eso cada pa\'is tiene un c\'odigo de red propio, pero no solo var\'ia de un pa\'is a otro sino que incluso dentro de España las condiciones que se imponen en la red peninsular o no peninsulares son distintas por las diferencias en las redes y las condiciones en las que operan. A pesar de las diferentes restricciones, los casos que se abordan en los c\'odigos de red suelen ser comunes para la mayor\'ia de ellos.  \par
 
-En el caso de la conexi\'on y operaci\'on de plantas generadoras los requerimientos m\'as importantes para el control son los rangos de frecuencia y tensi\'on, el control de la potencia activa y el control de la reactiva en operaci\'on normal. Tambien se cubren los casos de perturbaciones en la red como los huecos de tensi\'on o la inyecci\'on de corriente reactiva. Normalmente estos requerimientos pueden ser descritos como las siguientes zonas de operaci\'on para frecuencia y voltaje. Operaci\'on continua en un rango limitado alrededor del punto nominal, operaci\'on por tiempo limitado con una posible reducci\'on de la salida en unos margenes extendidos y por \'ultimo la desconexi\'on inmediata \cite{GridCodeDeepAnalisys}.\par
+Un ejemplo de esta variaci\'on es el tratamiento de las perdidas de tensi\'on en la red. En la figura \ref{FaultGCs} se puede ver la comparativa de especificaciones entre los diferentes c\'odigos de red europeos para la respuesta temporal de la tensi\'on ante una caida. \par
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{FaultGCs.PNG}
+\caption{Respuesta de tensi\'on ante caida en los c\'odigos de red europeos \cite{FaultGC}.}
+\label{FaultGCs}
+\end{figure}
+
+En el caso de la conexi\'on y operaci\'on de plantas generadoras los requerimientos m\'as importantes para el control son los rangos de frecuencia y tensi\'on, el control de la potencia activa y el control de la reactiva en operaci\'on normal. Tambien se cubren los casos de perturbaciones en la red como los huecos de tensi\'on o la inyecci\'on de corriente reactiva. Normalmente estos requerimientos pueden ser descritos en las siguientes zonas de operaci\'on para frecuencia y tensi\'on: Operaci\'on continua en un rango limitado alrededor del punto nominal, operaci\'on por tiempo limitado con una posible reducci\'on de la salida en unos margenes extendidos y por \'ultimo la desconexi\'on inmediata \cite{GridCodeDeepAnalisys}.\par
 
 		\paragraph{Tensi\'on}
 Respecto al control de tensi\'on, en la secci\'on anterior se ha visto que la magnitud de la tensi\'on esta controlada por la potencia reactiva. Por lo tanto el control de la tensi\'on se expone en los c\'odigos de red como un control de la potencia reactiva en funci\'on de la tensi\'on de red \cite{WFgridcode}. \par
@@ -264,9 +279,9 @@ Como consecuencia de un desajuste entre la potencia activa aportada y la demanda
 
 Normalmente el control de la frecuencia esta compuesto por tres funciones distintas. El control primario de frecuencia, usado ante los desequilibrios repentinos en la red. Actua a nivel local en la turbina en un rango de 15 a 30 segundos. El control secundario o de carga permite reestablecer la frecuencia y la potencia a los valores programados. Se realiza en las unidades de control central del parque y actua en un rango de 15 minutos. Este es el tipo de funci\'on que se implementara en este trabajo. Finalmente esta el control terciario que consiste en la gesti\'on de la potencia generada por cada aerogenerador para ayudar al control secundario \cite{WFgridcode}. \par
 
-En el PO 1.5 se trata el establecimiento de la reserva para la regulacion de frecuencia y potencia. Respecto al control primario, se especifica que debe cumpletar un reestablecimiento total antes de 15 segundos desde el instante de desequilibrio si el valor de esre es menor o igual a 1500 MW. En caso de que el desequilibrio sea superior a 1500 MW el 50\% la reserva de regulaci\'on primaria debe actuar antes de 15 segundos y se be alzanzar el 100\% de actuaci\'on antes de 30 segundos. La regulaci\'on primaria debe actuar durante un tiempo de 15 minutos hasta que la regulaci\'on secundaria recupere las consignas iniciales y reestablezca la reserva primaria utilizada \cite{PO15}. \par
+En el PO 1.5 se trata el establecimiento de la reserva para la regulacion de frecuencia y potencia. Respecto al control primario, se especifica que debe completar un reestablecimiento total antes de 15 segundos desde el instante de desequilibrio si el valor de esre es menor o igual a 1500 MW. En caso de que el desequilibrio sea superior a 1500 MW el 50\% la reserva de regulaci\'on primaria debe actuar antes de 15 segundos y se debe alzanzar el 100\% de actuaci\'on antes de 30 segundos. La regulaci\'on primaria debe actuar durante un tiempo de 15 minutos hasta que la regulaci\'on secundaria recupere las consignas iniciales y reestablezca la reserva primaria utilizada \cite{PO15}. \par
 
-La actuaci\'on de la reserva secundaria no debe retarserse m\'as de 30 segundos y debe mantenerse durante un tiempo de 15 minutos hasta que su uso neto sea sustituido por la regulaci\'on terciaria. Se deben garantizar unos valores minimos de reserva de 500 MW a subir y 400 MW a bajar. Sobre la reserva terciaria se dice que se ha de mantener unos margenes de subida y bajada de potencia para prevenir las diferencias de demanda real con respecto a la esperada y de la producci\'on de las centrales e\'olicas respecto a la esperada \cite{PO15}. \par
+La actuaci\'on de la reserva secundaria no debe retarserse m\'as de 30 segundos y debe mantenerse durante un tiempo de 15 minutos hasta que su uso neto sea sustituido por la regulaci\'on terciaria. Se deben garantizar unos valores m\'inimos de reserva de 500 MW a subir y 400 MW a bajar. Sobre la reserva terciaria se dice que se ha de mantener unos margenes de subida y bajada de potencia para prevenir las diferencias de demanda real con respecto a la esperada y de la producci\'on de las centrales e\'olicas respecto a la esperada \cite{PO15}. \par
 
 Por otra parte, en el PO 1.2 se especifican los limites de frecuencia admisibles del sistemas y las correciones que se deben aplicar de potencia activa. Estando los limites de subfrecuencia entre $49,8Hz$ y $49,5Hz$, y de sobrefrecuencia en $50,2Hz$ y $50,5Hz$. Para estos limites la correcci\'on de potencia activa se rige por la ecuaci\'on (\ref{eq:PF}) que devuelve difrenecia de potencia, $\Delta P$, a imponer respecto a la referencia, $P_{ref}$ \cite{PO12}. \par
 
@@ -285,7 +300,7 @@ En la figura \ref{FPgridcode} se muestran los limites de $\Delta P$ que se puede
 \label{FPgridcode}
 \end{figure}
 
-En este mismo documento se especifica que las tecnolog\'ias cuya energ\'ia primaria sea renovable y se conecten a la red mediante convertidores electr\'onicos, como es el caso de los aerogeneradores modernos y por extensi\'on de la mayor\'ia de parques e\'olicos, se contribuira a la maximizaci\'on de producci\'on y se minimizara la necesidad de aplicar limitaciones a su producci\'on. Esto significa que este control estara podr\'a desactivarse siempre que el operador del sistema considere que existen otros medios para evitar poner en riesgo la calidad del suministro, pero es necesario que se pueda activar en tiempo real si as\'i se solicitase \cite{PO12}. \par
+En este mismo documento se especifica que las tecnolog\'ias cuya energ\'ia primaria sea renovable y se conecten a la red mediante convertidores electr\'onicos, como es el caso de los aerogeneradores modernos y por extensi\'on de la mayor\'ia de parques e\'olicos, se contribuira a la maximizaci\'on de producci\'on y se minimizara la necesidad de aplicar limitaciones a su producci\'on. Esto significa que este control podr\'a desactivarse siempre que el operador del sistema considere que existen otros medios para evitar poner en riesgo la calidad del suministro, pero es necesario que se pueda activar en tiempo real si as\'i se solicitase \cite{PO12}. \par
 
 \chapter{Control de plantas el\'ectricas}
 
@@ -302,13 +317,13 @@ Esto se puede conseguir en lazo abierto en lazo cerrado. La solución en lazo ab
 
 Por la complejidad del sistema de conexi\'on a red de una planta el\'ectrica y la posibilidad de variaciones en sus parametros a lo largo del tiempo en este cap\'itulo se hablara de la soluci\'on de lazo cerrado. \par
 
- Primero se hablara del control en general de plantas el\'ectricas y se definira el concepto de los niveles de control, en la siguietne secci\'on se establecer\'a el estado del arte en el control de parques e\'olicos pasando tanto por el uso de las t\'ecnicas de control cl\'asicas como las modernas. \par 
+ Primero se hablara del control en general de plantas el\'ectricas y se definira el concepto de los niveles de control, en la siguiente secci\'on se establecer\'a el estado del arte en el control de parques e\'olicos pasando tanto por el uso de las t\'ecnicas de control cl\'asicas como las modernas. \par 
 
 	\section{Introducci\'on al control de plantas el\'ectricas}
 
 Para poder cumplir los requisitos del codigo de red y alcanzar el m\'aximo de potencia entregable de forma \'optima las centrales el\'ectricas disponen de un sistema de control. En el caso de los parques e\'olicos se tiene la problematica añadida de tener que controlar varios generadores diferentes con una potencia m\'axima disponible variable en el tiempo. \par
 
-En un principio, los aerogeneradores de un parque se controlaban solamente de forma local. Aplicando un control individual a cada m\'aquina se consigue una regulaci\'on de reactiva en torno al cero \cite{PI_QV}. Desde que se impone una noramtiva m\'as estricta sobre los parques e\'olicos el control ha evolucionado en complejidad. \par
+En un principio, los aerogeneradores de un parque se controlaban solamente de forma local. Aplicando un control individual a cada m\'aquina que busca una regulaci\'on de reactiva en torno al consumo y aporte nulo \cite{PI_QV}. Desde que se impone una noramtiva m\'as estricta sobre los parques e\'olicos el control ha evolucionado en complejidad. \par
 
 Para poder cumplir los requisitos del c\'odigo de red acerca de los distintos niveles se establecen tres niveles de control diferentes. El control primario a nivel local de cada generador y con los tiempos de reacci\'on especificados en el cap\'itulo anterior. El control secundario actua en un area atendiendo a la frecuencia y el intercambio de potencia con areas vecinas y el control terciario que actua en el sistema el\'ectrico en su totalidad \cite{NivelesDeControl}. En el caso de un parque e\'olico este ultimo nivel de control ser\'ia el parque como conjunto. \par
 
@@ -322,13 +337,13 @@ Al nivel del control terciario, el controlador del parque, este se comporta como
 
 En el control de tensi\'on y reactiva en concreto existen diferentes estrategias. En la actualidad se puede diferentes formas de establecer la consigna para el PCC. Las magnitudes usadas como consigna para el control son el factor de potencia o \emph{fdp}, la tensi\'on y la potencia reactiva. \par
 
-El fdp se utiliza como consigna en muchos casos por proporcionar un incremento en la contribuci\'on de reactiva a la par con el incremento de aporte de potencia activa a la red. Una desventaje en parques e\'olicos es que los cambios potencia activa en los aerogeneradores resultaran en un cambio del fdp en el PCC por la inductancia de las lineas. Esto resultara en una serie de cambios bruscos en al referenecia de reactiva que llegara a las turbinas que necesitara un control m\'as r\'apido y un hardware que elimine los retardos lo m\'as posible para asegurara que el sistema no oscila \cite{SPControl}.
+El fdp se utiliza como consigna en muchos casos para proporcionar un incremento en la contribuci\'on de reactiva a la par con el incremento de aporte de potencia activa a la red. Una desventaje en parques e\'olicos es que los cambios potencia activa en los aerogeneradores resultaran en un cambio del fdp en el PCC por la inductancia de las lineas. Esto resultara en una serie de cambios bruscos en al referenecia de reactiva que llegara a las turbinas que necesitara un control m\'as r\'apido y un hardware que elimine los retardos lo m\'as posible para asegurara que el sistema no oscila \cite{SPControl}.
 
 El control de tensi\'on ofrece la posibilidad de reducir los efectos que provocan los cambios en la potencia activa sin la necesidad de r\'apidos cambios en la consigna por parte del operador del sistema. Pero debido a los retardos de comunicaci\'on dentro del parque es inevitable cierta variaci\'on en la tensi\'on del PCC \cite{SPControl}. \par
 
 Utilizar la potencia reactiva como consigna es la estrategia m\'as utilizada  con grandes generadores s\'incronos. La desventaja es la misma que cuando se usa el fdp ante los cambios de potencia activa. Requiere tambien un control r\'apido para eliminar un impacto indeseado en la tensi\'on \cite{SPControl}. \par
 
-En el control de potencia activa tambien existen diferentes estrategias de control para las posibls situaciones de funcionamiento. Durante los periodos en los que la capicadad de transimis\'on de la red es reducida se establece un limite m\'aximo de potencia activa generada, esto se llama en ingles \emph{Absolute Production Limiter}. La capacidad de participar en el control secundario o de areas es llamado \emph{Balance Control}. Ante cambios bruscos en la potencia m\'axima disponible provocados por el tiempo, tormentas u otros eventos con r\'apidas variaciones de la velocidad del viento, se puede imponer una limitaci\'on en la velocidad de cambio de la potencia producida, esto se llama \emph{Power Rate Limitation}. En momentos en los que necesite mantener una reserva de potencia activa en el parque se puede establecer la potencia entregada a un limite por debajo de la disponible, esto se llama \emph{Delta Control}  \cite{ActiveStrategies}. \par
+En el control de potencia activa tambien existen diferentes estrategias de control para las posibles situaciones de funcionamiento. Durante los periodos en los que la capacidad de transimis\'on de la red es reducida se establece un l\'imite m\'aximo de potencia activa generada, esto se llama en ingles \emph{Absolute Production Limiter}. La capacidad de participar en el control secundario o de areas es llamado \emph{Balance Control}. Ante cambios bruscos en la potencia m\'axima disponible provocados por el tiempo, tormentas u otros eventos con r\'apidas variaciones de la velocidad del viento, se puede imponer una limitaci\'on en la velocidad de cambio de la potencia producida, esto se llama \emph{Power Rate Limitation}. En momentos en los que se necesite mantener una reserva de potencia activa en el parque se puede establecer la potencia entregada a un limite por debajo de la disponible, esto se llama \emph{Delta Control}  \cite{ActiveStrategies}. \par
 
 En la figura \ref{PowerLimits} se pueden observar los efectos de estas diferentes funciones que se pueden aplicar en un parque e\'olico. Donde la curva en rojo es la potencia suministrada y la verde es la potencia disponible. \par 
 
@@ -369,15 +384,15 @@ El controlador PI es lento pero preciso. La acci\'on integradora elimina el erro
 
 Para que el PID, o cualquiera de sus variaciones, devuelva la respuesta que se desea tanto en el r\'egimen transitorio como el permanete, hay que ajustar los par\'ametros utilizados en lo que se conoce como sintonizaci\'on o \emph{tuning}. Por tanto, esta parte del diseño del controlador tiene mucha importancia y existen variadas t\'ecnicas tanto apra el c\'alculo te\'orico como la obtenci\'on emp\'irica. \par
 
-Cuando se conoce la planta o se ha calculado un modelo aproximado de ella es posible calcular el PID de forma te\'orica. Se establece un polo dominante que se correpsonde a la respuesta deseada, y luego se aplica la asignaci\'on directa de polos. Esta consiste en multiplicar a la planta por la funci\'on de transferencia gen\'erica del controlador y calcular los coeficientes apra los cuales la funcion de transferencia final equivale al polo dominante elegido con anterioridad. \par
+Cuando se conoce la planta o se ha calculado un modelo aproximado de ella es posible calcular el PID de forma te\'orica. Se establece un polo dominante que se correpsonde a la respuesta deseada, y luego se aplica la asignaci\'on directa de polos. Esta consiste en multiplicar a la planta por la funci\'on de transferencia gen\'erica del controlador y calcular los coeficientes para los cuales la funcion de transferencia final equivale al polo dominante elegido con anterioridad. \par
 
-Como Ziegler y Nichols describen en \cite{ZNoriginal}: "Un acercamiento puramente matem\'atico al estudio del control autom\'atico es, ciertamente, la forma más deseable desde un punto de vista de precisi\'on y brevedad. Sin embargo, desafortunadamente, las matem\'aticas de control implican una desconcertante variedad de funciones exponenciales y trigonometricas que el ingeniero medio no puede permitirse el tiempo en abrirse paso a traves de ellas para llegar a la soluci\'on del problema actual." \par
+Como Ziegler y Nichols describen en \cite{ZNoriginal}: ``Un acercamiento puramente matem\'atico al estudio del control autom\'atico es, ciertamente, la forma más deseable desde un punto de vista de precisi\'on y brevedad. Sin embargo, desafortunadamente, las matem\'aticas de control implican una desconcertante variedad de funciones exponenciales y trigonometricas que el ingeniero medio no puede permitirse el tiempo en abrirse paso a traves de ellas para llegar a la soluci\'on del problema actual.'' \par
 
 Es por eso que en la industria para ahorrar costes y tiempo se utilizan los m\'etodos de ajuste y sintonizaci\'on emp\'iricos. Estos m\'etodos se conocen as\'i por utilizar la respuesta real de la planta sin control para poder aplicarse. Dentro de estos m\'etodos encontramos entre los m\'as usados el Ziegler-Nichols, Chien-Hrones-Reswick y el Cohen-Coon.\par
 
 		\paragraph{Ziegler-Nichols}
 
-Dos m\'etodos fueron presentados por Ziegler y Nichols en 1942. Estos m\'etodos todavia son ampliamente en su forma original o alguna de las variaciones. El primer m\'etodo es el de la respuesta al escal\'on y el segundo es el de la respuesta en frecuencia. \par 
+Dos m\'etodos fueron presentados por Ziegler y Nichols en 1942. Estos m\'etodos todav\'ia son ampliamente usados en su forma original o alguna de las variaciones. El primer m\'etodo es el de el ajuste de los valores del PID a traves de la respuesta al escal\'on y el segundo es a traves de la respuesta en frecuencia. \par 
 
 En la respuesta al escal\'on en lazo abierto se deben medir los par\'ametros $a$ y $L$. Para ello hay que dibujar una tangente en el punto de m\'axima pendiente y coger las coordenadas de los puntos de corte con los ejes. Como se ve en la figura \ref{ZNstep}, $L$ se corresponde a la coordenada del punto de corte con el eje $x$ y $a$ se corresponde con el punto de corte con el eje $y$. 
 
@@ -404,7 +419,7 @@ PID        & $1.2/a$ & $2L$       & $L/2$      & $3.4L$
 
 Este m\'etodo solo se puede aplicar a plantas en las que la respuesta al escal\'on en lazo abierto no es inestable o si la respuesta es muy oscilatoria. Por eso Ziegler y Nichols propusieron un segundo m\'etodo que se puede aplicar a cualquier tipo de planta, usando la respuesta en frecuencia. \par
 
-Para el m\'etodo de la respuesta en frecuencia se utiliza la curva de Nyquistdel proceso en cadena abierta. Se calcula el punto de intersecci\'on con el eje real negativo que esta definido por $K_{u}$ y $T_{u}$. Estos dos valores se introducen en la tabla \ref{ta:ZNfreq} y se hallan los valores del controlador como en el m\'etodo anterior. \par
+Para el m\'etodo de la respuesta en frecuencia se utiliza la curva de Nyquist del proceso en cadena abierta. Se calcula el punto de intersecci\'on con el eje real negativo que esta definido por $K_{u}$ y $T_{u}$. Estos dos valores se introducen en la tabla \ref{ta:ZNfreq} y se hallan los valores del controlador como en el m\'etodo anterior. \par
 
 \begin{table}[h!]
 \centering
@@ -418,7 +433,7 @@ PID        & $0.6K_u$ & $0.5T_u$ & $0.125T_u$ & $0.85T_u$
 \end{tabular}
 \end{table}
 
-Como se necesita conocer la planta para poder dibujar la curva de Nyquist los parametros $K_u$ y $T_u$ se suelen medir de otra manera. Se aplica un controlador P a la planta con un $K$ nulo. Luego se va aumentando su valor lentamente hasta que el sistema oscile. La ganacia cuando el sistema empieza a oscilar es $K_u$ y el persiodo de las oscilaciones es $T_u$. \par
+Como se necesita conocer la planta para poder dibujar la curva de Nyquist los parametros $K_u$ y $T_u$ se suelen medir de otra manera. Se aplica un controlador P a la planta con un $K$ nulo. Luego se va aumentando su valor lentamente hasta que el sistema oscile. La ganacia cuando el sistema empieza a oscilar es $K_u$ y el periodo de las oscilaciones es $T_u$. \par
 
 El m\'etodo de Ziegler-Nichols es ampliamente utilizado por su simpleza y el poco esfuerzo que requiere. Sin embargo, el criterio de diseño que utiliza de obtener un sistema con un factor de reducci\'on de la oscilaci\'on entre el primer pico y el segundo a un cuarto tiene beneficios e inconvenientes. Aporta un buen rechazo a als perturbaciones de carga, pero tambien crea un sistema con una amortiguaci\'on muy pobre y poco margen de estabilidad \cite{PIDbook}. \par
 
@@ -426,7 +441,7 @@ El m\'etodo de Ziegler-Nichols es ampliamente utilizado por su simpleza y el poc
 
 Existen multiples sugerencias para modificar el m\'etodo de Ziegler-Nichols. Chien, Hrones y Reswick, \emph{CHR}, propusier\'on un cambio para el m\'etodo del escal\'on para conseguir un mejor amortiguamiento en lazo cerrado. \par
 
-El cambio propuesto es utilizar "la respuesta m\'as r\'apida sin sobreoscilaci\'on" o "la respuesta m\'as r\'apida con un 20\% de sobreoscilaci\'on" como nuevo criterio de diseño. Adem\'as observaron que el ajuste del PID para cambios en la consigna o para la respuesta ante perturbaciones de carga eran difrentes. \par
+El cambio propuesto es utilizar ``la respuesta m\'as r\'apida sin sobreoscilaci\'on" o ``la respuesta m\'as r\'apida con un 20\% de sobreoscilaci\'on" como nuevo criterio de diseño. Adem\'as observaron que el ajuste del PID para cambios en la consigna o para la respuesta ante perturbaciones de carga eran difrentes. \par
 
 Para el m\'etodo CHR se utilizan los par\'ametros anteriormente mencionados $a$ y $L$. Con estos valores se pueden calcular los par\'ametros del controlador utilizando la tabla \ref{ta:CHRload}. El PID con 20\% de sobreoscilaci\'on es muy parecido a los valores dados por Ziegler-Nichols, sin embargo se puede observar que para el 0\% se reduce el efecto del proporcional y el integrativo para hacer m\'as lento el sistema. \par
 
@@ -622,7 +637,7 @@ Para gestionar los buses simulink tiene la herramienta de \emph{Bus Editor}. Aqu
 
 \chapter{Modelado y simulaci\'on del control}
 
-Para analizar el comportamiento del parque e\'olico y el controlador se modelara y analizara en Simulink los casos de estudio propuestos. En los casos de estudio propuestos se analizar\'a el comportamiento de la planta para diferentes referencias de potencia activa y variaci\'ones en el car\'acter reactivo de la red de conexi\'on. En este cap\'itulo se presentara el m\'etodo usado para desarrollar el modelo del circuito el\'ectrico, el diseño del algoritmo de control y los diferentes casos que se han estudiado. \par
+Para analizar el comportamiento del parque e\'olico y el controlador se modelar\'a y analizar\'a en Simulink los casos de estudio propuestos. En los casos de estudio propuestos se analizar\'a el comportamiento de la planta para diferentes referencias de potencia activa y variaci\'ones en el car\'acter reactivo de la red de conexi\'on. En este cap\'itulo se presentara el m\'etodo usado para desarrollar el modelo del circuito el\'ectrico, el diseño del algoritmo de control y los diferentes casos que se han estudiado. \par
 
 	\section{Modelado del parque y la conexi\'on a red en Simulink}
 
@@ -641,7 +656,7 @@ Los aerogeneradores son representados como una fuente de intensidad trif\'asica.
 
 Este modelo se puede usar para representar la totalidad del parque. En el primer modelo estudiado todo el parque es representado como un solo generador para simplificar el algoritmo de control utilizado. En este caso se esta tratando la potencia generada por los aerogeneradores como una sola fuente como se ver\'ia en el bus principal de alimentaci\'on una vez que se han unido todas las ramas de cada generador. \par
 
-Adem\'as se eliminan detalles como el car\'acter inductivo del motor trif\'asico de cada aerogenerador o el transformador que conecta el bus de alimentaci\'on del parque con cada unidad. Cuando se hace una representaci\'on individual de cada aerogeneradoe se pueden ir incluyendo estos elementos seg\'un hasta donde se modele el circuito. Como se puede ver en la figura \ref{FullConverter} se pueden diferenciar tres aprtes en el circuito de conexi\'on de un aerogenerador. 
+Adem\'as se eliminan detalles como el car\'acter inductivo del motor trif\'asico de cada aerogenerador o el transformador que conecta el bus de alimentaci\'on del parque con cada unidad. Cuando se hace una representaci\'on individual de cada aerogenerador se pueden ir incluyendo estos elementos seg\'un hasta donde se modele el circuito. Como se puede ver en la figura \ref{FullConverter} se pueden diferenciar tres partes en el circuito de conexi\'on de un aerogenerador. 
 
 %figuraFullConverter
 \begin{figure}[h!]
@@ -664,7 +679,7 @@ En los parametros de las lineas es donde se establece si la planta tiene más o 
 
 		\paragraph{Red} 
 
-La red esta representada como una fuente de tensi\'on y una impedancia de car\'acter indiuctivo. Se ha utilizado el bloque de fuente de tensi\'on variable para representar las inestabilidades en la red. Es la parte más simple del modelo el\'ectrico en cuanto a n\'umero de elementos, solo se necesitan dos bloques para representarla como se ve en la figura \ref{GridSimulink}. \par
+La red esta representada como una fuente de tensi\'on y una impedancia de car\'acter inductivo. Se ha utilizado el bloque de fuente de tensi\'on variable para representar las inestabilidades en la red. Es la parte más simple del modelo el\'ectrico en cuanto a n\'umero de elementos, solo se necesitan dos bloques para representarla como se ve en la figura \ref{GridSimulink}. \par
 
 \begin{figure}[h!]
 \centering
@@ -673,17 +688,17 @@ La red esta representada como una fuente de tensi\'on y una impedancia de car\'a
 \label{GridSimulink}
 \end{figure} \par
 
-Es la red la que determina la consigna del control de reactiva, porque esta depende de la tensi\'on de red como se vio en la secci\'on de los c\'odigos de red. Pero no solo los cambios que se producen en la tensi\'on de la red no solo se producen por las variaciones programadas en la fuente variable, la parte inductiva de la red provoca un aumento en la potencia reactiva que consume cuando la intensidad que suministra la planta aumenta.  \par
+Es la red la que determina la consigna del control de reactiva, porque esta depende de la tensi\'on de red como se vio en la secci\'on de los c\'odigos de red. Pero los cambios que se pueden observar en la tensi\'on de la red no solo se producen por las variaciones programadas en la fuente variable, la parte inductiva de la red provoca un aumento en la tensi\'on cuando aumenta el consumo de potencia reactiva por ella. Este consumo de reactiva aumenta con el aumento de intensidad, que se produce al aumentar la potencia activa que suministra la planta.  \par
 
-Por lo tanto el aumento de la potencia activa que suminsitra la red, por esta impedancia inductiva, provoca una desviaci\'on natural en la tensi\'on del PCC. Esta desviaci\'on de tensi\'on sera m\'as significativa mientras mayor sea la potencia que la planta genera. \par
+Por lo tanto el aumento de la potencia activa que se suminsitra a la red, por esta impedancia inductiva, provoca una desviaci\'on natural en la tensi\'on del PCC. Esta desviaci\'on de tensi\'on sera m\'as significativa mientras mayor sea la potencia que la planta genera. \par
 
 	\section{Diseño del control de la conexi\'on a red}
 
 En el diseño de un controlador hay tres elementos importantes. La consigna, la realimentaci\'on y el propio controlador. Estos elementos se deben diseñar para las dos señales que se estan controlando, potencia activa y reactiva. \par
 
-		\paragraph{consigna}
+		\paragraph{Consigna}
 
-La consigna de potencia, $P_{SP}$, fija es una constante que no varia durante la prueba pero que se variara para los difrentes casos de estudio. Por otro lado la consigna de reactiva, $Q_{SP}$, viene dada por el codigo de red. \par
+La consigna de potencia, $P_{SP}$, fija es una constante que no varia durante la prueba pero que se variara para los difrentes casos de estudio. Por otro lado la consigna de reactiva, $Q_{SP}$, viene dada por el c\'odigo de red, indicado a traves de una referencia con la tensi\'on. \par
 
 El c\'odigo de red establece unos margenes dentro de los cuales debe trabajar la planta, pero para obtener una consigna en concreto se establece la consigna de la planta como el punto medio entre el limite superior y el inferior. Siendo los limites superior e inferior dos rectas de igual pendiente, el punto medio entre los dos pertenecera a otra recta de la misma pendiente y un origen de coordenadas media de ambas rectas. \par
 
@@ -693,7 +708,7 @@ La recta que establece $Q_{SP}$ descrita en (\ref{eq:QV}) devuelve el porcentaje
 	Q_{SP}(\%P)= -0.75V +300 
 \end{equation} \par
 
-Para el c\'alculo de esta operaci\'on en el modelo de Simulink se usan la media de las tensiones de las tres fases medidas en el medidor de red y la potencia calculada con ello. Como se puede ver en la figura \ref{SP_Sim} la potencia medida en la red es cambaida de signo por que el medidor devuelve la potencia consumida por la red, por lo que hay que cambiarle el signo para obtener la potencia generada por la planta. 
+Para el c\'alculo de esta operaci\'on en el modelo de Simulink se usan la media de las tensiones de las tres fases medidas en el medidor de red y la potencia calculada con ello. Como se puede ver en la figura \ref{SP_Sim} la potencia medida en la red es cambiada de signo por que el medidor devuelve la potencia consumida por la red, por lo que hay que cambiarle el signo para obtener la potencia generada por la planta. 
 
 \begin{figure}[h!]
 \centering
@@ -702,9 +717,9 @@ Para el c\'alculo de esta operaci\'on en el modelo de Simulink se usan la media 
 \label{SP_Sim}
 \end{figure} \par
 
-En el caso de que la planta no esta aplicando la compensaci\'on de reactiva la consigna de esta misma sera 0. La consigna tambien se establece como cero cuando se quiere que la planta aporte la reactiva natural provocada por su propio car\'acter. \par
+En el caso de que la planta no est\'a aplicando la compensaci\'on de reactiva la consigna de esta misma sera cero. La consigna tambien se establece como cero cuando se quiere que la planta aporte la reactiva natural provocada por su propio car\'acter. \par
 
-\paragraph{realimentaci\'on}
+\paragraph{Realimentaci\'on}
 
 Para la realimetnaci\'on del controlador se mide en dos puntos del circuito diferentes, el PCC y la salida de intensidad del parque. La salida de estos medidores son la tensi\'on de las tres fases y la intensidad de las tres lineas en valor de pico y expresado en complejo. \par
 
@@ -802,23 +817,46 @@ Cuando la planta esta conectada a la red pero no genera intensidad consume ciert
 
 \chapter{An\'alisis de resultados}
 
-Para alcanzar los objetivos propuestos en este trabajo se han realizado las pruebas en los seis casos diferentes descritos en el cap\'itulo. A continuaci\'on se muestran los resultados de las pruebas para comprobar el cumplimiento del c\'odigo de red y la comparaci\'on del cumplimiento del c\'odigo de red respecto a no aplicarlo. \par
+Para alcanzar los objetivos propuestos en este trabajo se han realizado las pruebas en los seis casos diferentes descritos en el cap\'itulo. A continuaci\'on se muestran los resultados de las pruebas para comprobar el cumplimiento del c\'odigo de red y la comparaci\'on del cumplimiento del c\'odigo de red respecto a no aplicarlo. Estos se consideraran dos ensayos independientes. \par
 
 Los casos de estudio se describiran en el orden siguiente, de menor a mayor potencia nominal y tratando primero el caso inductivo. En cada escenario se realizan dos ensayos diferentes, estudio de la respuesta de la planta ante diferentes perturbaciones de tensi\'on en la red y la comparaci\'on de la aplicaci\'on o no de la compensaci\'on de reactiva descrita en el P.O. 7.4.\par
+
+En el segundo ensayo se realizaran tres medidas, todas en regimen permamente. Cuando la planta genera $0 VAR$ a la red, cuando se toma de consigna la recta definida por el c\'odigo de red y la generaci\'on de $0VAR$ a la salida  del generador. Se pretende comprobar cual aporta mejor correci\'on de tensi\'on a la red. \par 
 
 	\paragraph{Primer escenario} 
 
 Este es el caso de estudio para $0W$ y una planta inductiva. Al tratarse de una potencia activa nula y el P.O. 7.4 describe la limitaci\'on de la potencia reactiva en porcentaje de activa, la referencia de reactiva sera 0 sin importar las variaciones de tensi\'on en la red. \par
 
-En la figura \ref{GC1} se muestra la evoluci\'on temporal potencia reactiva de la red, $Grid\_Q$, y de la consigna de esta misma, $Q_{SP}$. Todas las medidas de potencia estan en Watios y la de tiempo en segundos.\par
+En la figura \ref{GC1} se muestra la evoluci\'on temporal potencia reactiva de la red, $Grid\_Q$, en rojo y de la consigna de esta misma, $Q_{SP}$, en azul. Todas las medidas de potencia estan en Watios y la de tiempo en segundos.\par
 
-%Añadir la grafica de los resultados para 0 W
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{/Casos/GC1.PNG}
+\caption{Resultados del primer ensayo. }
+\label{GC1}
+\end{figure} \par
 
-Tanto en este escenario como en el segundo no se realizara el ensayo de no aplicar compesnaci\'on del c\'odigo de red, porque el propio c\'odigo de red nos impedia aplicar la compensaci\'on. \par
+En cuanto entra la perturbaci\'on de tensi\'on esto afecta a la reactiva del parque lo cual produce las desviaciones en la medida respecto a la cosigna, que amntiene siempre el valor de 0. cuando la perturbaci\'on termina la reactiva vuelve al cero como un sistema de primer orden. \par 
+
+Tanto en este escenario como en el segundo no se realizara el ensayo de no aplicar compesnaci\'on del c\'odigo de red, porque el propio c\'odigo de red nos impedia aplicar la compensaci\'on. Como la potencia activa es nula la tensi\'on de la red no se ha visto alterada y dejar a la planta ser tan reactiva como puede ser desv\'ia la tensi\'on del punto nominal. \par
+
 
 	\paragraph{Segundo escenario}
 
-Al igual que en el primer caso la potencia nominal es de $0W$ pero en planta capacitiva. La limitaci\'on sobre la potencia reactiva impuesta por la potencia activa tiene el mismo.
+Al igual que en el primer caso la potencia nominal es de $0W$ pero en planta capacitiva. La limitaci\'on sobre la potencia reactiva impuesta por la potencia activa tiene el mismo resultado. \par
+
+Los resultados del primer ensayo se ven reflejados en la figura \ref{GC2}. Son diferentes respecto a la primer caso porque se han alargado los tiempos de las perturbaciones. Aun as\'i la planta presenta la misma respuesta por estar en condiciones similares. \par
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{/Casos/GC2.PNG}
+\caption{Resultados del primer ensayo. }
+\label{GC2}
+\end{figure} \par
+
+La magnitud de los cambios en la potencia reactiva es mayor porque la planta capacitiva tiene mayor componente reactiva que la planta de car\'acter inductivo. Pero la din\'amica de las dos plantas es parecida en este ensayo. \par
+
+Como se ha dicho antes en el segundo ensayo al aplicar  la reactiva generada por la planta para compensar se empeora la situaci\'on de la red que se encontraba en el punto nominal y esto la mueve de esa tensi\'on. \par
 
 	\paragraph{tercer escenario}
 
@@ -826,17 +864,22 @@ En este caso se estudia una planta inductiva de una potencia nominal de $1MW$. E
 
 Los resultados de las pruebas de perturbaciones en la tensi\'on de red se muestran en la figura \ref{GC3}. Este es el primer ensayo en el que se evalua la respuesta del controlador ante un cambio en la referencia de reactiva con tres tipos de entrada diferentes, escalon, rampa y sinusoide. \par
 
-%Añadir las graficas de los resultados de 1MWL
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{/Casos/GC3.PNG}
+\caption{Resultados del primer ensayo. }
+\label{GC3}
+\end{figure} \par
 
-En la figura \ref{L1MWgc} se puede ver la porcentaje de potencia reactiva respecto de activa en el eje y frente a la tensi\'on en cientos de kV. El resultado mostrado en concreto son de la prueba para una perturbaci\'on sinusoidal, en la que se puede apreciar que durante toda la perturbaci\'on el comportamiento de la planta estuvo dentro de los limites del c\'odigo de red. \par
+En la figura \ref{lims3} se puede ver la porcentaje de potencia reactiva respecto de activa en el eje y frente a la tensi\'on en cientos de kV. Los resultados mostrados corresponden a las prueba para las perturbaci\'on de escal\'on, rempa y seniode. Se puede ver que durante toda la perturbaci\'on el comportamiento de la planta estuvo dentro de los limites del c\'odigo de red. \par
 
 La linea vertical que sobrepasa el limite superiror se produce durante la inicializaci\'on del control. La planta no esta aplicando control por lo que la potencia activa es muy baja y la potencia reactiva es la natural de la planta. Esto produce un porcentaje de reactiva muy alto que se sale fuera de los limites establecidos por el c\'odigo de red. \par  
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.5\textwidth]{/Casos/L1MWgc.PNG}
+\includegraphics[width=1\textwidth]{/Casos/lims3.PNG}
 \caption{comportanmiento de la planta respecto a los limites del c\'odigo de red. }
-\label{L1MWgc}
+\label{lims3}
 \end{figure} \par
 
 El segundo ensayo consiste en la aplicaci\'on o no de la compensaci\'on del c\'odigo de red. En la figura \ref{NGC3} se la tensi\'on resultante de no aportar ni cosumir nada de reactiva, aplicando el c\'odigo de red y cuando se deja que la planta compense sola. En la gr\'afica se ve un valor m\'as alto de tensi\'on que corresponde a no aplicar la compensaci\'on de reactiva y un valor m\'as bajo caundo ya se estan aplicando las limitaciones del c\'odigo de red. \par
@@ -858,9 +901,14 @@ Cuando la se deja que la planta actua con sus caracteristicas naturales la tensi
 
 En este caso tambien se trabaja con una potencia nominal de $1MW$, esta vez en una planta capacitiva. La consigna impuesta por el c\'odigo de red es la misma que en el caso anterior aun que el controlador debe actuar de forma diferente aplicado el cambio de signo para evitar la inestabilidad. 
 
-En la figura \ref{GC4} se ve la respuesta ante las diferentes perturbaciones de la red antes comentadas. \par
+En la figura \ref{GC4} se ve la respuesta ante las diferentes perturbaciones de la red antes comentadas. Se aprecia en las gr\'aficas que el comportameinto es invertido al de el caso inductivo, cuando en el escenario anterior la consigna era menor a la medida de la red en este es mayor y viceversa. \par
 
-%Figura de perturbaciones de tension
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{/Casos/GC4.PNG}
+\caption{Resultados del primer ensayo. }
+\label{GC4}
+\end{figure} \par
 
 La figura \ref{C1MWgc} muestra la respuesta con respecto a los limites del c\'odigo de red. En este caso la linea vertical sobrepasa el limte inferior pues la planta viene de una situaci\'on capacitiva cuando empieza a corrergir. \par
 
@@ -881,7 +929,12 @@ Este es el caso de planta inductiva con una potencia nominal de $7.5GW$. En los 
 
 Los resultados del primer ensayo se muestra en la figura \ref{GC5}. A diferencia de los otros casos la reactiva inicial es despreciable respecto a la reactiva que se demanda ante las perturbaciones en la red. \par
 
-%Figurita GC
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{/Casos/GC5.PNG}
+\caption{Resultados del primer ensayo. }
+\label{GC5}
+\end{figure} \par
 
 En la figura \ref{L7GWgc} se ve la respuesta de la planta en el respecto al c\'odigo de red cuando se enfrenta a la entrada de una rampa. Como en este caso la potencia activa era mayor el protenaje de reactiva es menor y no se aprecia que la planta venga de fuera del c\'odigo de red. \par
  
@@ -903,29 +956,67 @@ En el segundo ensayo tambien se ve afectado por el aumento de potencia nominal. 
 \label{NGC5}
 \end{figure} \par
 
-%escribir porque sale capacitivo :P SUERTE CON ESO jaja Salu2
+En este caso, aunque la planta era inductiva en un principio, la inyecci\'on de potencia activa provoca que la linea actue con caracter capacitivo. Esto provoca que la tensi\'on disminuya hasta $403.1 kV$. Comparado con los $405.1 kV$ que consigue la planta aplicando el c\'odigo de red, se disminuye la desviaci\'on de tensi\'on en $2kV$ dejando a la planta actuar fuera del c\'odigo de red. 
 
 	\paragraph{sexto escenario}
 
 Este caso de estudio se trata de una planta de potencia nominal $7.5GW$ con car\'acter capacitivo. \par
 
-En la figura \ref{GC6} se ven los resultados del primer ensayo.  \par
+En la figura \ref{GC6} se ven los resultados del primer ensayo. En este caso se ve que la respuesta no se invierte respecto al caso inductivo.   \par
 
-%Si no he puesto una gráfica GC en mi vida Hulio
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{/Casos/GC6.PNG}
+\caption{Resultados del primer ensayo. }
+\label{GC6}
+\end{figure} \par
 
 Los resultados de porcentaje de reactiva ante la entrada rampa se muestran en la figura \ref{C7GWgc}. El resultado es casi identico al del caso anterior porque el efecto de la potencia activa es mucho m\'as significativo que las caracteristicas anturales de la planta antes de que el control empiece a actuar. \par
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.5\textwidth]{/Casos/C7GWgc.PNG}
-\caption{comportanmiento de la planta respecto a los limites del c\'odigo de red. }
+\caption{Comportanmiento de la planta respecto a los limites del c\'odigo de red. }
 \label{C7GWgc}
 \end{figure} \par
 
-
+El segundo ensayo presenta el mismo comportamiento que el caso anterior, por comportarse de forma capacitiva tambien. \par
 
 \chapter{Conclusiones y estudios futuros}
 
+Las conclusiones y estudios futuros de este trabajo se presentaran en el mismo orden que los objetivos. Primero se hablara de los resultados del primer ensayo realizado en los seis casos de estudio y despues del segundo ensayo. \par
+
+Los resultados del primer ensayo son realtivos al objetivo de crear un PPC que mantenga la compensaci\'on de reactiva dentro de los margenes establecidos por el c\'odigo de red en España. \par
+
+Cuando la planta genera una potencia activa nula, el c\'odigo de red no permite la compensaci\'on de reactiva. Es por eso que ante perturbaciones en la tensi\'on de la red que modifican la reactiva de la planta se sobrepasaran los margenes de este. Es imposible cumplir el c\'odigo en el caso de no aportar potencia activa a pesar de que la planta si pudiera apoyar a la estabilidad de la red compensando con reactiva las perturbaciones. \par
+
+En el caso de la potencia de $1MW$, una potencia media-baja, la planta se facil de controlar para que siga el c\'odigo de red. El controlador puede tener una respuesta lenta ante las perturbaciones sin error de posici\'on. En el caso de la rampa y la senoide se puede ver que el controlador tiene un error de velocidad finito y por tanto un error de aceleraci\'on infinito. \par
+
+Es importante destacar que la planta podr\'ia no cumplir las espacificaciones del c\'odigo de red en la estabilizaci\'on inicial porque la potencia activa no es lo suficientemente elevada para que al reactiva que produce la planta tenga un porcentaje ddespreciable. \par
+
+Para los casos de potencia alta, $7.5 GW$, no cambia mucho su comporamiento en realci\'on a los casos de potencia media. Sin embargo al ser m\'as alta la potencia activa los porcentajes de potencia reactiva que genera la planta de por si respecto a esta son menores. Esto hace m\'as facil el cumplimiento del c\'odigo de red, incluso cuando la planta a\'un esta en el regimen transitorio inicial. \par
+
+La conclusi\'on final de esta serie de ensayos es que a mayor potencia activa generada por el parque m\'as f\'acil es controlar la reactiva para que se cumpla el c\'odigo de red. Esto viene de definir las imposiciones de potencia reactiva como porcentaje de la potencia activa producida. \par
+
+Desde el caso de ser imposible controlar un parque que no produce potencia activa, aun que podr\'ia ayudar a compensar las desviaciones de tensi\'on en la red, hasta los casos de alta potencia nominal que a penas necesitan compensaci\'on para mantenerse dentro de los limites. \par
+
+En caunto a este primer ensayo, en estudios futuros se plantea sustituir el control cl\'asico por estructuras de control m\'as avanzadas como podr\'ian ser el control predictivo, control robusto, controlador de l\'ogica difusa o redes neuronales. \par
+
+En el segundo ensayo se pretende comparar el efecto sobre la tensi\'on que teine aplicar la compensaci\'on de reactiva como dicta el c\'odigo de red, no aplicar ninguna compensaci\'on o dejar que la planta compense con su propoio caracter reactivo. Para esto se analiza solo la tensi\'on sin perturbaciones externas, tan solo el aumento de tensi\'on natural que se produce al aumentar la intensidad que circula por la red. \par
+
+En los casos de potencia nula cumplir el c\'odigo de red o no aplicar la compensaci\'on es lo mismo. Como no se produce tampoco ninguna desviaci\'on en la tensi\'on de la red que la planta aporte su reactancia natural supone un empeoramiento de las condiciones de la red. \par
+
+En el resto de casos se puede comprobar que la desviaci\'on de tensi\'on disminuyee cuando se aplica la compensaci\'on dictada por el c\'odigo de red frente a no aportar ning\'un tipo de compensaci\'on. En este sentido se comprueba que la aplicaci\'on del c\'odigo de red no solo es beneficiosa para la estabilidad de la red, si no necesario para poder prevenir el aumento natural de tensi\'on que se produce por la inyecci\'on de intensidad. \par
+
+En caunto a la compensaci\'on con la reactancia antural de la planta existen dos casos diferenciados, la planta inductiva y la planta capacitiva. En los casos de planta inductiva se eleva la tensi\'on de la red, esto se suma a la subida provocada por la intensidad que se suministra en la potencia activa provocando un error en la tensi\'on mayor a cuando no se aplica compensaci\'on. \par
+
+Las plantas que son capacitivas disminuyen la tensi\'on de la red. En el caso de las plantas con potencia media la variaci\'on de tensi\'on que provoca la intensidad no es muy elevada y la compensaci\'on de la planta puede llegar a ser excesiva como se ve en el cuarto caso de estudio. Esto provoca una tensi\'on menor que la nominal que a veces supera en error absoluto a la compensaci\'on del c\'odigo de red, aun que siempre es mejor opci\'on que no plaicar compensaci\'on. \par
+
+Finalmente en las plantas que generan una elevada potencia activa la compensaci\'on de la planta ofrece una tensi\'on menor a la que se mide cuando se aplica el c\'odigo de red, pero sin llegar a la tensi\'on nominal. Por lo tanto el error de tensi\'on siempre es menor en el caso de la compensaci\'on de la planta que cuando se aplica el c\'odigo de red. \par
+
+Esto significa que las plantas de caracter capacitivo de una alta potencia nominal podr\'ian mejorar la calidad de la potencia que emiten aplicando este tipo de compensaci\'on en vez de la especificada en el c\'odigo de red. Sin embargo los parques e\'olicos suelen tener un caracter inductivo. Son las plantas fotovolt\'aicas las que tendr\'ian un caracter capacitivo. \par
+
+El hecho de que la mayor\'ia de plantas actualmente sean de caracter inductivo y que la energ\'ia solar no tiene una gran importancia en al generaci\'on de la red el\'ectrica española son factores que explican que este caso no se haya tenido en cuenta. Sin embargo la creciente demanda de energias renovables podr\'ia provocar un aumento de las centrales fotovolt\'aicas de potencias nominales altas en un futuro. \par
 
 
 \bibliography{Biblio}
