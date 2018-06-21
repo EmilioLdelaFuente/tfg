@@ -74,6 +74,14 @@
 
 \chapter*{Agradecimientos}
 
+Lo primero quiero agradecer a mi familia, mi gato y mis amigos que siempre han estado mostrando todo su apoyo aun que la situaci\'on se complicara. 
+
+Agradecer a Altran por haberme dado la oportunidad de realizar el trabajo como parte de mi preparaci\'on para el proyecto. Adem\'as a todos mis compañeros de trabajo que siempre estaban dispuestos a ayudarme con cualquier duda, en especial a Manuel, que ha sido cotutor del trabajo y me ha guiado en las partes m\'as oscuras de este recorrido.
+
+Tambien agradecer a Ricardo su labor como tutor resolviendome los problemas tanto acad\'emicos como administrativos derivados de la burocracia universitaria. 
+
+Por ultimo, pero no por ello menos importante, agradecer a la figura de Tesla. Adem\'as de hacer posible la realizaci\'on de este trabajo al descubrir la corriente alterna, es tambien un ejemplo como ingeniero, cient\'ifico y persona en general cuyos pasos siempre he intentado seguir.
+
 \chapter*{Resumen}
 
 Debido a la importancia de la energ\'ia e\'olica en la producci\'on el\'ectrica actual, los c\'odigos de red han adaptado su noramtiva para permitir la introdcci\'on de la potencia instalada a la red de forma estable y segura. Esto significa para los parques e\'olicos la necesidad de implementar un control que cumpla con dicha noramtiva. \par
@@ -521,19 +529,6 @@ $K_d$        & Pequeña reducci\'on & Reducci\'on     & Reducci\'on
 \end{table}
 
 
-	\subsection{Control mod\'erno}
-
-Los controladores cl\'asicos funcionan bajo la premisa de que el sistema f\'isico en el que se han implementado es lineal. Aunque la mayor\'ia de sistemas no son lineales se pueden linealizar en torno a un punto de trabajo para procedimientos industriales controlados. Sin embargo para los casos en los que el sistema es altamente no lineal o las condiciones varian en un rango demasiado amplio para linializarlo, se han diseñado una serie de t\'ecnicas de control que intentan evitar este problema.  \par
-
-Entre estas t\'ecnicas encontramos el control progresivo, el control robusto, la l\'ogica difusa, el control de estructura variable y todas las t\'ecnologias basadas en IA. En este trabajo se hablara m\'as de las que se han estudiado su uso en la energ\'ia e\'olica. \par
-
-		\paragraph{L\'ogica difusa}
-
-Los controladores de l\'ogica difusa no trabajan con los modelos matem\'aticos obtenidos de las ecuaciones diferenciales como los controladores cl\'asicos, en su lugar resuelve el problema a traves de heur\'istica y los modelos m\'atematicos de la l\'ogica difusa. Esto es \'util para los sistemas f\'isicos con modelos no lineales o aquellos para los que no se pueden expresar por modelos m\'atematicos convencionales. \par
-
-El control difuso se rige por leyes de control parecidas a las que impondria un ser humano. Se asigna una calificaci\'on verbal a los diferentes valores que puede tomar una medida y esta calificaci\'on verbal va asociada a un subconjunto difuso. La elecci\'on de las funciones de pertenencia asociadas a estos subconjuntos es en principio arbitraria. Ajustar estas funciones es parte del proceso de diseño del controlador. \par
-
-
 \chapter{Herramientas de diseño}
 
 
@@ -628,12 +623,6 @@ En la libreria de \emph{Simscape} exsten varios bloques de transformadores trif\
 La conexi\'on de los devanados se puede establecer como estrella, estrella con el neutro accesible, estrella con conexi\'on a tierra, trienagulo con 30º de retraso frente a la estrella y triangulo con 30º de adelanto,  tanto en el priamrio como en el secundario. En este trabajo los transformadores usados tienen ambos lados conectados con la topolog\'ia de estrrella sin conexi\'on a neutro para evitar el desfase y para eliminar las corrientes que se desv\'ian al neutro. \par
 
 Entre los par\'ametros configurables de los transformadores estan la potencia y frecuencia nominales, estos valores no tienen impacto en la simulaci\'on cuando se establece que las unidades son del sistema internacional, pero se utilizan para calcular el resto de parametros cuando se usa \emph{pu}, \emph{por unidad}. Tambien se puede configurar la tensi\'on de linea, la resistencia interna, y la inductancia del primario y el secundario. \par
-
-		\subsection{Tratamiento de señal por buses}
-
-Simulink trabaja usando señales para comunicar los bloques. El tratamiento de estas señales es importante por ser precisamente estas a las que se las hara el seguimiento en las simulaciones. Para el tratamiento de multiples señales existe la herramienta de los buses. Los buses son estructuras formadas por varias señales o incluso otros buses. \par
-
-Para gestionar los buses simulink tiene la herramienta de \emph{Bus Editor}. Aqui se pueden visualizar y editar los buses que hay declarados en el workspace adem\'as de crear nuevos buses.
 
 		%\subsection{Diseño encapsulado mediante modelos referenciados}
 
